@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 const year = new Date().getFullYear();
 ---
 
@@ -13,6 +14,6 @@ const year = new Date().getFullYear();
     >
       Astro
     </a>
-    {' '}and Love · {year}
+    {' '}and <Icon name="ph:heart" class="h-5 w-5 inline align-text-bottom" /> {year}
   </p>
 </footer>
