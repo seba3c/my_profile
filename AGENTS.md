@@ -59,25 +59,25 @@ Agent-focused guide for working with this Astro portfolio template.
 
 ```bash
 # Install dependencies
-npm install
+pnpm install
 
 # Start dev server (localhost:4321)
-npm run dev
+pnpm dev
 
 # Build for production → ./dist/
-npm run build
+pnpm build
 
 # Preview production build locally
-npm run preview
+pnpm preview
 
 # Astro type-check (astro check)
-npm run check
+pnpm check
 
 # Lint all source files
-npm run lint
+pnpm lint
 
 # Auto-fix lint issues
-npm run lint:fix
+pnpm lint:fix
 ```
 
 ---
@@ -134,6 +134,7 @@ Themes are CSS-only, controlled by a `data-theme` attribute on `<html>`.
 | `strategic` | `strategic-dark` | `#38BDF8` (sky) | `#0F172A` |
 | `innovator` | `innovator-dark` | `#BEF264` (lime) | `#0B0F0E` |
 | `midnight` | `midnight-dark` | `#A78BFA` (violet) | `#0F0D29` |
+| `impress` | `impress-dark` | `#e35f5f` (red/coral) | `#150303` |
 
 ### Adding a New Theme
 
