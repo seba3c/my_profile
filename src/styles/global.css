@@ -125,6 +125,14 @@
     --color-textrain: #7d7b9c;
   }
 
+  [data-theme="impress-dark"] {
+    --color-background: #150303;
+    --color-accent: #f43d61;
+    --color-maintext: #FFFFFF;
+    --color-subtext: #b2bed1;
+    --color-textrain: #7d7b9c;
+  }
+
   *::selection {
     background-color: var(--color-accent);
     color: var(--color-background);
