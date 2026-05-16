@@ -82,6 +82,30 @@ export const site = {
       tech: ['Python', 'Django', 'Datadog', 'Javascript'],
     },
   ],
+  academic: [
+    {
+      period: '2018',
+      title: 'Computer Graphics, Images and Computer Vision Specialist [M.Sc.]',
+      institution: 'Universidad Nacional de la Plata, Postgrado - Facultad de Informática - UNLP',
+      location: 'Argentina',
+      thesis: 'Low cost home video surveillance system using instant messaging and image processing',
+      advisor: 'Dra. Maria Jose Abasolo',
+    },
+    {
+      period: '2010',
+      title: 'Licenciado [B.Sc.] en Informática',
+      institution: 'Universidad Nacional de la Plata, Facultad de Informática - UNLP',
+      location: 'Argentina',
+      thesis: 'Test driven development applied to Rich Internet Applications',
+      advisor: 'Dr. Gustavo Rossi',
+    },
+    {
+      period: '2004',
+      title: 'Analista de Computación',
+      institution: 'Universidad Nacional de la Plata, Facultad de Informática - UNLP',
+      location: 'Argentina',
+    },
+  ],
   featuredProjects: [
     {
       title: 'Lumen Studio Website',

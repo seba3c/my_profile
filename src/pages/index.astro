@@ -4,6 +4,7 @@ import About from '../components/About.astro';
 import Footer from '../components/Footer.astro';
 //import FeaturedProjects from '../components/FeaturedProjects.astro';
 import Experience from '../components/Experience.astro';
+import Academic from '../components/Academic.astro';
 import { site } from '../../data/site';
 
 //const projects = site.featuredProjects;
@@ -12,6 +13,7 @@ import { site } from '../../data/site';
 <Layout title={site.meta.title} description={site.meta.description}>
   <About />
   <Experience />
+  <Academic />
   <!-- <FeaturedProjects projects={projects} />  -->
   <Footer />
 </Layout>

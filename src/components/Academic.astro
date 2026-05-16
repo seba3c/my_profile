@@ -1,0 +1,73 @@
+---
+import { site } from '../../data/site';
+---
+
+<section id="academic" class="mb-24 scroll-mt-24 lg:mb-32 lg:scroll-mt-8" aria-labelledby="academic-heading">
+  <h2 id="academic-heading" class="section-heading">Academic</h2>
+  <div class="space-y-4">
+    {
+      site.academic.map((item) => (
+        <article class="scroll-stat panel-card group grid gap-4 md:grid-cols-[9rem_1fr] md:gap-6">
+          <p class="pt-1 font-mono text-xs uppercase tracking-wider text-slate">{item.period}</p>
+          <div class="space-y-3">
+            <h3 class="text-base font-semibold text-slate uppercase">
+              {item.title}
+            </h3>
+            <p class="body-copy">{item.institution} | {item.location}</p>
+            {(item.thesis || item.advisor) && (
+              <ul class="list-disc space-y-1 pl-5 text-sm text-slate">
+                {item.thesis && (
+                  <li><span class="font-semibold">Thesis:</span> {item.thesis}</li>
+                )}
+                {item.advisor && (
+                  <li><span class="font-semibold">Advisor:</span> {item.advisor}</li>
+                )}
+              </ul>
+            )}
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .scroll-stat {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .scroll-stat.reveal {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+</style>
+
+<script>
+  function revealCards() {
+    const cards = document.querySelectorAll('.scroll-stat');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const index = Array.from(cards).indexOf(entry.target);
+          setTimeout(() => {
+            entry.target.classList.add('reveal');
+          }, (index % 3) * 150); 
+          
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -10px 0px'
+    });
+
+    cards.forEach(card => observer.observe(card));
+  }
+
+  revealCards();
+  
+  document.addEventListener('astro:after-swap', revealCards);
+</script>
