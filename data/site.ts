@@ -11,75 +11,75 @@
 export const site = {
   url: 'https://example.com',
   meta: {
-    title: 'Alex Morgan | Full-stack engineer',
+    title: 'Sebastian Castaneda | Software Engineer',
     description:
-      'Portfolio example: shipping reliable web products with clear architecture, tests, and delivery practices.',
+      'My personal Website',
   },
   hero: {
-    name: 'Alex Morgan',
-    role: 'Full-stack engineer',
-    tagline: 'From product intent to production — pragmatic systems, accessible UI, and maintainable code.',
-    contact: 'Open to collaborations and senior IC roles on product-minded teams.',
+    name: 'Carlos Sebastian Castañeda',
+    role: 'Senior Software Engineer',
+    tagline: 'Software Engineer | Fintech | Crypto | API integrations | Python | Java',
+    contact: 'Looking to contribute in a senior engineering or technical lead role on high-impact, distributed systems.',
     avatarSrc: '/favicon.svg',
-    avatarAlt: 'Alex Morgan',
+    avatarAlt: 'Carlos Sebastian Castañeda',
   },
   about: {
     paragraphs: [
-      'A brief, compelling introduction about who you are and what you do. Mention your core philosophy, your passion for building digital products, and your drive for creating efficient, high-impact solutions.',
-      'I care about clear boundaries between modules, automated checks in CI, and documentation that helps the next contributor ship safely.',
+      'Software Engineer with over 10 years of experience building production systems across FinTech, crypto, government, and health-tech domains.',
       {
-        heading: 'Example focus areas',
+        heading: 'My strongs',
         bullets: [
-          'Designing APIs and client boundaries with typed contracts',
-          'Performance budgets, caching, and pragmatic observability',
-          'Shipping incrementally with feature flags and rollback-friendly deploys',
+          'Strong backend foundation in Python (Django, FastAPI), AWS, and Docker',
+          'Hands-on experience delivering customer-facing web applications and REST APIs end to end',
+          'Full ownership of features — from system architecture and payment integrations to frontend delivery, security remediation, and cross-functional collaboration with Product, Security, and DevOps teams',
+          'Fast learner who adapts quickly to new tech stacks and tooling as project needs evolve',
         ],
       },
       {
-        heading: 'Sample stack',
-        techItems: ['TypeScript', 'Astro', 'Tailwind CSS', 'Node', 'Vitest'],
+        heading: 'My main tech stack',
+        techItems: ['Python', 'Java', 'Javascript', 'AWS', 'Docker', 'Opencode', 'Claude Code', 'Astro'],
       },
     ],
   },
   experiences: [
     {
-      period: '2025',
-      title: 'Lead Product Designer',
-      company: 'Lumen Studio',
+      period: '2021-2026',
+      title: 'Senior Software Engineer',
+      company: 'Xapo Bank',
       summary:
-        'Built a polished portfolio experience with accessible UI, motion-led interactions, and reusable components.',
+        'Senior Backend Engineer in different company areas and teams.',
       highlights: [
-        'Designed and shipped the complete website using Astro, Tailwind CSS, and content-driven components',
-        'Crafted consistent responsive layouts and accessible typography across desktop and mobile',
-        'Optimized asset delivery and performance for sub-1s page load metrics',
+        'Architected and shipped integrations with multiple FIAT and crypto payment providers using Python and AWS, enabling secure transaction processing for 10K+ customers.',
+        'Built and deployed internal automation tools that reduced manual operations by around ~50%, streamlining processing workflows across banking operations.',
+        'Owned the security alert pipeline for the team — reviewing and remediating dependency vulnerabilities, enforcing secret scanning, and preventing sensitive data leaks in version control and application logs.',
       ],
-      tech: ['TypeScript', 'Astro', 'Tailwind CSS', 'Node', 'Vite'],
+      tech: ['Python', 'Java', 'Docker', 'AWS', 'Javascript', 'Terraform', 'NewRelic', 'Coralogix', 'Django', 'FastAPI', 'PostgreSQL', 'MySQL', 'Redis'],
+  },
+    {
+      period: '2018-2021',
+      title: 'Senior Software Engineer',
+      company: 'AccelOne',
+      summary:
+        'Senior Software Engineer for Xapo Bank and Seattle Children\'s Hospital, Foundation, and Research',
+      highlights: [
+        'Developed internal tooling for XAPO Bank (as external consultant) using Python, Flask, and MongoDB, supporting operational workflows for high-volume FIAT and cryptocurrency transaction processing.',
+        'Designed and built a REST API using Node.js for a health-tech mobile application to track and manage medical procedure data, deployed on AWS.',
+      ],
+      tech: ['Python', 'Flask', 'Nodejs', 'MongoDB'],
     },
     {
-      period: '2024',
-      title: 'Frontend Architect',
-      company: 'Nova Launch',
+      period: '2016-2018',
+      title: 'Software Engineer',
+      company: 'DevsAr',
       summary:
-        'Delivered a modular marketing site and interactive product showcase for a launch-ready SaaS brand.',
+        'Software Engineer for Moni and Matterport',
       highlights: [
-        'Implemented a component-based design system with reusable cards, buttons, and hero sections',
-        'Built content-driven project pages, archive views, and client-side navigation enhancements',
-        'Added cross-browser polish and performance tuning with image optimization and lazy loading',
+        'Built and enhanced features for Matterpor\'s customer-facing web portal using Python (Django) on the backend and JavaScript on the frontend, working on-site with the engineering team in San Francisco, CA.',
+        'Implemented a 3D model cloning feature in the customer portal, allowing users to duplicate and manage spatial models directly from the web interface.',
+        'Shipped customer-facing features for a high-traffic payday loan platform serving 5K+ users, built with Python (Django, Celery) on the backend and JavaScript (Marionette) on the frontend.',
+        'Enhanced the internal operations dashboard, improving loan management workflows and giving the operations team better visibility into portfolio health and borrower status.',
       ],
-      tech: ['Astro', 'TypeScript', 'Tailwind CSS', 'Node', 'Vite'],
-    },
-    {
-      period: '2023',
-      title: 'UI Engineer',
-      company: 'Orbital Creative',
-      summary:
-        'Created an interactive product showcase with a clean visual system and accessible component library.',
-      highlights: [
-        'Built a flexible project card system for content updates without code changes',
-        'Improved brand consistency with typography, color, and motion guidelines',
-        'Added testing and quality checks for cross-device UI fidelity',
-      ],
-      tech: ['Astro', 'Tailwind CSS', 'JavaScript', 'Node', 'Vitest'],
+      tech: ['Python', 'Django', 'Datadog', 'Javascript'],
     },
   ],
   featuredProjects: [
@@ -102,25 +102,6 @@ export const site = {
         },
       ],
     },
-    {
-      title: 'Nova Launch Marketing Platform',
-      period: '2024',
-      summary: 'Delivered a modular marketing site and interactive product showcase for a launch-ready SaaS brand.',
-      solution: 'Implemented a content-driven architecture with reusable card components and dynamic project pages, enabling non-technical content updates.',
-      impact: 'Reduced content update time by 80% through intuitive component-based structure; enabled marketing team independence.',
-      image: 'astro-02.jpeg',
-      imageAlt: 'Nova Launch platform interface',
-      techCategories: [
-        {
-          category: 'Frontend',
-          items: ['Astro', 'TypeScript', 'Tailwind CSS'],
-        },
-        {
-          category: 'Developer Experience',
-          items: ['Vite', 'ESLint', 'Automated Testing'],
-        },
-      ],
-    },
   ],
   projectArchivePage: {
     title: 'All projects',
@@ -129,15 +110,11 @@ export const site = {
   },
   projectArchive: [
     { date: '2025', project: 'Design system rollout', role: 'Frontend', techStack: 'Astro, CSS, Storybook' },
-    { date: '2024', project: 'Checkout reliability', role: 'Full-stack', techStack: 'TypeScript, Postgres, Redis' },
-    { date: '2024', project: 'Auth hardening', role: 'Backend', techStack: 'OAuth2, JWT, rate limits' },
-    { date: '2023', project: 'Analytics pipeline', role: 'Data', techStack: 'SQL, dbt, warehouse' },
-    { date: '2023', project: 'Mobile web refresh', role: 'Frontend', techStack: 'HTML, CSS, a11y audits' },
   ],
   contact: {
-    email: 'hello@example.com',
-    github: 'https://github.com/',
-    linkedin: 'https://www.linkedin.com/',
+    email: 'castanedacs@gmail.com',
+    github: 'https://github.com/seba3c',
+    linkedin: 'https://www.linkedin.com/in/sebastiancastaneda/',
   },
 } as const;
 
