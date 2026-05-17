@@ -8,6 +8,15 @@
  * Replace placeholder images in src/assets/ with your own.
  */
 
+export interface AcademicEntry {
+  period: string;
+  title: string;
+  institution: string;
+  location: string;
+  thesis?: string;
+  advisor?: string;
+}
+
 export const site = {
   url: 'https://example.com',
   meta: {
@@ -20,7 +29,7 @@ export const site = {
     role: 'Senior Software Engineer',
     tagline: 'Startup | Fintech | Crypto | Banking | AI Enthusiast',
     contact: 'Looking to contribute in a senior engineering or technical lead role on high-impact, distributed systems.',
-    avatarSrc: '/profile.jpeg',
+    avatarSrc: '/profile_v2.jpeg',
     avatarAlt: 'Carlos Sebastian Castañeda',
   },
   about: {
@@ -105,7 +114,7 @@ export const site = {
       institution: 'Universidad Nacional de la Plata, Facultad de Informática - UNLP',
       location: 'Argentina',
     },
-  ],
+  ] as AcademicEntry[],
   featuredProjects: [
     {
       title: 'Lumen Studio Website',

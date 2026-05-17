@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import { site } from '@data/site';
 import ContactBar from './ContactBar.astro';
 
@@ -13,15 +14,15 @@ const isSidebar = variant === 'sidebar';
 {isSidebar ? (
   <>
     <div class="relative group mb-8 reveal-content flex justify-center" style="animation-delay: 100ms;">
-      <div class="balloon-float w-28 h-28 md:w-36 md:h-36 rounded-full border-2 border-accent overflow-hidden shadow-[0_0_50px_color-mix(in_srgb,var(--color-accent)_33%,transparent)]">
-        <img
+      <div class="balloon-float w-36 h-36
+       md:w-45 md:h-45 rounded-full border-2 border-accent overflow-hidden shadow-[0_0_50px_color-mix(in_srgb,var(--color-accent)_33%,transparent)]">
+        <Image
           src={site.hero.avatarSrc}
           alt={site.hero.avatarAlt}
           class="h-full w-full scale-110 object-cover"
           loading="eager"
-          decoding="async"
-          width="96"
-          height="96"
+          width={180}
+          height={180}
         />
       </div>
       <div class="balloon-float absolute -z-10 top-0 left-0 h-full w-full rounded-full"></div>
@@ -43,15 +44,14 @@ const isSidebar = variant === 'sidebar';
 ) : (
   <div class="flex flex-col items-center text-center">
     <div class="relative mb-4">
-      <div class="h-20 w-20 rounded-full border-2 border-accent overflow-hidden shadow-[0_0_40px_color-mix(in_srgb,var(--color-accent)_28%,transparent)]">
-        <img
+      <div class="h-32 w-32 rounded-full border-2 border-accent overflow-hidden shadow-[0_0_40px_color-mix(in_srgb,var(--color-accent)_28%,transparent)]">
+        <Image
           src={site.hero.avatarSrc}
           alt={site.hero.avatarAlt}
           class="h-full w-full object-cover"
           loading="eager"
-          decoding="async"
-          width="80"
-          height="80"
+          width={128}
+          height={128}
         />
       </div>
     </div>
