@@ -15,6 +15,11 @@ export default [
   },
   {
     files: ['**/*.astro'],
+    languageOptions: {
+      parserOptions: {
+        parser: tseslint.parser,
+      },
+    },
     rules: {
       'astro/no-set-html-directive': 'error',
     },
