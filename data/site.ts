@@ -148,6 +148,8 @@ export const site = {
     email: 'castanedacs@gmail.com',
     github: 'https://github.com/seba3c',
     linkedin: 'https://www.linkedin.com/in/sebastiancastaneda/',
+    instagram: 'https://www.instagram.com/sebastian.castaneda.3/',
+    x: 'https://x.com/seba3c'
   },
 } as const;
 
