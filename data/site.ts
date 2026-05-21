@@ -26,6 +26,7 @@ export const site = {
   },
   hero: {
     name: 'Carlos Sebastian Castañeda',
+    nickname: 'Sebastian Castañeda',
     role: 'Senior Software Engineer',
     tagline: 'Startup | Fintech | Crypto | Banking | AI Enthusiast',
     contact: 'Looking to contribute in a senior engineering or technical lead role on high-impact, distributed systems.',
