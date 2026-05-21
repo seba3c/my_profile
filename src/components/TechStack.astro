@@ -1,0 +1,57 @@
+---
+import { site } from '../../data/site';
+
+const colorMap: Record<string, { border: string; bg: string; hoverBg: string; text: string }> = {
+  emerald: { border: 'border-emerald-400/20', bg: 'bg-emerald-400/5', hoverBg: 'hover:bg-emerald-400/10', text: 'text-emerald-400' },
+  orange: { border: 'border-orange-400/20', bg: 'bg-orange-400/5', hoverBg: 'hover:bg-orange-400/10', text: 'text-orange-400' },
+  amber: { border: 'border-amber-400/20', bg: 'bg-amber-400/5', hoverBg: 'hover:bg-amber-400/10', text: 'text-amber-400' },
+  yellow: { border: 'border-yellow-400/20', bg: 'bg-yellow-400/5', hoverBg: 'hover:bg-yellow-400/10', text: 'text-yellow-400' },
+  purple: { border: 'border-purple-400/20', bg: 'bg-purple-400/5', hoverBg: 'hover:bg-purple-400/10', text: 'text-purple-400' },
+};
+---
+
+<section
+  id="tech-stack"
+  class="mb-24 scroll-mt-24 lg:mb-32 lg:scroll-mt-8"
+  aria-labelledby="tech-stack-heading"
+>
+  <h2 id="tech-stack-heading" class="mb-6 text-xl font-semibold tracking-tight text-slate-light">
+    My tech stack
+  </h2>
+  <div class="reveal-content grid items-start gap-8">
+    <div class="space-y-6 body-copy">
+      {site.techStack.map((group) => {
+        const colors = colorMap[group.color] || colorMap.sky;
+        return (
+          <div class="space-y-2">
+            <p class="text-sm font-medium text-slate-light">{group.category}</p>
+            <div class="flex flex-wrap gap-1.5">
+              {group.items.map((tech) => (
+                <span
+                  class={`rounded-full border ${colors.border} ${colors.bg} ${colors.hoverBg} px-3 py-1 text-xs font-medium transition-all duration-200 ease-out hover:scale-115 ${colors.text}`}
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .reveal-content {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: revealIn 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  }
+
+  @keyframes revealIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

@@ -9,7 +9,6 @@ type AboutParagraph =
       textAfter?: string;
       heading?: string;
       bullets?: string[];
-      techItems?: string[];
     };
 
 const paragraphs = site.about.paragraphs as readonly AboutParagraph[];
@@ -51,15 +50,6 @@ const paragraphs = site.about.paragraphs as readonly AboutParagraph[];
                   </ul>
                 )}
 
-                {p.techItems && (
-                  <div class="mt-3 flex flex-wrap gap-2">
-                    {p.techItems.map((tech) => (
-                      <span class="rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-accent">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                )}
               </div>
             )}
           </>

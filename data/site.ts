@@ -45,12 +45,30 @@ export const site = {
           'Fast learner who adapts quickly to new tech stacks and tooling as project needs evolve',
         ],
       },
-      {
-        heading: 'My main tech stack',
-        techItems: ['Python', 'Java', 'Javascript', 'AWS', 'Docker', 'Opencode', 'Claude Code', 'Astro'],
-      },
     ],
   },
+  techStack: [
+    {
+      category: 'Languages & Frameworks',
+      color: 'emerald',
+      items: ['Python', 'JavaScript', 'TypeScript', 'Java', 'Django', 'FastAPI', 'Flask', 'Spring Boot', 'Nodejs', 'Astro'],
+    },
+    {
+      category: 'Data & Infrastructure',
+      color: 'orange',
+      items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'AWS', 'Terraform', 'Docker', 'Kubernetes', 'Git'],
+    },
+    {
+      category: 'Observability & DevOps',
+      color: 'amber',
+      items: ['New Relic', 'Datadog', 'Sentry', 'PagerDuty', 'GitHub Actions', 'Coralogix'],
+    },
+    {
+      category: 'Tools & AI',
+      color: 'purple',
+      items: ['Postman', 'JIRA', 'Confluence', 'Figma', 'GitHub Copilot', 'Claude Code', 'OpenCode', 'Gemini', 'Codex'],
+    },
+  ],
   experiences: [
     {
       period: '2021-2026',
