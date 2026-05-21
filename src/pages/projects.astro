@@ -34,17 +34,20 @@ const homeHref = base;
       <table class="w-full table-fixed border-spacing-0 text-left text-sm">
         <thead class="text-slate">
           <tr>
-            <th scope="col" class="whitespace-nowrap px-4 py-4 text-xs font-medium uppercase tracking-[0.25em]">
+            <th scope="col" class="w-16 whitespace-nowrap px-4 py-4 text-xs font-medium uppercase tracking-[0.25em]">
               Year
             </th>
-            <th scope="col" class="px-4 py-4 text-xs font-medium uppercase tracking-[0.25em]">
+            <th scope="col" class="w-5/12 px-4 py-4 text-xs font-medium uppercase tracking-[0.25em]">
               Project
             </th>
-            <th scope="col" class="px-4 py-4 text-xs font-medium uppercase tracking-[0.25em]">
+            <th scope="col" class="w-24 px-4 py-4 text-xs font-medium uppercase tracking-[0.25em]">
               Role
             </th>
-            <th scope="col" class="px-4 py-4 text-xs font-medium uppercase tracking-[0.25em]">
+            <th scope="col" class="w-40 px-4 py-4 text-xs font-medium uppercase tracking-[0.25em]">
               Tech stack
+            </th>
+            <th scope="col" class="w-20 px-4 py-4 text-xs font-medium uppercase tracking-[0.25em]">
+              Link
             </th>
           </tr>
         </thead>
@@ -53,9 +56,28 @@ const homeHref = base;
             site.projectArchive.map((row) => (
               <tr>
                 <td class="whitespace-nowrap px-4 py-4 font-mono text-slate">{row.date}</td>
-                <td class="px-4 py-4 text-slate">{row.project}</td>
+                <td class="px-4 py-4">
+                  <div class="text-slate">{row.project}</div>
+                  {row.description && (
+                    <div class="mt-1 text-xs text-slate-light">{row.description}</div>
+                  )}
+                </td>
                 <td class="px-4 py-4 text-slate">{row.role}</td>
                 <td class="px-4 py-4 text-accent">{row.techStack}</td>
+                <td class="px-4 py-4">
+                  {row.link ? (
+                    <a
+                      href={row.link}
+                      target="_blank"
+                      rel="noreferrer"
+                      class="text-sm text-accent transition hover:text-slate-light hover:underline"
+                    >
+                      View →
+                    </a>
+                  ) : (
+                    <span class="text-sm text-slate-lightest">—</span>
+                  )}
+                </td>
               </tr>
             ))
           }

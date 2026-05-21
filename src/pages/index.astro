@@ -2,20 +2,20 @@
 import Layout from '../layouts/Layout.astro';
 import About from '../components/About.astro';
 import TechStack from '../components/TechStack.astro';
+import FeaturedProjects from '../components/FeaturedProjects.astro';
 import Footer from '../components/Footer.astro';
-//import FeaturedProjects from '../components/FeaturedProjects.astro';
 import Experience from '../components/Experience.astro';
 import Academic from '../components/Academic.astro';
 import { site } from '../../data/site';
 
-//const projects = site.featuredProjects;
+const projects = site.featuredProjects;
 ---
 
 <Layout title={site.meta.title} description={site.meta.description}>
   <About />
   <TechStack />
+  <FeaturedProjects projects={projects} />
   <Experience />
   <Academic />
-  <!-- <FeaturedProjects projects={projects} />  -->
   <Footer />
 </Layout>

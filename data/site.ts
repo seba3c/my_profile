@@ -136,23 +136,12 @@ export const site = {
   ] as AcademicEntry[],
   featuredProjects: [
     {
-      title: 'Lumen Studio Website',
-      period: '2025',
-      summary: 'Built a polished portfolio experience with accessible UI, motion-led interactions, and reusable components.',
-      solution: 'Designed a modular component system with Astro and Tailwind CSS, ensuring consistent brand experience across all breakpoints.',
-      impact: 'Achieved sub-1s page load metrics and 95+ Lighthouse scores through optimized asset delivery and lazy loading strategies.',
-      image: 'astro-01.webp',
-      imageAlt: 'Lumen Studio website showcase',
-      techCategories: [
-        {
-          category: 'Frontend',
-          items: ['TypeScript', 'Astro', 'Tailwind CSS', 'Responsive Design'],
-        },
-        {
-          category: 'Performance',
-          items: ['Asset Optimization', 'Lazy Loading', 'Image CDN'],
-        },
-      ],
+      title: 'criptils',
+      period: '2026',
+      summary: 'A simple python library to work with crypto and fiat amounts. Initially implemented as an experiment to test the Pypi flows to build and publish a Python package. Currently in beta.',
+      role: 'Owner',
+      link: 'https://github.com/seba3c/cryptils',
+      techStack: ['Python', 'tox', 'ruff', 'uv'],
     },
   ],
   projectArchivePage: {
@@ -161,7 +150,7 @@ export const site = {
     intro: 'A concise archive of engagements and representative work.',
   },
   projectArchive: [
-    { date: '2025', project: 'Design system rollout', role: 'Frontend', techStack: 'Astro, CSS, Storybook' },
+    { date: '2026', project: 'Mint', description: 'Audits your legacy CSS and generates a clean, exportable design system from the chaos.', role: 'Collaborator', techStack: 'Typescript, CSS', link: 'https://github.com/nujovich/mint' },
   ],
   contact: {
     email: 'castanedacs@gmail.com',

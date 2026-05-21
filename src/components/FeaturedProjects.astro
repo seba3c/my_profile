@@ -16,17 +16,14 @@ const archiveHref = `${base}projects`;
 
 <section
   id="featured-projects"
-  class="mb-20 scroll-mt-24 lg:mb-28 lg:scroll-mt-8"
+  class="mb-16 scroll-mt-24 lg:mb-24 lg:scroll-mt-8"
   aria-labelledby="projects-heading"
 >
   <h2 id="projects-heading" class="section-heading">Featured Projects</h2>
   <div class="space-y-20">
     {
       projects.map((project) => (
-        <ProjectCard
-          project={project}
-          imageSrc={project.image ? `${base}${project.image}` : undefined}
-        />
+        <ProjectCard project={project} />
       ))
     }
   </div>
