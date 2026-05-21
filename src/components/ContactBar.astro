@@ -6,7 +6,7 @@ import { Icon } from 'astro-icon/components';
 <div class="flex items-center gap-1">
   <a
     href={site.contact.github}
-    class="subtle-link inline-flex h-9 w-9 items-center justify-center rounded"
+    class="subtle-link inline-flex h-9 w-9 items-center justify-center rounded opacity-80 hover:opacity-100 transition-opacity"
     target="_blank"
     rel="noreferrer"
     aria-label="GitHub"
@@ -15,7 +15,7 @@ import { Icon } from 'astro-icon/components';
   </a>
   <a
     href={site.contact.linkedin}
-    class="subtle-link inline-flex h-9 w-9 items-center justify-center rounded"
+    class="subtle-link inline-flex h-9 w-9 items-center justify-center rounded opacity-80 hover:opacity-100 transition-opacity"
     target="_blank"
     rel="noreferrer"
     aria-label="LinkedIn"
@@ -24,7 +24,7 @@ import { Icon } from 'astro-icon/components';
   </a>
   <a
     href={`mailto:${site.contact.email}`}
-    class="subtle-link inline-flex h-9 w-9 items-center justify-center rounded"
+    class="subtle-link inline-flex h-9 w-9 items-center justify-center rounded opacity-80 hover:opacity-100 transition-opacity"
     aria-label="Email"
   >
     <Icon name="ph:envelope-simple" class="h-6 w-6" />
@@ -32,16 +32,18 @@ import { Icon } from 'astro-icon/components';
   <a
     href={site.contact.x}
     target="_blank"
-    class="subtle-link inline-flex h-9 w-9 items-center justify-center rounded"
-    aria-label="Email"
+    rel="noreferrer"
+    class="subtle-link inline-flex h-9 w-9 items-center justify-center rounded opacity-80 hover:opacity-100 transition-opacity"
+    aria-label="X"
   >
     <Icon name="ph:x-logo" class="h-6 w-6" />
   </a>
   <a
     href={site.contact.instagram}
     target="_blank"
-    class="subtle-link inline-flex h-9 w-9 items-center justify-center rounded"
-    aria-label="Email"
+    rel="noreferrer"
+    class="subtle-link inline-flex h-9 w-9 items-center justify-center rounded opacity-80 hover:opacity-100 transition-opacity"
+    aria-label="Instagram"
   >
     <Icon name="ph:instagram-logo" class="h-6 w-6" />
   </a>
