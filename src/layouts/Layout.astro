@@ -76,6 +76,35 @@ const defaultTheme = `${baseTheme}-dark`;
       </main>
     </div>
     <script is:inline>
+      // Scroll-reveal animation for cards with class "scroll-stat"
+      (function () {
+        function revealCards() {
+          const cards = document.querySelectorAll('.scroll-stat');
+
+          const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const index = Array.from(cards).indexOf(entry.target);
+                setTimeout(() => {
+                  entry.target.classList.add('reveal');
+                }, (index % 3) * 150);
+
+                observer.unobserve(entry.target);
+              }
+            });
+          }, {
+            threshold: 0.15,
+            rootMargin: '0px 0px -10px 0px'
+          });
+
+          cards.forEach(card => observer.observe(card));
+        }
+
+        revealCards();
+        document.addEventListener('astro:after-swap', revealCards);
+      })();
+    </script>
+    <script is:inline>
       (function () {
         let scrollHandler = null;
 
