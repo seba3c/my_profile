@@ -29,7 +29,7 @@ export const site = {
     nickname: 'Sebastian Castañeda',
     role: 'Senior Software Engineer',
     tagline: 'Startup | Fintech | Crypto | Banking | AI',
-    contact: 'Looking to contribute in a senior engineering or technical lead role on high-impact, distributed systems.',
+    contact: '',
     avatarSrc: '/profile_v2.jpeg',
     avatarAlt: 'Carlos Sebastian Castañeda',
   },
@@ -152,6 +152,23 @@ export const site = {
   projectArchive: [
     { date: '2026', project: 'Mint', description: 'Audits your legacy CSS and generates a clean, exportable design system from the chaos.', role: 'Collaborator', techStack: 'Typescript, CSS', link: 'https://github.com/nujovich/mint' },
   ],
+  certifications: [
+    {
+      name: 'Certificate of completion: Introduction to agent skills',
+      issuer: 'Anthropic',
+      date: 'Mar 2026',
+      credentialId: 'ty2g2abmazr3',
+      credentialLink: 'https://verify.skilljar.com/c/ty2g2abmazr3',
+    },
+    {
+      name: 'Claude Code in Action',
+      issuer: 'Anthropic',
+      date: 'Mar 2026',
+      credentialId: 'r6w53zwcez5p',
+      credentialLink: 'https://verify.skilljar.com/c/r6w53zwcez5p',
+    },
+  ],
+  certificationsEmptyText: 'Coming soon...',
   contact: {
     email: 'castanedacs@gmail.com',
     github: 'https://github.com/seba3c',

@@ -4,4 +4,5 @@ export const navLinks = [
   { href: '#featured-projects', label: 'Featured Projects' },
   { href: '#experiences', label: 'Experiences' },
   { href: '#academic', label: 'Academic' },
+  { href: '#certifications', label: 'Certifications' },
 ] as const;
