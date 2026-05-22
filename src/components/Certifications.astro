@@ -10,7 +10,7 @@ import { Icon } from 'astro-icon/components';
 >
   <h2 id="certifications-heading" class="section-heading">Certifications</h2>
 
-  {site.certifications.length === 0 ? (
+  {site.certifications.length < 1 ? (
     <p class="body-copy text-slate-light">{site.certificationsEmptyText}</p>
   ) : (
     <div class="space-y-8">
