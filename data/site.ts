@@ -8,15 +8,6 @@
  * Replace placeholder images in src/assets/ with your own.
  */
 
-export interface AcademicEntry {
-  period: string;
-  title: string;
-  institution: string;
-  location: string;
-  thesis?: string;
-  advisor?: string;
-}
-
 export const site = {
   url: 'https://example.com',
   meta: {
@@ -178,5 +169,4 @@ export const site = {
   },
 } as const;
 
-//export type ProjectArchiveRow = (typeof site.projectArchive)[number];
-//export type FeaturedProject = (typeof site.featuredProjects)[number];
+export type FeaturedProject = (typeof site.featuredProjects)[number];
