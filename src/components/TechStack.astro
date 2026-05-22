@@ -28,7 +28,7 @@ const colorMap: Record<string, { border: string; bg: string; hoverBg: string; te
             <div class="flex flex-wrap gap-1.5">
               {group.items.map((tech) => (
                 <span
-                  class={`rounded-full border ${colors.border} ${colors.bg} ${colors.hoverBg} px-3 py-1 text-xs font-medium transition-all duration-200 ease-out hover:scale-115 ${colors.text}`}
+                  class={`cursor-default rounded-full border ${colors.border} ${colors.bg} ${colors.hoverBg} px-3 py-1 text-xs font-medium transition-all duration-200 ease-out hover:scale-115 ${colors.text}`}
                 >
                   {tech}
                 </span>

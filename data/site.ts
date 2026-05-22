@@ -133,10 +133,10 @@ export const site = {
       institution: 'Universidad Nacional de la Plata, Facultad de Informática - UNLP',
       location: 'Argentina',
     },
-  ] as AcademicEntry[],
+  ],
   featuredProjects: [
     {
-      title: 'criptils',
+      title: 'Criptils',
       period: '2026',
       summary: 'A simple python library to work with crypto and fiat amounts. Initially implemented as an experiment to test the Pypi flows to build and publish a Python package. Currently in beta.',
       role: 'Owner',
@@ -178,5 +178,5 @@ export const site = {
   },
 } as const;
 
-export type ProjectArchiveRow = (typeof site.projectArchive)[number];
-export type FeaturedProject = (typeof site.featuredProjects)[number];
+//export type ProjectArchiveRow = (typeof site.projectArchive)[number];
+//export type FeaturedProject = (typeof site.featuredProjects)[number];

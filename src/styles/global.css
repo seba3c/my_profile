@@ -88,6 +88,10 @@
   .panel-card {
     @apply rounded-md bg-white-soft p-6 transition duration-200;
   }
+
+  .pill-link {
+    @apply inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-medium text-accent transition-all duration-200 ease-out hover:bg-accent/20 hover:scale-105;
+  }
 }
 
 @layer base {
