@@ -1,0 +1,43 @@
+---
+import type { FeaturedEvent } from "../../data/site";
+import EventCard from "./EventCard.astro";
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  events: readonly FeaturedEvent[];
+}
+
+const { events } = Astro.props;
+const base = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const archiveHref = `${base}events`;
+---
+
+<section
+  id="featured-events"
+  class="mb-16 scroll-mt-24 lg:mb-24 lg:scroll-mt-8"
+  aria-labelledby="events-heading"
+>
+  <h2 id="events-heading" class="section-heading">Events</h2>
+  <div class="space-y-20">
+    {
+      events.map((event) => (
+        <EventCard event={event} />
+      ))
+    }
+  </div>
+  <p class="mt-14">
+    <a
+      href={archiveHref}
+      class="group flex items-center gap-2 text-sm text-accent transition hover:text-slate-light"
+      data-astro-prefetch
+    >
+      View Full Event Archive
+      <Icon
+        name="ph:arrow-right"
+        class="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
+      />
+    </a>
+  </p>
+</section>

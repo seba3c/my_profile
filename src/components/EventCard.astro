@@ -1,51 +1,61 @@
 ---
-import type { FeaturedProject } from '../../data/site';
+import type { FeaturedEvent } from '../../data/site';
+import { Icon } from 'astro-icon/components';
 
 interface Props {
-  project: FeaturedProject;
+  event: FeaturedEvent;
 }
 
-const { project } = Astro.props;
+const { event } = Astro.props;
 ---
 
-  <article class="scroll-stat panel-card group space-y-4 bg-white-soft/50">
+<article class="scroll-stat panel-card group space-y-4 bg-white-soft/50">
   <header>
     <h3 class="text-2xl font-semibold text-slate">
-      {project.title}
+      {event.name}
     </h3>
-    {project.period && <p class="mt-1 font-mono text-sm text-accent">{project.period}</p>}
+    {event.location && event.date && (
+      <p class="mt-1 font-mono text-sm text-accent">
+        {event.location} — {event.date}
+      </p>
+    )}
   </header>
 
-  <p class="body-copy">{project.summary}</p>
+  <p class="body-copy">{event.description}</p>
 
-  <ul>
-    {project.role && (
-      <li>
-        <span class="text-xs uppercase tracking-wider text-accent">Role</span>
-        <span class="mt-1.5 text-sm text-slate-light">{project.role}</span>
-      </li>
-    )}
-
+  {event.role && (
+    <ul>
     <li>
-      <span class="text-xs uppercase tracking-wider text-accent">Tech stack</span>
-      <span class="mt-1.5 text-sm text-slate-light">
-        {project.techStack.join(', ')}
-      </span>
+      <span class="text-xs uppercase tracking-wider text-accent">Role</span>
+      <span class="mt-1.5 text-sm text-slate-light">{event.role}</span>
     </li>
-  </ul>
+    </ul>
+  )}
 
-  {project.link && (
-    <div>
+  <div class="flex flex-wrap items-center gap-3">
+    {event.eventLink && (
       <a
-        href={project.link}
+        href={event.eventLink}
         target="_blank"
         rel="noreferrer"
         class="pill-link"
       >
-        View →
+        Event site
+        <Icon name="ph:arrow-square-out" class="h-3 w-3" />
       </a>
-    </div>
-  )}
+    )}
+    {event.activityLink && (
+      <a
+        href={event.activityLink}
+        target="_blank"
+        rel="noreferrer"
+        class="pill-link"
+      >
+        Activity
+        <Icon name="ph:arrow-square-out" class="h-3 w-3" />
+      </a>
+    )}
+  </div>
 </article>
 
 <style>

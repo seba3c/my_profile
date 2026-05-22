@@ -3,12 +3,12 @@ import ArchiveLayout from '../layouts/ArchiveLayout.astro';
 import { site } from '@data/site';
 import { Icon } from 'astro-icon/components';
 
-const title = `${site.projectArchivePage.title} | ${site.hero.name}`;
-const description = site.projectArchivePage.description;
+const title = `${site.eventArchivePage.title} | ${site.hero.name}`;
+const description = site.eventArchivePage.description;
 const base = import.meta.env.BASE_URL.endsWith('/')
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
-const homeHref = `${base}#featured-projects`;
+const homeHref = `${base}#featured-events`;
 ---
 
 <ArchiveLayout title={title} description={description}>
@@ -23,10 +23,10 @@ const homeHref = `${base}#featured-projects`;
     </a>
   </p>
 
-  <h1 class="mb-8 text-4xl font-bold tracking-tight text-white sm:text-4xl">{site.projectArchivePage.title}</h1>
+  <h1 class="mb-8 text-4xl font-bold tracking-tight text-white sm:text-4xl">{site.eventArchivePage.title}</h1>
 
   <p class="mb-10 max-w-prose body-copy">
-    {site.projectArchivePage.intro}
+    {site.eventArchivePage.intro}
   </p>
 
   <div class="overflow-hidden">
@@ -35,47 +35,60 @@ const homeHref = `${base}#featured-projects`;
         <thead class="text-slate">
           <tr>
             <th scope="col" class="w-16 whitespace-nowrap px-4 py-4 text-xs font-medium uppercase tracking-[0.25em]">
-              Year
+              Date
             </th>
             <th scope="col" class="w-6/12 md:w-5/12 px-4 py-4 text-xs font-medium uppercase tracking-[0.25em]">
-              Project
+              Event
+            </th>
+            <th scope="col" class="hidden md:table-cell w-0 md:w-40 px-4 py-4 text-xs font-medium uppercase tracking-[0.25em]">
+              Location
             </th>
             <th scope="col" class="hidden md:table-cell w-0 md:w-24 px-4 py-4 text-xs font-medium uppercase tracking-[0.25em]">
               Role
             </th>
-            <th scope="col" class="hidden md:table-cell w-0 md:w-40 px-4 py-4 text-xs font-medium uppercase tracking-[0.25em]">
-              Tech stack
-            </th>
-            <th scope="col" class="w-20 px-4 py-4 text-xs font-medium uppercase tracking-[0.25em]">
+            <th scope="col" class="w-32 px-4 py-4 text-xs font-medium uppercase tracking-[0.25em]">
               
             </th>
           </tr>
         </thead>
         <tbody>
           {
-            site.projectArchive.map((row) => (
+            site.eventArchive.map((row) => (
               <tr>
                 <td class="whitespace-nowrap px-4 py-4 font-mono text-slate">{row.date}</td>
                 <td class="px-4 py-4">
-                  <div class="text-slate">{row.project}</div>
+                  {row.eventLink ? (
+                    <a
+                      href={row.eventLink}
+                      target="_blank"
+                      rel="noreferrer"
+                      class="inline-flex items-center gap-1.5 text-slate transition hover:text-accent"
+                    >
+                      {row.event}
+                      <Icon name="ph:arrow-square-out" class="h-3 w-3" />
+                    </a>
+                  ) : (
+                    <div class="text-slate">{row.event}</div>
+                  )}
                   {row.description && (
                     <div class="mt-1 text-xs text-slate-light">{row.description}</div>
                   )}
                 </td>
+                <td class="hidden md:table-cell px-4 py-4 text-slate">{row.location}</td>
                 <td class="hidden md:table-cell px-4 py-4 text-slate">{row.role}</td>
-                <td class="hidden md:table-cell px-4 py-4 text-accent">{row.techStack}</td>
                 <td class="px-4 py-4">
-                  {row.link ? (
+                  {row.activityLink ? (
                     <a
-                      href={row.link}
+                      href={row.activityLink}
                       target="_blank"
                       rel="noreferrer"
                       class="pill-link"
                     >
-                      View →
+                      Activity
+                      <Icon name="ph:arrow-square-out" class="h-3 w-3" />
                     </a>
                   ) : (
-                    <span class="text-sm text-slate-lightest">—</span>
+                    <span class="text-sm text-slate-lightest">-</span>
                   )}
                 </td>
               </tr>

@@ -143,6 +143,33 @@ export const site = {
   projectArchive: [
     { date: '2026', project: 'Mint', description: 'Audits your legacy CSS and generates a clean, exportable design system from the chaos.', role: 'Collaborator', techStack: 'Typescript, CSS', link: 'https://github.com/nujovich/mint' },
   ],
+  featuredEvents: [
+    {
+      name: 'VCLTechFest 26',
+      location: 'Valencia, Spain',
+      date: 'May 23, 2026',
+      description: 'VLCTechFest is a day of talks by and for the technology communities of the Valencian Community. An event to learn, be inspired and network in an open and collaborative environment.',
+      role: 'Atendee',
+      eventLink: 'https://vlctechfest.org/en/',
+      activityLink: '',
+    },
+  ],
+  eventArchivePage: {
+    title: 'Events Archive',
+    description: 'Conferences, workshops, and meetups I have participated in.',
+    intro: 'A chronological list of industry events, conferences, and workshops I have attended or spoken at over the years.',
+  }, 
+  eventArchive: [
+    {
+      date: '2026',
+      event: 'VCLTechFest 26',
+      description: 'VLCTechFest is a day of talks by and for the technology communities of the Valencian Community. An event to learn, be inspired and network in an open and collaborative environment.',
+      location: 'Valencia, Spain',
+      role: 'Atendee',
+      eventLink: 'https://vlctechfest.org/en/',
+      activityLink: '',
+    },
+  ],
   certifications: [
     {
       name: 'Certificate of completion: Introduction to agent skills',
@@ -170,3 +197,5 @@ export const site = {
 } as const;
 
 export type FeaturedProject = (typeof site.featuredProjects)[number];
+export type FeaturedEvent = (typeof site.featuredEvents)[number];
+export type EventArchiveRow = (typeof site.eventArchive)[number];

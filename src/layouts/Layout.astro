@@ -77,57 +77,76 @@ const defaultTheme = `${baseTheme}-dark`;
     </div>
     <script is:inline>
       (function () {
-        const links = Array.from(document.querySelectorAll('[data-section-link]'));
-        const sections = ['about', 'tech-stack', 'featured-projects', 'experiences', 'academic', 'certifications']
-          .map((id) => document.getElementById(id))
-          .filter(Boolean);
+        let scrollHandler = null;
 
-        if (!links.length || !sections.length) return;
-
-        const setActive = (id) => {
-          links.forEach((link) => {
-            const href = link.getAttribute('href') || '';
-            const isActive = href.endsWith('#' + id);
-            link.classList.toggle('nav-link-active', isActive);
-            if (isActive) link.setAttribute('aria-current', 'true');
-            else link.removeAttribute('aria-current');
-          });
-        };
-
-        const updateActive = () => {
-          const scrolledToBottom =
-            window.innerHeight + window.scrollY >= document.body.scrollHeight - 10;
-
-          if (scrolledToBottom) {
-            setActive(sections[sections.length - 1].id);
-            return;
+        function initScrollSpy() {
+          // Clean up previous listener to avoid duplicates on view transitions
+          if (scrollHandler) {
+            window.removeEventListener('scroll', scrollHandler);
           }
 
-          if (window.scrollY < 50) {
-            setActive(sections[0].id);
-            return;
-          }
+          // Re-query DOM so we always operate on the current page's elements
+          const links = Array.from(document.querySelectorAll('[data-section-link]'));
+          const sections = ['about', 'tech-stack', 'featured-projects', 'featured-events', 'experiences', 'academic', 'certifications']
+            .map((id) => document.getElementById(id))
+            .filter(Boolean);
 
-          const active = [...sections]
-            .reverse()
-            .find((s) => s.getBoundingClientRect().top <= window.innerHeight * 0.15);
+          if (!links.length || !sections.length) return;
 
-          if (active) setActive(active.id);
-          else setActive(sections[0].id);
-        };
-
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-          if (!ticking) {
-            requestAnimationFrame(() => {
-              updateActive();
-              ticking = false;
+          const setActive = (id) => {
+            links.forEach((link) => {
+              const href = link.getAttribute('href') || '';
+              const isActive = href.endsWith('#' + id);
+              link.classList.toggle('nav-link-active', isActive);
+              if (isActive) link.setAttribute('aria-current', 'true');
+              else link.removeAttribute('aria-current');
             });
-            ticking = true;
-          }
-        }, { passive: true });
+          };
 
-        updateActive();
+          const updateActive = () => {
+            const scrolledToBottom =
+              window.innerHeight + window.scrollY >= document.body.scrollHeight - 10;
+
+            if (scrolledToBottom) {
+              setActive(sections[sections.length - 1].id);
+              return;
+            }
+
+            if (window.scrollY < 50) {
+              setActive(sections[0].id);
+              return;
+            }
+
+            const active = [...sections]
+              .reverse()
+              .find((s) => s.getBoundingClientRect().top <= window.innerHeight * 0.15);
+
+            if (active) setActive(active.id);
+            else setActive(sections[0].id);
+          };
+
+          let ticking = false;
+          scrollHandler = () => {
+            if (!ticking) {
+              requestAnimationFrame(() => {
+                updateActive();
+                ticking = false;
+              });
+              ticking = true;
+            }
+          };
+
+          window.addEventListener('scroll', scrollHandler, { passive: true });
+
+          // Small delay to allow hash-scroll to settle before calculating active section
+          setTimeout(updateActive, 50);
+        }
+
+        // Initialize on first load
+        initScrollSpy();
+
+        // Re-initialize after every view transition (Astro's ClientRouter)
+        document.addEventListener('astro:page-load', initScrollSpy);
       })();
     </script>
   </body>
