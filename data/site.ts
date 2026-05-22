@@ -31,7 +31,7 @@ export const site = {
   meta: {
     title: 'Sebastian Castaneda | Software Engineer',
     description:
-      'My personal Website',
+      'My personal website',
   },
   hero: {
     name: 'Carlos Sebastian Castañeda',
@@ -46,7 +46,7 @@ export const site = {
     paragraphs: [
       'Software Engineer with over 10 years of experience building production systems across FinTech, crypto, government, and health-tech domains.',
       {
-        heading: 'My strongs',
+        heading: 'My strengths',
         bullets: [
           'Strong backend foundation in Python (Django, FastAPI), AWS, and Docker',
           'Hands-on experience delivering customer-facing web applications and REST APIs end to end',
@@ -90,7 +90,7 @@ export const site = {
         'Built and deployed internal automation tools that reduced manual operations by around ~50%, streamlining processing workflows across banking operations.',
         'Owned the security alert pipeline for the team — reviewing and remediating dependency vulnerabilities, enforcing secret scanning, and preventing sensitive data leaks in version control and application logs.',
       ],
-      tech: ['Python', 'Java', 'Docker', 'AWS', 'Javascript', 'Terraform', 'NewRelic', 'Coralogix', 'Django', 'FastAPI', 'PostgreSQL', 'MySQL', 'Redis'],
+      tech: ['Python', 'Java', 'Docker', 'AWS', 'JavaScript', 'Terraform', 'NewRelic', 'Coralogix', 'Django', 'FastAPI', 'PostgreSQL', 'MySQL', 'Redis'],
   },
     {
       period: '2018-2021',
@@ -111,12 +111,12 @@ export const site = {
       summary:
         'Software Engineer for Moni and Matterport',
       highlights: [
-        'Built and enhanced features for Matterpor\'s customer-facing web portal using Python (Django) on the backend and JavaScript on the frontend, working on-site with the engineering team in San Francisco, CA.',
+        'Built and enhanced features for Matterport\'s customer-facing web portal using Python (Django) on the backend and JavaScript on the frontend, working on-site with the engineering team in San Francisco, CA.',
         'Implemented a 3D model cloning feature in the customer portal, allowing users to duplicate and manage spatial models directly from the web interface.',
         'Shipped customer-facing features for a high-traffic payday loan platform serving 5K+ users, built with Python (Django, Celery) on the backend and JavaScript (Marionette) on the frontend.',
         'Enhanced the internal operations dashboard, improving loan management workflows and giving the operations team better visibility into portfolio health and borrower status.',
       ],
-      tech: ['Python', 'Django', 'Datadog', 'Javascript'],
+      tech: ['Python', 'Django', 'Datadog', 'JavaScript'],
     },
   ],
   academic: [
