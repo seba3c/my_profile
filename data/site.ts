@@ -17,6 +17,15 @@ export interface AcademicEntry {
   advisor?: string;
 }
 
+export interface ProjectArchiveEntry {
+  date: string;
+  project: string;
+  description?: string;
+  role: string;
+  techStack: string;
+  link?: string;
+}
+
 export const site = {
   url: 'https://example.com',
   meta: {
@@ -150,15 +159,15 @@ export const site = {
     intro: 'A concise archive of engagements and representative work.',
   },
   projectArchive: [
-    { date: '2026', project: 'Mint', description: 'Audits your legacy CSS and generates a clean, exportable design system from the chaos.', role: 'Collaborator', techStack: 'Typescript, CSS', link: 'https://github.com/nujovich/mint' },
-  ],
+    //{ date: '2026', project: 'Mint', description: 'Audits your legacy CSS and generates a clean, exportable design system from the chaos.', role: 'Collaborator', techStack: 'Typescript, CSS', link: 'https://github.com/nujovich/mint' },
+  ] as ProjectArchiveEntry[],
   featuredEvents: [
     {
       name: 'VCLTechFest 26',
       location: 'Valencia, Spain',
       date: 'May 23, 2026',
       description: 'VLCTechFest is a day of talks by and for the technology communities of the Valencian Community. An event to learn, be inspired and network in an open and collaborative environment.',
-      role: 'Atendee',
+      role: 'Attendee',
       eventLink: 'https://vlctechfest.org/en/',
       activityLink: '',
     },
@@ -174,7 +183,7 @@ export const site = {
       event: 'VCLTechFest 26',
       description: 'VLCTechFest is a day of talks by and for the technology communities of the Valencian Community. An event to learn, be inspired and network in an open and collaborative environment.',
       location: 'Valencia, Spain',
-      role: 'Atendee',
+      role: 'Attendee',
       eventLink: 'https://vlctechfest.org/en/',
       activityLink: '',
     },
