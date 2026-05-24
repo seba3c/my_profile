@@ -67,7 +67,7 @@ const { title, description } = Astro.props;
 
         // Re-query DOM so we always operate on the current page's elements
         const links = Array.from(document.querySelectorAll('[data-section-link]'));
-        const sections = ['about', 'tech-stack', 'featured-projects', 'featured-events', 'experiences', 'academic', 'certifications']
+        const sections = ['about', 'tech-stack', 'featured-projects', 'featured-events', 'experiences', 'certifications', 'academic']
           .map((id) => document.getElementById(id))
           .filter(Boolean);
 
