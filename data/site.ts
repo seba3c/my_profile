@@ -145,12 +145,12 @@ export const site = {
   ] as AcademicEntry[],
   featuredProjects: [
     {
-      title: 'Criptils',
+      title: 'Mint',
       period: '2026',
-      summary: 'A simple python library to work with crypto and fiat amounts. Initially implemented as an experiment to test the Pypi flows to build and publish a Python package. Currently in beta.',
-      role: 'Owner',
-      link: 'https://github.com/seba3c/cryptils',
-      techStack: ['Python', 'tox', 'ruff', 'uv'],
+      summary: 'Audits your legacy CSS and generates a clean, exportable design system from the chaos.',
+      role: 'Collaborator',
+      link: 'https://github.com/nujovich/mint',
+      techStack: ['Typescript', 'CSS'],
     },
   ],
   projectArchivePage: {
@@ -159,7 +159,7 @@ export const site = {
     intro: 'A concise archive of engagements and representative work.',
   },
   projectArchive: [
-    //{ date: '2026', project: 'Mint', description: 'Audits your legacy CSS and generates a clean, exportable design system from the chaos.', role: 'Collaborator', techStack: 'Typescript, CSS', link: 'https://github.com/nujovich/mint' },
+    { date: '2026', project: 'Criptils', description: 'A simple python library to work with crypto and fiat amounts. Initially implemented as an experiment to test the Pypi flows to build and publish a Python package. Currently in beta.', role: 'Owner', techStack: 'Python, tox, ruff, uv', link: 'https://github.com/seba3c/cryptils' },
   ] as ProjectArchiveEntry[],
   featuredEvents: [
     {
@@ -169,7 +169,7 @@ export const site = {
       description: 'VLCTechFest is a day of talks by and for the technology communities of the Valencian Community. An event to learn, be inspired and network in an open and collaborative environment.',
       role: 'Attendee',
       eventLink: 'https://vlctechfest.org/en/',
-      activityLink: '',
+      activityLink: 'https://www.linkedin.com/feed/update/urn:li:activity:7464570974085238784/',
     },
   ],
   eventArchivePage: {
@@ -185,7 +185,7 @@ export const site = {
       location: 'Valencia, Spain',
       role: 'Attendee',
       eventLink: 'https://vlctechfest.org/en/',
-      activityLink: '',
+      activityLink: 'https://www.linkedin.com/feed/update/urn:li:activity:7464570974085238784/',
     },
   ],
   certifications: [
