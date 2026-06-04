@@ -26,6 +26,13 @@ export interface ProjectArchiveEntry {
   link?: string;
 }
 
+export interface CertificationArchiveEntry {
+  name: string;
+  issuer: string;
+  date: string;
+  credentialLink?: string;
+}
+
 export const site = {
   url: 'https://example.com',
   meta: {
@@ -190,13 +197,6 @@ export const site = {
   ],
   certifications: [
     {
-      name: 'Certificate of completion: Introduction to agent skills',
-      issuer: 'Anthropic',
-      date: 'Mar 2026',
-      credentialId: 'ty2g2abmazr3',
-      credentialLink: 'https://verify.skilljar.com/c/ty2g2abmazr3',
-    },
-    {
       name: 'Claude Code in Action',
       issuer: 'Anthropic',
       date: 'Mar 2026',
@@ -204,6 +204,25 @@ export const site = {
       credentialLink: 'https://verify.skilljar.com/c/r6w53zwcez5p',
     },
   ],
+  certificationArchivePage: {
+    title: 'Certification Archive',
+    description: 'All certifications and credentials earned over the years.',
+    intro: 'A complete archive of professional certifications, courses and bootcamps.',
+  },
+  certificationArchive: [
+    {
+      name: 'Certificate of completion: Introduction to agent skills',
+      issuer: 'Anthropic',
+      date: 'Mar 2026',
+      credentialLink: 'https://verify.skilljar.com/c/ty2g2abmazr3',
+    },
+    {
+      name: 'The nuts and Bolts of OAuth 2.0',
+      issuer: 'Udemy',
+      date: 'Feb 2026',
+      credentialLink: 'https://www.udemy.com/certificate/UC-1f805355-e91d-445e-a64a-eed0e399cdfe/',
+    },
+  ] as CertificationArchiveEntry[],
   certificationsEmptyText: 'Coming soon...',
   contact: {
     email: 'castanedacs@gmail.com',
