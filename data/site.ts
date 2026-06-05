@@ -217,6 +217,12 @@ export const site = {
       credentialLink: 'https://verify.skilljar.com/c/ty2g2abmazr3',
     },
     {
+      name: 'Claude 101',
+      issuer: 'Anthropic',
+      date: 'Mar 2026',
+      credentialLink: 'https://verify.skilljar.com/c/j4v3rcsy7qby',
+    },
+    {
       name: 'The Nuts and Bolts of OAuth 2.0',
       issuer: 'Udemy',
       date: 'Feb 2026',
