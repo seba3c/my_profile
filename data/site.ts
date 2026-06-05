@@ -211,13 +211,13 @@ export const site = {
   },
   certificationArchive: [
     {
-      name: 'Certificate of completion: Introduction to agent skills',
+      name: 'Introduction to agent skills',
       issuer: 'Anthropic',
       date: 'Mar 2026',
       credentialLink: 'https://verify.skilljar.com/c/ty2g2abmazr3',
     },
     {
-      name: 'The nuts and Bolts of OAuth 2.0',
+      name: 'The Nuts and Bolts of OAuth 2.0',
       issuer: 'Udemy',
       date: 'Feb 2026',
       credentialLink: 'https://www.udemy.com/certificate/UC-1f805355-e91d-445e-a64a-eed0e399cdfe/',
