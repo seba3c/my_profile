@@ -228,6 +228,12 @@ export const site = {
       date: 'Feb 2026',
       credentialLink: 'https://www.udemy.com/certificate/UC-1f805355-e91d-445e-a64a-eed0e399cdfe/',
     },
+    {
+      name: 'Kubernetes for the Absolute Beginners - Hands-on',
+      issuer: 'Udemy',
+      date: 'Feb 2026',
+      credentialLink: 'https://www.udemy.com/certificate/UC-df62c2df-a2c7-405c-9b61-633bd868e41d/',
+    },
   ] as CertificationArchiveEntry[],
   certificationsEmptyText: 'Coming soon...',
   contact: {
