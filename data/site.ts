@@ -170,13 +170,22 @@ export const site = {
   ] as ProjectArchiveEntry[],
   featuredEvents: [
     {
-      name: 'VCLTechFest 26',
+      date: 'Jul 2, 2026',
+      name: 'Awakatech #28 | Entre lo técnico y lo humano',
+      description: "Monthly event organized by Mercadona Tech, where we discuss the latest trends in technology and innovation.",
       location: 'Valencia, Spain',
-      date: 'May 23, 2026',
-      description: 'VLCTechFest is a day of talks by and for the technology communities of the Valencian Community. An event to learn, be inspired and network in an open and collaborative environment.',
       role: 'Attendee',
-      eventLink: 'https://vlctechfest.org/en/',
-      activityLink: 'https://www.linkedin.com/feed/update/urn:li:activity:7464570974085238784/',
+      eventLink: 'https://www.meetup.com/awakatech/events/315267588/?eventOrigin=group_past_events',
+      activityLink: 'https://www.linkedin.com/feed/update/urn:li:activity:7480557564494258177/',
+    },
+    {
+      date: 'June 18, 2026',
+      name: 'Turning Your Java Project Into an AI-Ready Codebase',
+      description: "Valencia Java User Group (JUG) focused in Java Virtual Machine (JVM) programming paradigms and languages.",
+      location: 'Valencia, Spain',
+      role: 'Attendee',
+      eventLink: 'https://www.meetup.com/valenciajug/events/314964101/?eventOrigin=group_past_events',
+      activityLink: 'https://www.linkedin.com/feed/update/urn:li:activity:7473630745744359424/',
     },
   ],
   eventArchivePage: {
@@ -186,7 +195,16 @@ export const site = {
   }, 
   eventArchive: [
     {
-      date: '2026',
+      date: 'Jun 2026',
+      event: 'AI-Driven Software Development: Strategies, best practices, war stories',
+      description: "It's a monthly meet-up where we will be inviting speakers from inside and outside of our community to introduce you to interesting technical topics and share their experiences with you.",
+      location: 'Valencia, Spain',
+      role: 'Attendee',
+      eventLink: 'https://www.meetup.com/valencia-codes/events/314750239/?eventOrigin=group_past_events',
+      activityLink: 'https://www.linkedin.com/feed/update/urn:li:activity:7472961524576223233/',
+    },
+    {
+      date: 'May 2026',
       event: 'VCLTechFest 26',
       description: 'VLCTechFest is a day of talks by and for the technology communities of the Valencian Community. An event to learn, be inspired and network in an open and collaborative environment.',
       location: 'Valencia, Spain',
@@ -197,11 +215,10 @@ export const site = {
   ],
   certifications: [
     {
-      name: 'Claude Code in Action',
-      issuer: 'Anthropic',
-      date: 'Mar 2026',
-      credentialId: 'r6w53zwcez5p',
-      credentialLink: 'https://verify.skilljar.com/c/r6w53zwcez5p',
+      name: 'Staff Engineer Bootcamp',
+      issuer: 'Javier Turegano',
+      date: 'Jul 2026',
+      credentialLink: 'https://turegano.net/staff-engineer-bootcamp/',
     },
   ],
   certificationArchivePage: {
@@ -210,6 +227,13 @@ export const site = {
     intro: 'A complete archive of professional certifications, courses and bootcamps.',
   },
   certificationArchive: [
+    {
+      name: 'Claude Code in Action',
+      issuer: 'Anthropic',
+      date: 'Mar 2026',
+      credentialId: 'r6w53zwcez5p',
+      credentialLink: 'https://verify.skilljar.com/c/r6w53zwcez5p',
+    },
     {
       name: 'Introduction to agent skills',
       issuer: 'Anthropic',
