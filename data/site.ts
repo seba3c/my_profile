@@ -44,7 +44,7 @@ export const site = {
     name: 'Carlos Sebastian Castañeda',
     nickname: 'Sebastian Castañeda',
     role: 'Senior Software Engineer',
-    tagline: 'Startup | Fintech | Crypto | Digital Banking | AI | BTC',
+    tagline: 'Startup | Fintech | Crypto | Digital Banking | AI Enthusiast | AWS Solution Architect',
     contact: 'Valencia, Spain',
     avatarSrc: '/profile_v2.jpeg',
     avatarAlt: 'Carlos Sebastian Castañeda',
@@ -61,6 +61,7 @@ export const site = {
           'Fast learner who adapts quickly to new tech stacks and tooling as project needs evolve',
         ],
       },
+      "If you have a project, idea or just want to keep in touch, let's talk!",
     ],
   },
   techStack: [
@@ -215,10 +216,10 @@ export const site = {
   ],
   certifications: [
     {
-      name: 'Staff Engineer Bootcamp',
-      issuer: 'Javier Turegano',
-      date: 'Jul 2026',
-      credentialLink: 'https://turegano.net/staff-engineer-bootcamp/',
+      name: 'AWS Certified Solutions Architect – Associate',
+      issuer: 'Amazon Web Services Training and Certification',
+      date: 'Aug 2026',
+      credentialLink: 'https://www.credly.com/badges/fb1927e3-bd1c-405d-8900-7671d93e6031/public_url',
     },
   ],
   certificationArchivePage: {
@@ -227,6 +228,12 @@ export const site = {
     intro: 'A complete archive of professional certifications, courses and bootcamps.',
   },
   certificationArchive: [
+    {
+      name: 'Staff Engineer Bootcamp',
+      issuer: 'Javier Turegano',
+      date: 'Jul 2026',
+      credentialLink: 'https://turegano.net/staff-engineer-bootcamp/',
+    },
     {
       name: 'Claude Code in Action',
       issuer: 'Anthropic',
