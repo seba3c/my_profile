@@ -44,7 +44,7 @@ export const site = {
     name: 'Carlos Sebastian Castañeda',
     nickname: 'Sebastian Castañeda',
     role: 'Senior Software Engineer',
-    tagline: 'Startup | Fintech | Crypto | Digital Banking | AI Enthusiast | AWS Solution Architect',
+    tagline: 'AI Engineering | AWS Solution Architect | Fintech | Crypto | Digital Banking',
     contact: 'Valencia, Spain',
     avatarSrc: '/profile_v2.jpeg',
     avatarAlt: 'Carlos Sebastian Castañeda',
