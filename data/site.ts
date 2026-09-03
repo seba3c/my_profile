@@ -277,7 +277,7 @@ export const site = {
   ] as CertificationArchiveEntry[],
   certificationsEmptyText: 'Coming soon...',
   contact: {
-    email: 'castanedacs@gmail.com',
+    email: 'contact@sebastiancastaneda.dev',
     github: 'https://github.com/seba3c',
     linkedin: 'https://www.linkedin.com/in/sebastiancastaneda/',
     instagram: 'https://www.instagram.com/sebastian.castaneda.3/',
