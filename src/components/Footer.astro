@@ -5,8 +5,11 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="mt-auto bg-background">
-  <p class="text-sm text-footer-muted text-center lg:text-left">
-    {site.hero.nickname} - Built with{' '}
+  <p class="text-sm text-footer-muted text-center lg:text-center">
+    {site.hero.nickname} {year}
+  </p>
+  <p class="text-sm text-footer-muted text-center lg:text-center">
+    Built with{' '}
     <a
       href="https://astro.build"
       target="_blank"
@@ -15,6 +18,22 @@ const year = new Date().getFullYear();
     >
       Astro
     </a>
-    {' '}and <Icon name="ph:heart" class="h-5 w-5 inline align-text-bottom" /> {year}
+    <a
+      href="https://claude.ai/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-slate-light transition hover:text-slate-lightest"
+    >
+      Claude
+    </a>
+    <a
+      href="https://opencode.ai/"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="text-slate-light transition hover:text-slate-lightest"
+    >
+      Opencode
+    </a>
+    {' '}and <Icon name="ph:heart" class="h-5 w-5 inline align-text-bottom" />
   </p>
 </footer>

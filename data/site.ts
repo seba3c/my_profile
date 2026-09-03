@@ -44,27 +44,33 @@ export const site = {
     name: 'Carlos Sebastian Castañeda',
     nickname: 'Sebastian Castañeda',
     role: 'Senior Software Engineer',
-    tagline: 'AI Engineering | AWS Solution Architect | Fintech | Crypto | Digital Banking',
-    contact: 'Valencia, Spain',
+    tagline: 'Senior Software Engineer → AI Engineering | AWS Solutions Architect | Fintech | Bitcoin | Python & Java',
+    contact: '',
     avatarSrc: '/profile_v2.jpeg',
     avatarAlt: 'Carlos Sebastian Castañeda',
   },
   about: {
     paragraphs: [
-      'Software Engineer with over 10 years of experience building production systems across FinTech, crypto, government, and health-tech domains.',
+      'Software Engineer with over 10 years of experience building production systems across FinTech, crypto, government, and health-tech domains. Lately I\'ve been leaning into AI-augmented development — using tools like Claude, Claude Code, and GitHub Copilot as part of my daily workflow, and going deeper into AI engineering through hands-on coursework and project work.',
       {
         heading: 'My strengths',
         bullets: [
-          'Strong backend foundation in Python (Django, FastAPI), AWS, and Docker',
+          'Strong backend foundation in Python (Django, FastAPI), AWS, and Docker — language-agnostic in practice, with additional experience in Java, JavaScript, and other stacks as needed',
           'Hands-on experience delivering customer-facing web applications and REST APIs end to end',
           'Full ownership of features — from system architecture and payment integrations to frontend delivery, security remediation, and cross-functional collaboration with Product, Security, and DevOps teams',
-          'Fast learner who adapts quickly to new tech stacks and tooling as project needs evolve',
+          'Growing focus on AI engineering — from AI-assisted development to spec-driven workflows',
+          'Fast learner who adapts quickly to new tech stacks and tooling as project needs evolve'
         ],
       },
       "If you have a project, idea or just want to keep in touch, let's talk!",
     ],
   },
   techStack: [
+    {
+      category: 'AI',
+      color: 'red',
+      items: ['Claude Code', 'OpenCode', 'Gemini', 'Codex', 'GitHub Copilot', 'Spec-kit', 'Cursor'],
+    },
     {
       category: 'Languages & Frameworks',
       color: 'emerald',
@@ -73,7 +79,7 @@ export const site = {
     {
       category: 'Data & Infrastructure',
       color: 'orange',
-      items: ['PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'AWS', 'Terraform', 'Docker', 'Kubernetes', 'Git'],
+      items: ['AWS', 'PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'Terraform', 'Docker', 'Kubernetes', 'Git'],
     },
     {
       category: 'Observability & DevOps',
@@ -81,9 +87,9 @@ export const site = {
       items: ['New Relic', 'Datadog', 'Sentry', 'PagerDuty', 'GitHub Actions', 'Coralogix'],
     },
     {
-      category: 'Tools & AI',
+      category: 'Tools',
       color: 'purple',
-      items: ['Postman', 'JIRA', 'Confluence', 'Figma', 'GitHub Copilot', 'Claude Code', 'OpenCode', 'Gemini', 'Codex'],
+      items: ['Postman', 'JIRA', 'Confluence', 'Figma'],
     },
   ],
   experiences: [
@@ -95,8 +101,11 @@ export const site = {
         'Senior Backend Engineer in different company areas and teams.',
       highlights: [
         'Architected and shipped integrations with multiple FIAT and crypto payment providers using Python and AWS, enabling secure transaction processing for 10K+ customers.',
+        'Used GitHub Copilot as an additional PR reviewer alongside other AI coding assistants, following the engineering org\'s adoption of the tool — regularly surfaced issues and code improvements missed in initial human review.',
         'Built and deployed internal automation tools that reduced manual operations by around ~50%, streamlining processing workflows across banking operations.',
         'Owned the security alert pipeline for the team — reviewing and remediating dependency vulnerabilities, enforcing secret scanning, and preventing sensitive data leaks in version control and application logs.',
+        'Drove cross-team delivery with Product, Security, and DevOps — scoping requirements, defining technical solutions, and shipping high-availability services using AWS and Terraform.',
+        'Participated in on-call rotations, triaging and resolving production incidents to ensure high availability of critical banking and payment services.'
       ],
       tech: ['Python', 'Java', 'Docker', 'AWS', 'JavaScript', 'Terraform', 'NewRelic', 'Coralogix', 'Django', 'FastAPI', 'PostgreSQL', 'MySQL', 'Redis'],
   },
