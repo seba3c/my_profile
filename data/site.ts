@@ -69,7 +69,7 @@ export const site = {
     {
       category: 'AI',
       color: 'red',
-      items: ['Claude Code', 'OpenCode', 'Gemini', 'Codex', 'GitHub Copilot', 'Spec-kit', 'Cursor'],
+      items: ['Claude Code', 'OpenCode', 'Gemini', 'Codex', 'GitHub Copilot', 'Spec-kit', 'OpenSpec', 'Cursor'],
     },
     {
       category: 'Languages & Frameworks',
@@ -169,6 +169,14 @@ export const site = {
       link: 'https://github.com/nujovich/mint',
       techStack: ['Typescript', 'CSS'],
     },
+    {
+      title: 'Easyparse CV',
+      period: '2026',
+      summary: 'Parses resume/CV PDFs locally into structured JSON (personal info, experience, education, skills) — no external services involved.',
+      role: 'Owner',
+      link: 'https://github.com/seba3c/easyparse-cv',
+      techStack: ['TypeScript', 'Next.js', 'React'],
+    },
   ],
   projectArchivePage: {
     title: 'All projects',
@@ -176,7 +184,7 @@ export const site = {
     intro: 'A concise archive of engagements and representative work.',
   },
   projectArchive: [
-    { date: '2026', project: 'Criptils', description: 'A simple python library to work with crypto and fiat amounts. Initially implemented as an experiment to test the Pypi flows to build and publish a Python package. Currently in beta.', role: 'Owner', techStack: 'Python, tox, ruff, uv', link: 'https://github.com/seba3c/cryptils' },
+    { date: '2026', project: 'Monetils', description: 'A Python library for exact decimal handling of crypto and fiat amounts (BTC, USD), avoiding floating-point rounding errors, with Pydantic v2 integration.', role: 'Owner', techStack: 'Python, Pydantic, tox, ruff, uv', link: 'https://github.com/seba3c/monetils' },
   ] as ProjectArchiveEntry[],
   featuredEvents: [
     {
@@ -281,7 +289,8 @@ export const site = {
     github: 'https://github.com/seba3c',
     linkedin: 'https://www.linkedin.com/in/sebastiancastaneda/',
     instagram: 'https://www.instagram.com/sebastian.castaneda.3/',
-    x: 'https://x.com/seba3c'
+    x: 'https://x.com/seba3c',
+    resume: '/CarlosSebastianCastaneda_SoftwareEngineer.pdf'
   },
 } as const;
 
