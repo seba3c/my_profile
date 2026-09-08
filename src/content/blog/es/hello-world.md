@@ -8,9 +8,14 @@ tags: ["meta"]
 ¡Bienvenido! Esta es la primera publicación del blog.
 
 Voy a usar este espacio para escribir sobre ingeniería de software,
-desarrollo asistido por IA, y todo lo que vaya aprendiendo en el camino. Los
+desarrollo asistido por IA, y todo lo que vaya aprendiendo en el camino. Pero lo más
+importante es que estoy reconvirtiéndome de Ingeniero de Software de la vieja escuela a un
+Ingeniero de Software AI native. Los
 artículos se escriben en Markdown y —por primera vez en este sitio— se
 publican tanto en inglés como en español.
+La idea es generar contenido auténtico y real, nada de IA. Ya hay demasiado contenido
+generado con IA que no aporta valor; solo utilizaré IA para corregir gramática y ortografía,
+y para traducción de idioma.
 
 ## Por qué un blog
 

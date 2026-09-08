@@ -8,9 +8,14 @@ tags: ["meta"]
 Welcome! This is the first post on the blog.
 
 I'm using this space to write about software engineering, AI-assisted
-development, and whatever else I'm learning along the way. Posts here are
-written in Markdown and — for the first time on this site — published in
-both English and Spanish.
+development, and whatever else I'm learning along the way. But most
+importantly, I'm reinventing myself from an old-school Software Engineer into
+an AI-native Software Engineer. Posts here are written in Markdown and — for
+the first time on this site — published in both English and Spanish.
+The idea is to produce content that's authentic and real, not more AI-generated
+filler — there's already too much AI-generated content out there that adds no
+value. I'll only use AI to fix grammar and spelling, and for translation between
+languages.
 
 ## Why a blog
 
