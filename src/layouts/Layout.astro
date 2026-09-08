@@ -2,6 +2,7 @@
 import BaseLayout from './BaseLayout.astro';
 import SideNav from '../components/SideNav.astro';
 import MobileHeader from '../components/MobileHeader.astro';
+import MobileNav from '../components/MobileNav.astro';
 
 interface Props {
   title?: string;
@@ -16,6 +17,7 @@ const { title, description } = Astro.props;
     class="mx-auto flex min-h-screen max-w-6xl flex-col lg:flex-row lg:gap-6 lg:px-12 xl:max-w-7xl xl:gap-0"
   >
     <SideNav />
+    <MobileNav />
     <main
       id="main"
       class="relative flex min-w-0 flex-1 flex-col px-4 pb-16 pt-12 sm:px-6 md:px-8 lg:py-15 lg:pl-4 lg:pr-0"
@@ -90,33 +92,61 @@ const { title, description } = Astro.props;
           });
         };
 
-        const updateActive = () => {
+        const computeActiveId = () => {
           const scrolledToBottom =
             window.innerHeight + window.scrollY >= document.body.scrollHeight - 10;
 
-          if (scrolledToBottom) {
-            setActive(sections[sections.length - 1].id);
-            return;
-          }
-
-          if (window.scrollY < 50) {
-            setActive(sections[0].id);
-            return;
-          }
+          if (scrolledToBottom) return sections[sections.length - 1].id;
+          if (window.scrollY < 50) return sections[0].id;
 
           const active = [...sections]
             .reverse()
             .find((s) => s.getBoundingClientRect().top <= window.innerHeight * 0.15);
 
-          if (active) setActive(active.id);
-          else setActive(sections[0].id);
+          return active ? active.id : sections[0].id;
         };
+
+        const updateActive = () => setActive(computeActiveId());
+
+        // Landing here via a link to a specific section (e.g. the "back to
+        // home" link on the archive pages) triggers the browser's own
+        // smooth-scroll to that anchor, which can take a while (long page,
+        // slow device). While that scroll is still in flight, keep forcing
+        // the intended target as active instead of following whatever
+        // sections the animation happens to pass through on the way — that
+        // avoids depending on guessing how long the scroll will take. Once
+        // the normal scroll-position calculation agrees with that target on
+        // its own, hand off to it for ordinary live tracking.
+        const hashId = location.hash.replace('#', '');
+        const hashSection = sections.find((s) => s.id === hashId);
+        let settling = Boolean(hashSection);
+
+        if (hashSection) {
+          setActive(hashId);
+          // Safety net in case the target is never actually reached (e.g.
+          // the scroll gets interrupted) — re-sync from actual scroll
+          // position rather than leaving the display stuck.
+          setTimeout(() => {
+            if (settling) {
+              settling = false;
+              updateActive();
+            }
+          }, 2000);
+        }
 
         let ticking = false;
         scrollHandler = () => {
           if (!ticking) {
             requestAnimationFrame(() => {
-              updateActive();
+              if (settling) {
+                if (computeActiveId() === hashId) {
+                  settling = false;
+                } else {
+                  setActive(hashId);
+                }
+              } else {
+                updateActive();
+              }
               ticking = false;
             });
             ticking = true;
@@ -126,7 +156,9 @@ const { title, description } = Astro.props;
         window.addEventListener('scroll', scrollHandler, { passive: true });
 
         // Small delay to allow hash-scroll to settle before calculating active section
-        setTimeout(updateActive, 50);
+        setTimeout(() => {
+          if (!settling) updateActive();
+        }, 50);
       }
 
       // Initialize on first load
