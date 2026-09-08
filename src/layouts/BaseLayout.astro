@@ -92,6 +92,32 @@ const defaultTheme = `${baseTheme}-dark`;
       document.addEventListener('astro:page-load', rewriteBlogNavLinks);
     </script>
 
+    <!-- Global CSS has `scroll-behavior: smooth` (see global.css) so that
+         in-page nav-link clicks and hash landings animate. But on browser
+         back/forward navigation, Astro's ClientRouter restores the previous
+         scroll position with a plain `scrollTo(x, y)` that also inherits
+         that smooth behavior, animating the jump back to wherever the user
+         had scrolled to instead of restoring instantly. (Forcing this off
+         via document.documentElement.style doesn't work here — Astro's swap
+         copies the new document's root attributes over the old ones,
+         wiping any inline style we set beforehand.) On long pages (mobile's
+         stacked single-column layout in particular) that animation takes
+         long enough for the scroll-spy to latch onto whatever section it
+         passes through on the way, leaving the wrong nav item highlighted.
+         Re-issue the restore ourselves as an instant jump right after. -->
+    <script is:inline>
+      let pendingTraverseRestore = false;
+      document.addEventListener('astro:before-swap', (e) => {
+        pendingTraverseRestore = e.navigationType === 'traverse';
+      });
+      document.addEventListener('astro:after-swap', () => {
+        if (pendingTraverseRestore && history.state) {
+          window.scrollTo({ left: history.state.scrollX, top: history.state.scrollY, behavior: 'instant' });
+        }
+        pendingTraverseRestore = false;
+      });
+    </script>
+
     <!-- The body's pageFadeIn keyframe animation (see global.css) uses
          `animation-fill-mode: forwards`, which keeps a `transform` on <body>
          after the animation ends (translateY(0) still counts as a transform,
