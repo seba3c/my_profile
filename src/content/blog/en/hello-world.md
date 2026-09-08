@@ -3,6 +3,7 @@ title: "Hello, World"
 description: "The first post on this blog — why it exists and what to expect."
 pubDate: 2026-09-08
 tags: ["meta"]
+readingTime: 1
 ---
 
 Welcome! This is the first post on the blog.

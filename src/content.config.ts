@@ -10,6 +10,9 @@ const blog = defineCollection({
     updatedDate: z.coerce.date().optional(),
     draft: z.boolean().default(false),
     tags: z.array(z.string()).default([]),
+    // Estimated reading time in minutes, computed by the
+    // blog-i18n-reading-sync skill (ceil(wordCount / 200), min 1).
+    readingTime: z.number().optional(),
     // Set when a post is cross-posted elsewhere (e.g. dev.to) and this site
     // isn't the canonical source for it.
     canonicalUrl: z.url().optional(),

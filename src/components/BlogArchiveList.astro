@@ -23,7 +23,10 @@ const dateFormatter = new Intl.DateTimeFormat(locale === 'es' ? 'es-ES' : 'en-US
         <article class="panel-card group space-y-2 bg-white-soft/50">
           <header>
             <h2 class="text-2xl font-semibold text-slate">{post.entry.data.title}</h2>
-            <p class="mt-1 font-mono text-sm text-accent">{dateFormatter.format(post.entry.data.pubDate)}</p>
+            <p class="mt-1 font-mono text-sm text-accent">
+              {dateFormatter.format(post.entry.data.pubDate)}
+              {post.entry.data.readingTime && <> · {`${post.entry.data.readingTime} ${strings.readingTimeLabel}`}</>}
+            </p>
           </header>
 
           <p class="body-copy">{post.entry.data.description}</p>

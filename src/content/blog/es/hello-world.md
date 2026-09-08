@@ -3,6 +3,7 @@ title: "Hola, mundo"
 description: "La primera publicación del blog — por qué existe y qué esperar."
 pubDate: 2026-09-08
 tags: ["meta"]
+readingTime: 2
 ---
 
 ¡Bienvenido! Esta es la primera publicación del blog.

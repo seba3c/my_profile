@@ -16,7 +16,7 @@ interface Props {
 
 const { post, locale, availableLocales } = Astro.props;
 const strings = blogStrings[locale];
-const { title, description, pubDate, updatedDate, canonicalUrl } = post.entry.data;
+const { title, description, pubDate, updatedDate, readingTime, canonicalUrl } = post.entry.data;
 
 const basePath = locale === 'es' ? '/es/blog' : '/blog';
 const dateFormatter = new Intl.DateTimeFormat(locale === 'es' ? 'es-ES' : 'en-US', { dateStyle: 'long' });
@@ -67,6 +67,7 @@ const alternates = [
       <p class="font-mono text-sm text-accent">
         {strings.publishedLabel} {dateFormatter.format(pubDate)}
         {updatedDate && <> · {strings.updatedLabel} {dateFormatter.format(updatedDate)}</>}
+        {readingTime && <> · {`${readingTime} ${strings.readingTimeLabel}`}</>}
       </p>
     </header>
 

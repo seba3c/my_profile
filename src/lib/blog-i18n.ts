@@ -6,6 +6,7 @@ export const blogStrings = {
     readMore: 'Read more',
     publishedLabel: 'Published',
     updatedLabel: 'Updated',
+    readingTimeLabel: 'min read',
     emptyState: 'No posts yet — check back soon.',
   },
   es: {
@@ -15,6 +16,7 @@ export const blogStrings = {
     readMore: 'Leer más',
     publishedLabel: 'Publicado',
     updatedLabel: 'Actualizado',
+    readingTimeLabel: 'min de lectura',
     emptyState: 'Todavía no hay publicaciones — vuelve pronto.',
   },
 } as const;
