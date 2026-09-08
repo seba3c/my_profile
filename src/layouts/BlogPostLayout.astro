@@ -1,0 +1,79 @@
+---
+import ArchiveLayout from './ArchiveLayout.astro';
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import BlogMiniHeader from '../components/BlogMiniHeader.astro';
+import { Icon } from 'astro-icon/components';
+import { site } from '@data/site';
+import { resolveNavHref } from '../lib/nav';
+import { blogStrings, type BlogLocale } from '../lib/blog-i18n';
+import type { BlogPost, Locale } from '../lib/blog';
+
+interface Props {
+  post: BlogPost;
+  locale: BlogLocale;
+  availableLocales: Locale[];
+}
+
+const { post, locale, availableLocales } = Astro.props;
+const strings = blogStrings[locale];
+const { title, description, pubDate, updatedDate, readingTime, canonicalUrl } = post.entry.data;
+
+const basePath = locale === 'es' ? '/es/blog' : '/blog';
+const dateFormatter = new Intl.DateTimeFormat(locale === 'es' ? 'es-ES' : 'en-US', { dateStyle: 'long' });
+
+const hasEn = availableLocales.includes('en');
+const hasEs = availableLocales.includes('es');
+const enUrl = hasEn ? new URL(resolveNavHref(`/blog/${post.slug}`), site.url).href : undefined;
+const esUrl = hasEs ? new URL(resolveNavHref(`/es/blog/${post.slug}`), site.url).href : undefined;
+
+const alternates = [
+  ...(enUrl ? [{ hreflang: 'en', href: enUrl }] : []),
+  ...(esUrl ? [{ hreflang: 'es', href: esUrl }] : []),
+  { hreflang: 'x-default', href: (enUrl ?? esUrl)! },
+];
+---
+
+<ArchiveLayout
+  title={`${title} | ${site.hero.name}`}
+  description={description}
+  lang={locale}
+  canonicalUrl={canonicalUrl}
+  alternates={alternates}
+>
+  <Fragment slot="top-right">
+    <LanguageSwitcher
+      locale={locale}
+      enHref={hasEn ? resolveNavHref(`/blog/${post.slug}`) : undefined}
+      esHref={hasEs ? resolveNavHref(`/es/blog/${post.slug}`) : undefined}
+    />
+  </Fragment>
+
+  <BlogMiniHeader />
+
+  <p class="mb-8">
+    <a
+      href={resolveNavHref(basePath)}
+      class="group flex items-center gap-2 text-sm text-accent transition hover:text-slate-light"
+      data-astro-prefetch
+    >
+      <Icon name="ph:arrow-left" class="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+      {strings.backToBlog}
+    </a>
+  </p>
+
+  <article>
+    <header class="mb-10 border-b border-slate-lightest/10 pb-6">
+      <h1 class="mb-3 text-4xl font-bold tracking-tight text-white sm:text-4xl">{title}</h1>
+      <p class="flex items-center gap-2 font-mono text-xs text-slate-light">
+        <Icon name="ph:file-md" class="h-4 w-4 text-accent/70" />
+        {strings.publishedLabel} {dateFormatter.format(pubDate)}
+        {updatedDate && <> · {strings.updatedLabel} {dateFormatter.format(updatedDate)}</>}
+        {readingTime && <> · {`${readingTime} ${strings.readingTimeLabel}`}</>}
+      </p>
+    </header>
+
+    <div class="prose prose-blog max-w-prose">
+      <slot />
+    </div>
+  </article>
+</ArchiveLayout>

@@ -1,0 +1,44 @@
+---
+import { Icon } from 'astro-icon/components';
+import { blogStrings } from '../lib/blog-i18n';
+import { resolveNavHref } from '../lib/nav';
+import type { BlogPost, Locale } from '../lib/blog';
+
+interface Props {
+  posts: BlogPost[];
+  locale: Locale;
+}
+
+const { posts, locale } = Astro.props;
+const strings = blogStrings[locale];
+const basePath = locale === 'es' ? '/es/blog' : '/blog';
+const dateFormatter = new Intl.DateTimeFormat(locale === 'es' ? 'es-ES' : 'en-US', { dateStyle: 'long' });
+---
+
+{
+  posts.length === 0 ? (
+    <p class="body-copy">{strings.emptyState}</p>
+  ) : (
+    <ul class="file-list">
+      {posts.map((post) => (
+        <li>
+          <a href={resolveNavHref(`${basePath}/${post.slug}`)} class="file-row group" data-astro-prefetch>
+            <span class="file-row-title">
+              <Icon name="ph:file-md" class="mt-1 h-5 w-5 shrink-0 text-accent/70" />
+              <span>
+                <span class="block">{post.entry.data.title}</span>
+                <span class="file-row-meta mt-1 block">
+                  {dateFormatter.format(post.entry.data.pubDate)}
+                  {post.entry.data.readingTime && <> · {`${post.entry.data.readingTime} ${strings.readingTimeLabel}`}</>}
+                </span>
+                <span class="mt-1 block font-sans text-sm font-normal text-slate-light">
+                  {post.entry.data.description}
+                </span>
+              </span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  )
+}

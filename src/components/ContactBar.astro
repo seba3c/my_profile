@@ -1,6 +1,12 @@
 ---
 import { site } from '@data/site';
 import { Icon } from 'astro-icon/components';
+
+interface Props {
+  showResume?: boolean;
+}
+
+const { showResume = false } = Astro.props;
 ---
 
 <div class="flex items-center gap-1">
@@ -47,12 +53,14 @@ import { Icon } from 'astro-icon/components';
   >
     <Icon name="ph:instagram-logo" class="h-6 w-6" />
   </a>
-  <a
-    href={site.contact.resume}
-    download
-    class="subtle-link inline-flex h-9 w-9 items-center justify-center rounded opacity-80 hover:opacity-100 transition-opacity"
-    aria-label="Resume"
-  >
-    <Icon name="ph:file-arrow-down" class="h-6 w-6" />
-  </a>
+  {showResume && (
+    <a
+      href={site.contact.resume}
+      download
+      class="subtle-link inline-flex h-9 w-9 items-center justify-center rounded opacity-80 hover:opacity-100 transition-opacity"
+      aria-label="Resume"
+    >
+      <Icon name="ph:file-arrow-down" class="h-6 w-6" />
+    </a>
+  )}
 </div>

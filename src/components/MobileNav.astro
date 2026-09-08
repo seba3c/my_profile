@@ -1,0 +1,129 @@
+---
+import { Icon } from 'astro-icon/components';
+import { navLinks } from '@data/nav';
+import { resolveNavHref } from '../lib/nav';
+---
+
+<button
+  id="mobile-nav-toggle"
+  type="button"
+  class="fixed right-4 top-4 z-[60] flex h-11 w-11 items-center justify-center rounded-full border border-accent/30 bg-background text-maintext shadow-lg transition-colors duration-200 lg:hidden"
+  aria-expanded="false"
+  aria-controls="mobile-nav-panel"
+  aria-label="Open menu"
+>
+  <Icon name="ph:list" data-icon-open class="h-6 w-6" />
+  <Icon name="ph:x" data-icon-close class="hidden h-6 w-6" />
+</button>
+
+<div
+  id="mobile-nav-backdrop"
+  class="fixed inset-0 z-40 bg-background/70 opacity-0 pointer-events-none backdrop-blur-sm transition-opacity duration-300 lg:hidden"
+>
+</div>
+
+<nav
+  id="mobile-nav-panel"
+  aria-label="Primary"
+  class="fixed right-0 top-0 z-50 h-full w-72 max-w-[80%] translate-x-full bg-background px-8 py-20 shadow-2xl transition-transform duration-300 ease-out lg:hidden"
+>
+  <ul class="flex flex-col items-start gap-6">
+    {
+      navLinks.map((link) => {
+        // On mobile there's no persistent sidebar showing the header/contact
+        // info (unlike desktop's sticky SideNav), so jumping straight to
+        // #about would scroll it out of view. Send "About" to the top of
+        // <main> instead — it's the first in-flow element on mobile, so this
+        // is effectively "top of page" with no magic-number scroll offset.
+        const isAbout = link.href === '#about';
+        const isAnchor = link.href.startsWith('#');
+        const href = isAbout ? resolveNavHref('#main') : resolveNavHref(link.href);
+
+        return (
+          <li>
+            <a
+              href={href}
+              class="nav-link text-sm"
+              data-mobile-nav-link
+              {...(isAnchor && !isAbout && { 'data-section-link': true })}
+              {...(link.href === '/blog' && { 'data-blog-nav-link': true })}
+            >
+              <span>{link.label}</span>
+            </a>
+          </li>
+        );
+      })
+    }
+  </ul>
+</nav>
+
+<script is:inline>
+  (function () {
+    let keydownHandler = null;
+
+    function initMobileNav() {
+      const toggle = document.getElementById('mobile-nav-toggle');
+      const backdrop = document.getElementById('mobile-nav-backdrop');
+      const panel = document.getElementById('mobile-nav-panel');
+
+      if (!toggle || !backdrop || !panel) return;
+
+      const iconOpen = toggle.querySelector('[data-icon-open]');
+      const iconClose = toggle.querySelector('[data-icon-close]');
+      const links = Array.from(panel.querySelectorAll('[data-mobile-nav-link]'));
+
+      const setOpen = (open) => {
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+
+        panel.classList.toggle('translate-x-full', !open);
+        panel.classList.toggle('translate-x-0', open);
+
+        backdrop.classList.toggle('opacity-0', !open);
+        backdrop.classList.toggle('pointer-events-none', !open);
+        backdrop.classList.toggle('opacity-100', open);
+
+        if (iconOpen) iconOpen.classList.toggle('hidden', open);
+        if (iconClose) iconClose.classList.toggle('hidden', !open);
+
+        document.body.classList.toggle('overflow-hidden', open);
+
+        if (open) {
+          links[0]?.focus();
+        }
+      };
+
+      const isOpen = () => toggle.getAttribute('aria-expanded') === 'true';
+
+      const close = () => {
+        if (!isOpen()) return;
+        setOpen(false);
+        toggle.focus();
+      };
+
+      // 'astro:page-load' also fires on the initial page load (not just
+      // subsequent navigations), so guard against wiring these listeners
+      // twice on the same elements.
+      if (!toggle.dataset.wired) {
+        toggle.dataset.wired = 'true';
+        toggle.addEventListener('click', () => setOpen(!isOpen()));
+        backdrop.addEventListener('click', close);
+        links.forEach((link) => link.addEventListener('click', () => setOpen(false)));
+      }
+
+      if (keydownHandler) {
+        document.removeEventListener('keydown', keydownHandler);
+      }
+      keydownHandler = (e) => {
+        if (e.key === 'Escape' && isOpen()) close();
+      };
+      document.addEventListener('keydown', keydownHandler);
+
+      // Ensure a fresh closed state (view transitions can leave stale classes/attrs)
+      setOpen(false);
+    }
+
+    initMobileNav();
+    document.addEventListener('astro:page-load', initMobileNav);
+  })();
+</script>

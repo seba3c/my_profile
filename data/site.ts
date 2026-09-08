@@ -29,7 +29,7 @@ export interface ProjectArchiveEntry {
 export interface CertificationArchiveEntry {
   name: string;
   issuer: string;
-  date: string;
+  date: string;             
   credentialLink?: string;
 }
 

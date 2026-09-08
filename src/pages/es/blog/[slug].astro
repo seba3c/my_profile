@@ -1,0 +1,25 @@
+---
+import { render } from 'astro:content';
+import BlogPostLayout from '../../../layouts/BlogPostLayout.astro';
+import { getPostsByLocale, getAvailableLocalesForSlug, type BlogPost } from '../../../lib/blog';
+
+export async function getStaticPaths() {
+  const posts = await getPostsByLocale('es');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: BlogPost;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post.entry);
+const availableLocales = await getAvailableLocalesForSlug(post.slug);
+---
+
+<BlogPostLayout post={post} locale="es" availableLocales={availableLocales}>
+  <Content />
+</BlogPostLayout>

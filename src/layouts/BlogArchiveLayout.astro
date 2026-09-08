@@ -1,0 +1,34 @@
+---
+import ArchiveLayout from './ArchiveLayout.astro';
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import BlogMiniHeader from '../components/BlogMiniHeader.astro';
+import { site } from '@data/site';
+import { resolveNavHref } from '../lib/nav';
+import type { BlogLocale } from '../lib/blog-i18n';
+
+interface Props {
+  locale: BlogLocale;
+  title: string;
+  description: string;
+}
+
+const { locale, title, description } = Astro.props;
+
+const enUrl = new URL(resolveNavHref('/blog'), site.url).href;
+const esUrl = new URL(resolveNavHref('/es/blog'), site.url).href;
+const alternates = [
+  { hreflang: 'en', href: enUrl },
+  { hreflang: 'es', href: esUrl },
+  { hreflang: 'x-default', href: enUrl },
+];
+---
+
+<ArchiveLayout title={title} description={description} lang={locale} alternates={alternates}>
+  <Fragment slot="top-right">
+    <LanguageSwitcher locale={locale} enHref={resolveNavHref('/blog')} esHref={resolveNavHref('/es/blog')} />
+  </Fragment>
+
+  <BlogMiniHeader />
+
+  <slot />
+</ArchiveLayout>
