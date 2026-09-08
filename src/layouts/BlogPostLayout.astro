@@ -62,9 +62,10 @@ const alternates = [
   </p>
 
   <article>
-    <header class="mb-10">
+    <header class="mb-10 border-b border-slate-lightest/10 pb-6">
       <h1 class="mb-3 text-4xl font-bold tracking-tight text-white sm:text-4xl">{title}</h1>
-      <p class="font-mono text-sm text-accent">
+      <p class="flex items-center gap-2 font-mono text-xs text-slate-light">
+        <Icon name="ph:file-md" class="h-4 w-4 text-accent/70" />
         {strings.publishedLabel} {dateFormatter.format(pubDate)}
         {updatedDate && <> · {strings.updatedLabel} {dateFormatter.format(updatedDate)}</>}
         {readingTime && <> · {`${readingTime} ${strings.readingTimeLabel}`}</>}

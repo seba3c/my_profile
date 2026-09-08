@@ -93,6 +93,24 @@
   .pill-link {
     @apply inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-3 py-1 text-xs font-medium text-accent transition-all duration-200 ease-out hover:bg-accent/20 hover:scale-105;
   }
+
+  .file-list {
+    @apply divide-y divide-slate-lightest/10 border-t border-slate-lightest/10;
+  }
+
+  .file-row {
+    @apply flex flex-col gap-2 px-2 py-4 transition-colors duration-150
+           hover:bg-white/[0.03] focus-visible:bg-white/[0.03] focus-visible:outline-hidden;
+  }
+
+  .file-row-title {
+    @apply flex min-w-0 items-start gap-3 font-mono text-lg font-medium text-slate
+           transition-colors duration-150 group-hover:text-accent;
+  }
+
+  .file-row-meta {
+    @apply font-mono text-xs text-slate-light;
+  }
 }
 
 /* Rendered markdown body copy — tracks the active color theme's tokens
@@ -103,6 +121,7 @@
    `components` (or even `theme`) silently loses to the plugin's grays.
    Unlayered rules sit above every layer, so this always wins. */
 .prose-blog {
+  font-family: var(--font-mono);
   --tw-prose-body: var(--color-slate);
   --tw-prose-headings: var(--color-maintext);
   --tw-prose-lead: var(--color-slate);
@@ -118,6 +137,103 @@
   --tw-prose-pre-bg: color-mix(in srgb, var(--color-background), white 8%);
   --tw-prose-th-borders: color-mix(in srgb, var(--color-accent), transparent 60%);
   --tw-prose-td-borders: color-mix(in srgb, var(--color-accent), transparent 75%);
+}
+
+/* GitHub-flavored-markdown touches, layered on top of the --tw-prose-*
+   overrides above. Kept unlayered for the same reason as those vars.
+   Note: fenced code blocks are Shiki-highlighted at build time with inline
+   styles, so --tw-prose-pre-bg/--tw-prose-pre-code above only apply to any
+   non-highlighted <pre> — real code fences get their colors from Shiki's
+   github-dark theme regardless of these rules. */
+
+.prose-blog h1,
+.prose-blog h2 {
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-textrain), transparent 45%);
+}
+
+.prose-blog :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  font-weight: 500;
+  padding: 0.15em 0.4em;
+  border-radius: 6px;
+  background-color: color-mix(in srgb, var(--color-textrain), transparent 78%);
+}
+
+.prose-blog :not(pre) > code::before,
+.prose-blog :not(pre) > code::after {
+  content: none;
+}
+
+.prose-blog blockquote {
+  font-style: normal;
+  font-weight: 400;
+  color: var(--color-slate-light);
+}
+
+.prose-blog blockquote p:first-of-type::before,
+.prose-blog blockquote p:last-of-type::after {
+  content: none;
+}
+
+.prose-blog pre {
+  position: relative;
+  border: 1px solid color-mix(in srgb, var(--color-textrain), transparent 55%);
+  border-radius: 8px;
+}
+
+.prose-blog pre[data-language]::before {
+  content: attr(data-language);
+  position: absolute;
+  top: 0.5em;
+  right: 0.9em;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-slate-light);
+  opacity: 0.7;
+}
+
+.prose-blog table {
+  display: block;
+  overflow-x: auto;
+  border-collapse: collapse;
+  border: 1px solid color-mix(in srgb, var(--color-textrain), transparent 55%);
+}
+
+.prose-blog th,
+.prose-blog td {
+  border: 1px solid color-mix(in srgb, var(--color-textrain), transparent 55%);
+}
+
+.prose-blog thead {
+  background-color: color-mix(in srgb, var(--color-textrain), transparent 85%);
+}
+
+.prose-blog tbody tr:nth-child(even) {
+  background-color: color-mix(in srgb, var(--color-textrain), transparent 93%);
+}
+
+.prose-blog ul.contains-task-list {
+  list-style: none;
+  padding-inline-start: 0.25em;
+}
+
+.prose-blog li.task-list-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5em;
+}
+
+.prose-blog li.task-list-item::marker {
+  content: none;
+}
+
+.prose-blog li.task-list-item input[type='checkbox'] {
+  accent-color: var(--color-accent);
+  margin-top: 0.3em;
 }
 
 @layer base {
