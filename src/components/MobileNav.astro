@@ -1,6 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
 import { navLinks } from '@data/nav';
+import { resolveNavHref } from '../lib/nav';
 ---
 
 <button
@@ -35,9 +36,8 @@ import { navLinks } from '@data/nav';
         // <main> instead — it's the first in-flow element on mobile, so this
         // is effectively "top of page" with no magic-number scroll offset.
         const isAbout = link.href === '#about';
-        const href = isAbout
-          ? `${import.meta.env.BASE_URL}#main`
-          : `${import.meta.env.BASE_URL}${link.href}`;
+        const isAnchor = link.href.startsWith('#');
+        const href = isAbout ? resolveNavHref('#main') : resolveNavHref(link.href);
 
         return (
           <li>
@@ -45,7 +45,8 @@ import { navLinks } from '@data/nav';
               href={href}
               class="nav-link text-sm"
               data-mobile-nav-link
-              {...(!isAbout && { 'data-section-link': true })}
+              {...(isAnchor && !isAbout && { 'data-section-link': true })}
+              {...(link.href === '/blog' && { 'data-blog-nav-link': true })}
             >
               <span>{link.label}</span>
             </a>

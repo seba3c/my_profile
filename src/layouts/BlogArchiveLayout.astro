@@ -1,0 +1,43 @@
+---
+import ArchiveLayout from './ArchiveLayout.astro';
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import { Icon } from 'astro-icon/components';
+import { site } from '@data/site';
+import { resolveNavHref } from '../lib/nav';
+import type { BlogLocale } from '../lib/blog-i18n';
+
+interface Props {
+  locale: BlogLocale;
+  title: string;
+  description: string;
+}
+
+const { locale, title, description } = Astro.props;
+
+const enUrl = new URL(resolveNavHref('/blog'), site.url).href;
+const esUrl = new URL(resolveNavHref('/es/blog'), site.url).href;
+const alternates = [
+  { hreflang: 'en', href: enUrl },
+  { hreflang: 'es', href: esUrl },
+  { hreflang: 'x-default', href: enUrl },
+];
+---
+
+<ArchiveLayout title={title} description={description} lang={locale} alternates={alternates}>
+  <Fragment slot="top-right">
+    <LanguageSwitcher locale={locale} enHref={resolveNavHref('/blog')} esHref={resolveNavHref('/es/blog')} />
+  </Fragment>
+
+  <p class="mb-8">
+    <a
+      href={resolveNavHref('/')}
+      class="group flex items-center gap-2 text-sm text-accent transition hover:text-slate-light"
+      data-astro-prefetch
+    >
+      <Icon name="ph:arrow-left" class="h-4 w-4 transition-transform group-hover:-translate-x-1" />
+      {site.hero.name}
+    </a>
+  </p>
+
+  <slot />
+</ArchiveLayout>

@@ -1,0 +1,55 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  locale: 'en' | 'es';
+  /** Absolute pathname for the English version of this exact page, if it exists. */
+  enHref?: string;
+  /** Absolute pathname for the Spanish version of this exact page, if it exists. */
+  esHref?: string;
+}
+
+const { locale, enHref, esHref } = Astro.props;
+---
+
+<div class="flex items-center gap-2" aria-label="Language">
+  <Icon name="ph:translate" class="h-4 w-4 text-accent" />
+  <div class="flex items-center gap-1.5">
+    {
+      locale === 'en' ? (
+        <span class="nav-link nav-link-active" aria-current="true">EN</span>
+      ) : enHref ? (
+        <a href={enHref} class="nav-link" data-lang-switch="en">EN</a>
+      ) : (
+        <span class="nav-link cursor-not-allowed opacity-40" title="Not available in English">EN</span>
+      )
+    }
+    <span class="text-slate-lightest" aria-hidden="true">/</span>
+    {
+      locale === 'es' ? (
+        <span class="nav-link nav-link-active" aria-current="true">ES</span>
+      ) : esHref ? (
+        <a href={esHref} class="nav-link" data-lang-switch="es">ES</a>
+      ) : (
+        <span class="nav-link cursor-not-allowed opacity-40" title="No disponible en español">ES</span>
+      )
+    }
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    function initLanguageSwitcher() {
+      document.querySelectorAll('[data-lang-switch]').forEach((link) => {
+        if (link.dataset.wired) return;
+        link.dataset.wired = 'true';
+        link.addEventListener('click', () => {
+          localStorage.setItem('blog-locale', link.getAttribute('data-lang-switch'));
+        });
+      });
+    }
+
+    initLanguageSwitcher();
+    document.addEventListener('astro:page-load', initLanguageSwitcher);
+  })();
+</script>

@@ -7,17 +7,26 @@ import { SITE_CONFIG } from '../config.ts';
 interface Props {
   title?: string;
   description?: string;
+  lang?: string;
+  canonicalUrl?: string;
+  alternates?: { hreflang: string; href: string }[];
 }
 
-const { title = site.meta.title, description = site.meta.description } = Astro.props;
-const canonical = new URL(Astro.url.pathname, site.url).href;
+const {
+  title = site.meta.title,
+  description = site.meta.description,
+  lang = 'en',
+  canonicalUrl,
+  alternates = [],
+} = Astro.props;
+const canonical = canonicalUrl ?? new URL(Astro.url.pathname, site.url).href;
 
 const baseTheme = SITE_CONFIG.baseTheme;
 const defaultTheme = `${baseTheme}-dark`;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -31,6 +40,7 @@ const defaultTheme = `${baseTheme}-dark`;
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
+    {alternates.map((alt) => <link rel="alternate" hreflang={alt.hreflang} href={alt.href} />)}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
@@ -56,6 +66,30 @@ const defaultTheme = `${baseTheme}-dark`;
 
       // Re-apply theme after navigation (for view transitions)
       document.addEventListener('astro:page-load', applyTheme);
+    </script>
+
+    <!-- BLOG NAV LOCALE SCRIPT
+         The "Blog" nav link's target locale is picked client-side (this is a
+         fully static site, so there's no Accept-Language header to read on
+         the server): a stored preference wins, otherwise the browser's own
+         language decides. This only ever rewrites the nav link's href — a
+         directly-loaded blog URL is never redirected. -->
+    <script is:inline>
+      function resolveBlogLocale() {
+        const stored = localStorage.getItem('blog-locale');
+        if (stored === 'en' || stored === 'es') return stored;
+        return navigator.language.toLowerCase().startsWith('es') ? 'es' : 'en';
+      }
+
+      function rewriteBlogNavLinks() {
+        const locale = resolveBlogLocale();
+        document.querySelectorAll('[data-blog-nav-link]').forEach((link) => {
+          link.setAttribute('href', locale === 'es' ? '/es/blog' : '/blog');
+        });
+      }
+
+      rewriteBlogNavLinks();
+      document.addEventListener('astro:page-load', rewriteBlogNavLinks);
     </script>
 
     <!-- The body's pageFadeIn keyframe animation (see global.css) uses

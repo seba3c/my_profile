@@ -1,0 +1,40 @@
+---
+import { blogStrings } from '../lib/blog-i18n';
+import { resolveNavHref } from '../lib/nav';
+import type { BlogPost, Locale } from '../lib/blog';
+
+interface Props {
+  posts: BlogPost[];
+  locale: Locale;
+}
+
+const { posts, locale } = Astro.props;
+const strings = blogStrings[locale];
+const basePath = locale === 'es' ? '/es/blog' : '/blog';
+const dateFormatter = new Intl.DateTimeFormat(locale === 'es' ? 'es-ES' : 'en-US', { dateStyle: 'long' });
+---
+
+{
+  posts.length === 0 ? (
+    <p class="body-copy">{strings.emptyState}</p>
+  ) : (
+    <div class="space-y-4">
+      {posts.map((post) => (
+        <article class="panel-card group space-y-2 bg-white-soft/50">
+          <header>
+            <h2 class="text-2xl font-semibold text-slate">{post.entry.data.title}</h2>
+            <p class="mt-1 font-mono text-sm text-accent">{dateFormatter.format(post.entry.data.pubDate)}</p>
+          </header>
+
+          <p class="body-copy">{post.entry.data.description}</p>
+
+          <div>
+            <a href={resolveNavHref(`${basePath}/${post.slug}`)} class="pill-link">
+              {strings.readMore} →
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  )
+}

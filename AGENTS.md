@@ -185,6 +185,33 @@ Themes are CSS-only, controlled by a `data-theme` attribute on `<html>`.
 | Modify global styles | `src/styles/global.css` |
 | Add new component | `src/components/*.astro` |
 | Update SEO meta | `src/layouts/Layout.astro` or `ArchiveLayout.astro` |
+| Add/translate a blog post | `src/content/blog/{en,es}/<slug>.md` |
+
+---
+
+## Blog Content (Bilingual)
+
+- Posts live at `src/content/blog/{en,es}/<slug>.md`, defined by the content
+  collection in `src/content.config.ts`. Language is determined entirely by
+  the folder (`en/` or `es/`) — it is never a frontmatter field.
+- **Same filename = same post, paired across locales.** To create the
+  English version of `src/content/blog/es/<slug>.md`, write
+  `src/content/blog/en/<slug>.md` — same slug, translated frontmatter and
+  body. Do not invent a new slug for the translation.
+- Frontmatter schema: `title`, `description`, `pubDate`, `updatedDate?`,
+  `draft?` (default `false`), `tags?`, `canonicalUrl?` (set only when this
+  site isn't the canonical source, e.g. after cross-posting to dev.to).
+- It is normal and expected for only one locale to exist for a given slug
+  at a time — the archive pages (`/blog`, `/es/blog`) and the language
+  switcher already handle a missing counterpart gracefully (they just won't
+  link to it until it exists).
+- Set `draft: true` to keep a post out of both locales' archive listings
+  (and out of the build entirely — `getStaticPaths` excludes drafts) while
+  still keeping the file in the repo.
+- Routes: `src/pages/blog/index.astro` + `[slug].astro` (English),
+  `src/pages/es/blog/index.astro` + `[slug].astro` (Spanish). Shared logic
+  lives in `src/lib/blog.ts` (data fetching) and `src/lib/blog-i18n.ts`
+  (the handful of translated UI strings) — the four page files are thin.
 
 ---
 
