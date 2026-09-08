@@ -1,6 +1,7 @@
 ---
 import ArchiveLayout from './ArchiveLayout.astro';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import BlogMiniHeader from '../components/BlogMiniHeader.astro';
 import { Icon } from 'astro-icon/components';
 import { site } from '@data/site';
 import { resolveNavHref } from '../lib/nav';
@@ -46,6 +47,8 @@ const alternates = [
       esHref={hasEs ? resolveNavHref(`/es/blog/${post.slug}`) : undefined}
     />
   </Fragment>
+
+  <BlogMiniHeader />
 
   <p class="mb-8">
     <a
