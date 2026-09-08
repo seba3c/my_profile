@@ -57,6 +57,22 @@ const defaultTheme = `${baseTheme}-dark`;
       // Re-apply theme after navigation (for view transitions)
       document.addEventListener('astro:page-load', applyTheme);
     </script>
+
+    <!-- The body's pageFadeIn keyframe animation (see global.css) uses
+         `animation-fill-mode: forwards`, which keeps a `transform` on <body>
+         after the animation ends (translateY(0) still counts as a transform,
+         not `none`). A transformed ancestor becomes the containing block for
+         `position: fixed` descendants, which would otherwise stop tracking
+         the viewport. Clear it once the animation finishes. -->
+    <script is:inline>
+      document.addEventListener('animationend', (e) => {
+        if (e.target === document.body && e.animationName === 'pageFadeIn') {
+          document.body.style.animation = 'none';
+          document.body.style.opacity = '1';
+          document.body.style.transform = 'none';
+        }
+      });
+    </script>
   </head>
   <body class="min-h-screen bg-background text-maintext antialiased selection:bg-accent/30 selection:text-background">
     <slot />
