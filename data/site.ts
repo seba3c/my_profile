@@ -138,7 +138,7 @@ export const site = {
   ],
   academic: [
     {
-      period: '2018',
+      period: '2017',
       title: 'Computer Graphics, Images and Computer Vision Specialist [M.Sc.]',
       institution: 'Universidad Nacional de la Plata, Postgrado - Facultad de Informática - UNLP',
       location: 'Argentina',
