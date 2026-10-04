@@ -1,6 +1,5 @@
 ---
 import { site } from '../../data/site';
-import { Icon } from 'astro-icon/components';
 const year = new Date().getFullYear();
 ---
 
@@ -9,31 +8,9 @@ const year = new Date().getFullYear();
     {site.hero.nickname} {year}
   </p>
   <p class="text-sm text-footer-muted text-center lg:text-center">
-    Built with{' '}
-    <a
-      href="https://astro.build"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="text-slate-light transition hover:text-slate-lightest"
-    >
-      Astro
+    Designed by{' '}
+    <a href="https://juanaylola.com/" target="_blank" rel="noopener noreferrer" class="text-slate-light transition hover:text-slate-lightest">
+      Juana &amp; Lola Digital
     </a>
-    <a
-      href="https://claude.ai/"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="text-slate-light transition hover:text-slate-lightest"
-    >
-      Claude
-    </a>
-    <a
-      href="https://opencode.ai/"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="text-slate-light transition hover:text-slate-lightest"
-    >
-      Opencode
-    </a>
-    {' '}and <Icon name="ph:heart" class="h-5 w-5 inline align-text-bottom" />
   </p>
 </footer>

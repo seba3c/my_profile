@@ -3,24 +3,38 @@ import Layout from '../layouts/Layout.astro';
 import About from '../components/About.astro';
 import TechStack from '../components/TechStack.astro';
 import FeaturedProjects from '../components/FeaturedProjects.astro';
-import FeaturedEvents from '../components/FeaturedEvents.astro';
 import Footer from '../components/Footer.astro';
 import Experience from '../components/Experience.astro';
-import Academic from '../components/Academic.astro';
 import Certifications from '../components/Certifications.astro';
 import { site } from '../../data/site';
 
 const projects = site.featuredProjects;
-const events = site.featuredEvents;
+const homeUrl = new URL('/', Astro.site).href;
+const personId = new URL('/#person', Astro.site).href;
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  '@id': new URL('/#profile', Astro.site).href,
+  url: homeUrl,
+  mainEntity: {
+    '@type': 'Person',
+    '@id': personId,
+    name: site.hero.name,
+    alternateName: site.hero.nickname,
+    jobTitle: site.hero.role,
+    description: site.meta.description,
+    image: new URL(site.hero.avatarSrc, Astro.site).href,
+    url: homeUrl,
+    sameAs: [site.contact.github, site.contact.linkedin, site.contact.instagram, site.contact.x],
+  },
+};
 ---
 
-<Layout title={site.meta.title} description={site.meta.description}>
+<Layout title={site.meta.title} description={site.meta.description} structuredData={structuredData}>
   <About />
   <TechStack />
   <FeaturedProjects projects={projects} />
-  <!-- <FeaturedEvents events={events} /> -->
   <Experience />
   <Certifications />
-  <!-- <Academic /> -->
   <Footer />
 </Layout>

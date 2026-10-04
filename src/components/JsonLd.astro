@@ -1,0 +1,11 @@
+---
+/* eslint-disable astro/no-set-html-directive -- JSON is serialized and '<' is escaped before insertion. */
+interface Props {
+  data: Record<string, unknown>;
+}
+
+const { data } = Astro.props as Props;
+const json = JSON.stringify(data).replaceAll('<', '\\u003c');
+---
+
+<script type="application/ld+json" is:inline set:html={json} />

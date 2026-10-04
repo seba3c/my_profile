@@ -23,8 +23,27 @@ const dateFormatter = new Intl.DateTimeFormat(locale === 'es' ? 'es-ES' : 'en-US
 
 const hasEn = availableLocales.includes('en');
 const hasEs = availableLocales.includes('es');
-const enUrl = hasEn ? new URL(resolveNavHref(`/blog/${post.slug}`), site.url).href : undefined;
-const esUrl = hasEs ? new URL(resolveNavHref(`/es/blog/${post.slug}`), site.url).href : undefined;
+const enUrl = hasEn ? new URL(resolveNavHref(`/blog/${post.slug}/`), Astro.site).href : undefined;
+const esUrl = hasEs ? new URL(resolveNavHref(`/es/blog/${post.slug}/`), Astro.site).href : undefined;
+const pageUrl = new URL(resolveNavHref(`${basePath}/${post.slug}/`), Astro.site).href;
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  '@id': `${canonicalUrl ?? pageUrl}#article`,
+  url: canonicalUrl ?? pageUrl,
+  mainEntityOfPage: canonicalUrl ?? pageUrl,
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString(),
+  ...(updatedDate ? { dateModified: updatedDate.toISOString() } : {}),
+  inLanguage: locale,
+  author: {
+    '@type': 'Person',
+    '@id': new URL('/#person', Astro.site).href,
+    name: site.hero.name,
+    url: new URL('/', Astro.site).href,
+  },
+};
 
 const alternates = [
   ...(enUrl ? [{ hreflang: 'en', href: enUrl }] : []),
@@ -39,12 +58,14 @@ const alternates = [
   lang={locale}
   canonicalUrl={canonicalUrl}
   alternates={alternates}
+  ogType="article"
+  structuredData={structuredData}
 >
   <Fragment slot="top-right">
     <LanguageSwitcher
       locale={locale}
-      enHref={hasEn ? resolveNavHref(`/blog/${post.slug}`) : undefined}
-      esHref={hasEs ? resolveNavHref(`/es/blog/${post.slug}`) : undefined}
+      enHref={hasEn ? resolveNavHref(`/blog/${post.slug}/`) : undefined}
+      esHref={hasEs ? resolveNavHref(`/es/blog/${post.slug}/`) : undefined}
     />
   </Fragment>
 
@@ -52,7 +73,7 @@ const alternates = [
 
   <p class="mb-8">
     <a
-      href={resolveNavHref(basePath)}
+      href={resolveNavHref(`${basePath}/`)}
       class="group flex items-center gap-2 text-sm text-accent transition hover:text-slate-light"
       data-astro-prefetch
     >
@@ -66,8 +87,8 @@ const alternates = [
       <h1 class="mb-3 text-4xl font-bold tracking-tight text-white sm:text-4xl">{title}</h1>
       <p class="flex items-center gap-2 font-mono text-xs text-slate-light">
         <Icon name="ph:file-md" class="h-4 w-4 text-accent/70" />
-        {strings.publishedLabel} {dateFormatter.format(pubDate)}
-        {updatedDate && <> · {strings.updatedLabel} {dateFormatter.format(updatedDate)}</>}
+        {strings.publishedLabel} <time datetime={pubDate.toISOString()}>{dateFormatter.format(pubDate)}</time>
+        {updatedDate && <> · {strings.updatedLabel} <time datetime={updatedDate.toISOString()}>{dateFormatter.format(updatedDate)}</time></>}
         {readingTime && <> · {`${readingTime} ${strings.readingTimeLabel}`}</>}
       </p>
     </header>

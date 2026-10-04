@@ -33,12 +33,21 @@ export interface CertificationArchiveEntry {
   credentialLink?: string;
 }
 
+export interface EventArchiveEntry {
+  date: string;
+  event: string;
+  description?: string;
+  location: string;
+  role: string;
+  eventLink?: string;
+  activityLink?: string;
+}
+
 export const site = {
-  url: 'https://example.com',
   meta: {
-    title: 'Sebastian Castaneda | Software Engineer',
+    title: 'Sebastian Castañeda | Senior Software Engineer',
     description:
-      'My personal website',
+      'Senior software engineer with 10+ years building production systems in fintech, crypto, and health tech, focused on Python, AWS, and AI-assisted development.',
   },
   hero: {
     name: 'Carlos Sebastian Castañeda',
@@ -230,7 +239,7 @@ export const site = {
       eventLink: 'https://vlctechfest.org/en/',
       activityLink: 'https://www.linkedin.com/feed/update/urn:li:activity:7464570974085238784/',
     },
-  ],
+  ] as EventArchiveEntry[],
   certifications: [
     {
       name: 'AWS Certified Solutions Architect – Associate',

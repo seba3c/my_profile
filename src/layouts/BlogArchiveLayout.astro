@@ -2,7 +2,6 @@
 import ArchiveLayout from './ArchiveLayout.astro';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import BlogMiniHeader from '../components/BlogMiniHeader.astro';
-import { site } from '@data/site';
 import { resolveNavHref } from '../lib/nav';
 import type { BlogLocale } from '../lib/blog-i18n';
 
@@ -14,8 +13,8 @@ interface Props {
 
 const { locale, title, description } = Astro.props;
 
-const enUrl = new URL(resolveNavHref('/blog'), site.url).href;
-const esUrl = new URL(resolveNavHref('/es/blog'), site.url).href;
+const enUrl = new URL(resolveNavHref('/blog/'), Astro.site).href;
+const esUrl = new URL(resolveNavHref('/es/blog/'), Astro.site).href;
 const alternates = [
   { hreflang: 'en', href: enUrl },
   { hreflang: 'es', href: esUrl },
