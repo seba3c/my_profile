@@ -55,7 +55,7 @@ export const site = {
     role: 'Senior Software Engineer',
     tagline: 'Senior Software Engineer → AI Engineering | AWS Solutions Architect | Fintech | Bitcoin | Python & Java',
     contact: '',
-    avatarSrc: '/profile_v2.jpeg',
+    avatarSrc: '/profile_v2.webp',
     avatarAlt: 'Carlos Sebastian Castañeda',
   },
   about: {
