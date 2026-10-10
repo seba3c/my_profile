@@ -1,7 +1,9 @@
 {
-  "name": "projects-portfolio-template",
-  "version": "0.1.0",
+  "name": "public-profile",
+  "version": "1.0.0",
   "type": "module",
+  "author": "Sebastian Castañeda",
+  "description": "Public profile",
   "engines": {
     "node": ">=22.12.0"
   },
@@ -20,9 +22,6 @@
     "frontend",
     "web-design"
   ],
-  "author": "Masoud Soleymani",
-  "license": "MIT",
-  "description": "Projects portfolio template",
   "overrides": {
     "vite": "^7"
   },
