@@ -29,6 +29,7 @@ const { title, description, structuredData } = Astro.props;
       <slot />
     </main>
   </div>
+  <slot name="floating" />
   <script is:inline>
     // Scroll-reveal animation for cards with class "scroll-stat"
     (function () {

@@ -30,6 +30,7 @@ export interface CertificationArchiveEntry {
   name: string;
   issuer: string;
   date: string;             
+  credentialId?: string;
   credentialLink?: string;
 }
 
@@ -43,7 +44,32 @@ export interface EventArchiveEntry {
   activityLink?: string;
 }
 
+export interface ChatbotConfig {
+  url: string;
+  launcherLabel: string;
+  title: string;
+  subtitle: string;
+  closeLabel: string;
+  iframeTitle: string;
+  externalLinkLabel: string;
+  loadingMessage: string;
+  slowLoadingMessage: string;
+  retryLabel: string;
+}
+
 export const site = {
+  chatbot: {
+    url: 'https://seba3c-digital-twin.hf.space',
+    launcherLabel: 'Chat with my AI twin',
+    title: 'Sebastian’s AI twin',
+    subtitle: 'Career, skills & experience',
+    closeLabel: 'Close chat',
+    iframeTitle: 'Chat with Sebastian’s AI twin on Hugging Face',
+    externalLinkLabel: 'Open in new tab',
+    loadingMessage: 'Loading my AI twin…',
+    slowLoadingMessage: 'This is taking a little longer. The Space may be waking up. You can wait, retry, or open it in a new tab.',
+    retryLabel: 'Retry',
+  } satisfies ChatbotConfig,
   meta: {
     title: 'Sebastian Castañeda | Senior Software Engineer',
     description:
@@ -78,7 +104,7 @@ export const site = {
     {
       category: 'AI',
       color: 'red',
-      items: ['Claude Code', 'OpenCode', 'Gemini', 'Codex', 'GitHub Copilot', 'Spec-kit', 'OpenSpec', 'Cursor'],
+      items: ['OpenAI SDK', 'LangChain', 'Claude Code', 'OpenCode', 'Gemini', 'Codex', 'GitHub Copilot', 'Spec-kit', 'OpenSpec', 'Cursor'],
     },
     {
       category: 'Languages & Frameworks',
@@ -88,7 +114,7 @@ export const site = {
     {
       category: 'Data & Infrastructure',
       color: 'orange',
-      items: ['AWS', 'PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'Terraform', 'Docker', 'Kubernetes', 'Git'],
+      items: ['AWS', 'PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'ChromaDB', 'Terraform', 'Docker', 'Kubernetes', 'Git'],
     },
     {
       category: 'Observability & DevOps',
@@ -171,20 +197,20 @@ export const site = {
   ] as AcademicEntry[],
   featuredProjects: [
     {
-      title: 'Mint',
-      period: '2026',
-      summary: 'Audits your legacy CSS and generates a clean, exportable design system from the chaos.',
-      role: 'Collaborator',
-      link: 'https://github.com/nujovich/mint',
-      techStack: ['Typescript', 'CSS'],
+      title: 'Juana y Lola Digital',
+      period: '',
+      summary: 'I run this initiative to provide software development and IT consulting services to small local businesses and entrepreneurs.',
+      role: 'Owner',
+      link: 'https://juanaylola.com/',
+      techStack: ['Astro', 'Netlify', 'Codex'],
     },
     {
-      title: 'Easyparse CV',
-      period: '2026',
-      summary: 'Parses resume/CV PDFs locally into structured JSON (personal info, experience, education, skills) — no external services involved.',
+      title: 'My digital twin',
+      period: '',
+      summary: 'A chatbot that answers questions about my career, skills, and experience. Built with OpenAI models and retrieval-augmented generation (RAG), including reranking and query rephrasing, and deployed on Hugging Face Spaces.',
       role: 'Owner',
-      link: 'https://github.com/seba3c/easyparse-cv',
-      techStack: ['TypeScript', 'Next.js', 'React'],
+      link: 'https://seba3c-digital-twin.hf.space',
+      techStack: ['OpenAI', 'RAG', 'Hugging Face Spaces'],
     },
   ],
   projectArchivePage: {
@@ -193,6 +219,22 @@ export const site = {
     intro: 'A concise archive of engagements and representative work.',
   },
   projectArchive: [
+    {
+      date: '2026',
+      project: 'Mint',
+      description: 'Audits your legacy CSS and generates a clean, exportable design system from the chaos.',
+      role: 'Collaborator',
+      techStack: 'Typescript, CSS',
+      link: 'https://github.com/nujovich/mint',
+    },
+    {
+      date: '2026',
+      project: 'Easyparse CV',
+      description: 'Parses resume/CV PDFs locally into structured JSON (personal info, experience, education, skills) — no external services involved.',
+      role: 'Owner',
+      techStack: 'TypeScript, Next.js, React',
+      link: 'https://github.com/seba3c/easyparse-cv',
+    },
     { date: '2026', project: 'Monetils', description: 'A Python library for exact decimal handling of crypto and fiat amounts (BTC, USD), avoiding floating-point rounding errors, with Pydantic v2 integration.', role: 'Owner', techStack: 'Python, Pydantic, tox, ruff, uv', link: 'https://github.com/seba3c/monetils' },
   ] as ProjectArchiveEntry[],
   featuredEvents: [
@@ -241,6 +283,13 @@ export const site = {
     },
   ] as EventArchiveEntry[],
   certifications: [
+    {
+      name: 'AI Engineer Core Track: LLM Engineering, RAG, QLoRA, Agents',
+      issuer: 'Udemy',
+      date: 'Oct 2006',
+      credentialId: 'UC-8e03660a-5a18-486f-a625-ec224c73f019',
+      credentialLink: 'https://www.udemy.com/certificate/UC-8e03660a-5a18-486f-a625-ec224c73f019/',
+    },
     {
       name: 'AWS Certified Solutions Architect – Associate',
       issuer: 'Amazon Web Services Training and Certification',

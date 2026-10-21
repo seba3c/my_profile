@@ -1,0 +1,301 @@
+---
+import { Icon } from 'astro-icon/components';
+import type { ChatbotConfig } from '@data/site';
+
+interface Props {
+  chatbot: ChatbotConfig;
+}
+
+const { chatbot } = Astro.props;
+---
+
+<digital-twin-chatbot data-url={chatbot.url}>
+  <button
+    data-chat-launcher
+    type="button"
+    class="chat-launcher"
+    aria-controls="digital-twin-panel"
+    aria-expanded="false"
+    aria-haspopup="dialog"
+    hidden
+  >
+    <Icon name="ph:chat-circle-dots" class="size-6 shrink-0" />
+    <span>{chatbot.launcherLabel}</span>
+  </button>
+
+  <dialog id="digital-twin-panel" aria-labelledby="digital-twin-title" tabindex="-1">
+    <div class="chat-panel">
+      <header class="chat-header">
+        <div class="min-w-0">
+          <h2 id="digital-twin-title" class="font-heading text-base font-bold text-maintext">{chatbot.title}</h2>
+          <p class="mt-1 text-xs text-subtext">{chatbot.subtitle}</p>
+        </div>
+        <button data-chat-close type="button" class="chat-close" aria-label={chatbot.closeLabel} autofocus>
+          <Icon name="ph:x" class="size-5" />
+        </button>
+      </header>
+
+      <div data-chat-status class="chat-status" role="status" aria-live="polite" hidden>
+        <p data-chat-loading class="flex items-center gap-2">
+          <span class="chat-spinner" aria-hidden="true"></span>
+          {chatbot.loadingMessage}
+        </p>
+        <div data-chat-slow hidden>
+          <p>{chatbot.slowLoadingMessage}</p>
+          <button data-chat-retry type="button" class="chat-retry">{chatbot.retryLabel}</button>
+        </div>
+      </div>
+
+      <!-- No src until the visitor opens the widget; hidden chat makes no HF requests. -->
+      <iframe data-chat-frame title={chatbot.iframeTitle} class="chat-frame"></iframe>
+
+      <footer class="chat-footer">
+        <a href={chatbot.url} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5">
+          {chatbot.externalLinkLabel}
+          <Icon name="ph:arrow-up-right" class="size-3.5" />
+        </a>
+      </footer>
+    </div>
+  </dialog>
+
+  <noscript>
+    <a href={chatbot.url} target="_blank" rel="noopener noreferrer" class="chat-launcher">
+      <Icon name="ph:chat-circle-dots" class="size-6" />
+      {chatbot.launcherLabel}
+    </a>
+  </noscript>
+</digital-twin-chatbot>
+
+<script>
+  class DigitalTwinChatbot extends HTMLElement {
+    private cleanup?: () => void;
+
+    connectedCallback() {
+      // Custom elements reconnect after Astro swaps. Each instance owns its listeners.
+      this.cleanup?.();
+      const launcher = this.querySelector<HTMLButtonElement>('[data-chat-launcher]')!;
+      const dialog = this.querySelector<HTMLDialogElement>('dialog')!;
+      const closeButton = this.querySelector<HTMLButtonElement>('[data-chat-close]')!;
+      const frame = this.querySelector<HTMLIFrameElement>('[data-chat-frame]')!;
+      const status = this.querySelector<HTMLElement>('[data-chat-status]')!;
+      const loading = this.querySelector<HTMLElement>('[data-chat-loading]')!;
+      const slow = this.querySelector<HTMLElement>('[data-chat-slow]')!;
+      const retry = this.querySelector<HTMLButtonElement>('[data-chat-retry]')!;
+      const mobile = window.matchMedia('(max-width: 639px)');
+      const controller = new AbortController();
+      const { signal } = controller;
+      let loadingTimer: ReturnType<typeof setTimeout> | undefined;
+      let restoreScroll: (() => void) | undefined;
+
+      const unlockScroll = () => {
+        restoreScroll?.();
+        restoreScroll = undefined;
+      };
+
+      const lockScroll = () => {
+        if (restoreScroll) return;
+        const body = document.body;
+        const previous = body.style.getPropertyValue('overflow');
+        const priority = body.style.getPropertyPriority('overflow');
+        body.style.setProperty('overflow', 'hidden');
+        restoreScroll = () => {
+          if (previous) body.style.setProperty('overflow', previous, priority);
+          else body.style.removeProperty('overflow');
+        };
+      };
+
+      const loadFrame = () => {
+        clearTimeout(loadingTimer);
+        status.hidden = false;
+        loading.hidden = false;
+        slow.hidden = true;
+        frame.src = this.dataset.url!;
+        loadingTimer = setTimeout(() => {
+          loading.hidden = true;
+          slow.hidden = false;
+        }, 20_000);
+      };
+
+      const showPanel = () => {
+        dialog.setAttribute('aria-modal', String(mobile.matches));
+        if (mobile.matches) {
+          dialog.showModal();
+          lockScroll();
+        } else {
+          dialog.show();
+        }
+        launcher.setAttribute('aria-expanded', 'true');
+        closeButton.focus({ preventScroll: true });
+      };
+
+      const finishClose = (restoreFocus = true) => {
+        launcher.setAttribute('aria-expanded', 'false');
+        unlockScroll();
+        if (restoreFocus) launcher.focus({ preventScroll: true });
+      };
+
+      const closePanel = () => {
+        dialog.close();
+        finishClose();
+      };
+
+      launcher.addEventListener('click', () => {
+        if (dialog.open) {
+          closePanel();
+          return;
+        }
+        showPanel();
+        if (!frame.hasAttribute('src')) loadFrame();
+      }, { signal });
+      closeButton.addEventListener('click', closePanel, { signal });
+      retry.addEventListener('click', loadFrame, { signal });
+
+      frame.addEventListener('load', () => {
+        if (!frame.hasAttribute('src')) return;
+        clearTimeout(loadingTimer);
+        // Cross-origin load only means navigation completed, not that the AI is healthy.
+        status.hidden = true;
+      }, { signal });
+
+      dialog.addEventListener('cancel', (event) => {
+        event.preventDefault();
+        closePanel();
+      }, { signal });
+      dialog.addEventListener('close', () => {
+        // A responsive mode change closes and immediately reopens the same dialog.
+        if (!dialog.open) finishClose();
+      }, { signal });
+      document.addEventListener('keydown', (event) => {
+        // Events inside the cross-origin iframe do not bubble to this document.
+        if (event.key === 'Escape' && dialog.open && !mobile.matches) {
+          event.preventDefault();
+          closePanel();
+        }
+      }, { signal });
+
+      mobile.addEventListener('change', () => {
+        if (!dialog.open) return;
+        dialog.close();
+        unlockScroll();
+        showPanel();
+      }, { signal });
+
+      this.cleanup = () => {
+        controller.abort();
+        clearTimeout(loadingTimer);
+        if (dialog.open) dialog.close();
+        finishClose(false);
+      };
+      launcher.hidden = false;
+    }
+
+    disconnectedCallback() {
+      this.cleanup?.();
+      this.cleanup = undefined;
+    }
+  }
+
+  if (!customElements.get('digital-twin-chatbot')) {
+    customElements.define('digital-twin-chatbot', DigitalTwinChatbot);
+  }
+</script>
+
+<style>
+  .chat-launcher {
+    position: fixed;
+    right: max(1.25rem, env(safe-area-inset-right));
+    bottom: max(1.25rem, env(safe-area-inset-bottom));
+    z-index: 30;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    min-height: 3.5rem;
+    padding: 0.875rem 1.125rem;
+    border: 1px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
+    border-radius: 999px;
+    background: var(--color-background);
+    color: var(--color-accent);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    box-shadow: 0 8px 32px #0006;
+    cursor: pointer;
+    transition: background-color 160ms ease, border-color 160ms ease;
+  }
+
+  [hidden] { display: none !important; }
+
+  .chat-launcher:hover {
+    background: color-mix(in srgb, var(--color-accent) 10%, var(--color-background));
+    border-color: var(--color-accent);
+  }
+
+  button, a { -webkit-tap-highlight-color: transparent; }
+
+  button:focus-visible, a:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+  }
+
+  dialog {
+    position: fixed;
+    inset: auto max(1.25rem, env(safe-area-inset-right)) calc(max(1.25rem, env(safe-area-inset-bottom)) + 4.25rem) auto;
+    z-index: 35;
+    width: 420px;
+    height: min(740px, calc(100dvh - 7rem));
+    max-width: calc(100vw - 2.5rem);
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
+    border-radius: 1rem;
+    background: var(--color-background);
+    color: var(--color-maintext);
+    box-shadow: 0 16px 64px #0008;
+  }
+
+  .chat-panel { display: flex; flex-direction: column; height: 100%; }
+
+  .chat-header {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.75rem 0.75rem 0.75rem 1rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--color-accent) 15%, transparent);
+  }
+
+  .chat-close {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 999px;
+    color: var(--color-subtext);
+    cursor: pointer;
+  }
+
+  .chat-close:hover { background: color-mix(in srgb, var(--color-accent) 10%, transparent); color: var(--color-accent); }
+  .chat-frame { display: block; flex: 1; width: 100%; min-height: 0; border: 0; }
+  .chat-status { flex-shrink: 0; padding: 0.75rem 1rem; font-size: 0.75rem; line-height: 1.6; color: var(--color-subtext); }
+  .chat-retry { margin-top: 0.5rem; padding: 0.25rem 0.5rem; border: 1px solid currentColor; border-radius: 0.25rem; color: var(--color-accent); cursor: pointer; }
+  .chat-footer { flex-shrink: 0; padding: 0.625rem 1rem; border-top: 1px solid color-mix(in srgb, var(--color-accent) 15%, transparent); text-align: right; font-size: 0.6875rem; color: var(--color-accent); }
+  .chat-spinner { width: 0.875rem; height: 0.875rem; border: 2px solid color-mix(in srgb, var(--color-accent) 20%, transparent); border-top-color: var(--color-accent); border-radius: 50%; animation: chat-spin 1s linear infinite; }
+  @keyframes chat-spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 639px) {
+    dialog {
+      top: max(0.75rem, env(safe-area-inset-top));
+      right: max(0.75rem, env(safe-area-inset-right));
+      bottom: max(0.75rem, env(safe-area-inset-bottom));
+      left: max(0.75rem, env(safe-area-inset-left));
+      width: auto;
+      height: auto;
+      max-width: none;
+    }
+    dialog::backdrop { background: #0009; }
+  }
+</style>
