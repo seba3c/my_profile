@@ -26,12 +26,14 @@ const { project } = Astro.props;
       </li>
     )}
 
-    <li>
-      <span class="text-xs uppercase tracking-wider text-accent">Tech stack</span>
-      <span class="mt-1.5 text-sm text-slate-light">
-        {project.techStack.join(', ')}
-      </span>
-    </li>
+    {project.techStack.length > 0 && (
+      <li>
+        <span class="text-xs uppercase tracking-wider text-accent">Tech stack</span>
+        <span class="mt-1.5 text-sm text-slate-light">
+          {project.techStack.join(', ')}
+        </span>
+      </li>
+    )}
   </ul>
 
   {project.link && (

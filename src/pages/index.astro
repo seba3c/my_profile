@@ -6,6 +6,7 @@ import FeaturedProjects from '../components/FeaturedProjects.astro';
 import Footer from '../components/Footer.astro';
 import Experience from '../components/Experience.astro';
 import Certifications from '../components/Certifications.astro';
+import FloatingChatbot from '../components/FloatingChatbot.astro';
 import { site } from '../../data/site';
 
 const projects = site.featuredProjects;
@@ -37,4 +38,5 @@ const structuredData = {
   <Experience />
   <Certifications />
   <Footer />
+  <FloatingChatbot slot="floating" chatbot={site.chatbot} />
 </Layout>
