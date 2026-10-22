@@ -198,6 +198,12 @@ export const site = {
   featuredProjects: [
     {
       title: 'Juana y Lola Digital',
+      preview: {
+        src: '/projects/juana-y-lola.webp',
+        alt: 'Juana y Lola Digital homepage showcasing web design, software, and IT consulting services.',
+        width: 704,
+        height: 665,
+      },
       period: '',
       summary: 'I run this initiative to provide software development and IT consulting services to small local businesses and entrepreneurs.',
       role: 'Owner',
@@ -206,6 +212,12 @@ export const site = {
     },
     {
       title: 'My digital twin',
+      preview: {
+        src: '/projects/digital-twin.webp',
+        alt: 'Digital twin chatbot with suggested questions about my career, skills, and experience.',
+        width: 704,
+        height: 603,
+      },
       period: '',
       summary: 'A chatbot that answers questions about my career, skills, and experience. Built with OpenAI models and retrieval-augmented generation (RAG), including reranking and query rephrasing, and deployed on Hugging Face Spaces.',
       role: 'Owner',

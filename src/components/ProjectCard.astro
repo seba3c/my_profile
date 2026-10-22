@@ -1,5 +1,6 @@
 ---
 import type { FeaturedProject } from '../../data/site';
+import { Icon } from 'astro-icon/components';
 
 interface Props {
   project: FeaturedProject;
@@ -8,44 +9,104 @@ interface Props {
 const { project } = Astro.props;
 ---
 
-  <article class="scroll-stat panel-card group space-y-4 bg-white-soft/50">
-  <header>
-    <h3 class="text-2xl font-semibold text-slate">
-      {project.title}
-    </h3>
-    {project.period && <p class="mt-1 font-mono text-sm text-accent">{project.period}</p>}
-  </header>
+<article class="project-card scroll-stat panel-card group grid items-start gap-6 rounded-xl sm:grid-cols-[211.2px_minmax(0,1fr)]">
+  <a
+    href={project.link}
+    target="_blank"
+    rel="noreferrer"
+    aria-label={`View ${project.title} (opens in a new tab)`}
+    class="project-preview relative flex h-48 w-[211.2px] items-center justify-center overflow-hidden rounded-2xl border border-slate-lightest/15 bg-white-soft focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+  >
+    <img
+      src={project.preview.src}
+      alt={project.preview.alt}
+      width={project.preview.width}
+      height={project.preview.height}
+      loading="lazy"
+      decoding="async"
+      class="h-auto max-h-full w-auto max-w-full rounded-2xl object-contain"
+    />
+    <span
+      aria-hidden="true"
+      class="preview-overlay pointer-events-none absolute inset-0 flex items-center justify-center bg-black/50 text-white opacity-0 transition-opacity duration-200"
+    >
+      <Icon name="ph:eye" class="h-8 w-8" />
+    </span>
+  </a>
 
-  <p class="body-copy">{project.summary}</p>
+  <div class="min-w-0 space-y-4">
+    <header>
+      <h3 class="text-2xl font-semibold text-slate">
+        {project.title}
+      </h3>
+      {project.period && <p class="mt-1 font-mono text-sm text-accent">{project.period}</p>}
+    </header>
 
-  <ul>
-    {project.role && (
-      <li>
-        <span class="text-xs uppercase tracking-wider text-accent">Role</span>
-        <span class="mt-1.5 text-sm text-slate-light">{project.role}</span>
-      </li>
+    <p class="body-copy">{project.summary}</p>
+  </div>
+
+  <div class="min-w-0 space-y-4 text-left sm:col-span-2">
+    <ul class="grid items-start gap-6 sm:grid-cols-[211.2px_minmax(0,1fr)]">
+      {project.role && (
+        <li>
+          <span class="block text-xs uppercase tracking-wider text-accent">Role</span>
+          <span class="mt-1.5 block text-sm text-slate-light">{project.role}</span>
+        </li>
+      )}
+
+      {project.techStack.length > 0 && (
+        <li class="min-w-0 sm:col-start-2">
+          <span class="block text-xs uppercase tracking-wider text-accent">Tech stack</span>
+          <span class="mt-1.5 block text-sm text-slate-light">
+            {project.techStack.join(', ')}
+          </span>
+        </li>
+      )}
+    </ul>
+
+    {project.link && (
+      <div>
+        <a
+          href={project.link}
+          target="_blank"
+          rel="noreferrer"
+          class="pill-link"
+        >
+          View →
+        </a>
+      </div>
     )}
-
-    {project.techStack.length > 0 && (
-      <li>
-        <span class="text-xs uppercase tracking-wider text-accent">Tech stack</span>
-        <span class="mt-1.5 text-sm text-slate-light">
-          {project.techStack.join(', ')}
-        </span>
-      </li>
-    )}
-  </ul>
-
-  {project.link && (
-    <div>
-      <a
-        href={project.link}
-        target="_blank"
-        rel="noreferrer"
-        class="pill-link"
-      >
-        View →
-      </a>
-    </div>
-  )}
+  </div>
 </article>
+
+<style>
+  .project-preview:is(:hover, :focus-visible) .preview-overlay {
+    opacity: 1;
+  }
+
+  .project-card {
+    --project-surface: color-mix(in srgb, var(--color-background), white 7%);
+    border: 1px solid transparent;
+    background:
+      linear-gradient(var(--project-surface), var(--project-surface)) padding-box,
+      linear-gradient(
+        315deg,
+        color-mix(in srgb, var(--color-accent) 60%, transparent),
+        color-mix(in srgb, var(--color-accent) 12%, transparent) 45%,
+        color-mix(in srgb, var(--color-accent) 2%, transparent)
+      ) border-box;
+    box-shadow:
+      0 0 22px color-mix(in srgb, var(--color-accent) 12%, transparent),
+      0 12px 28px rgb(0 0 0 / 35%),
+      0 3px 8px rgb(0 0 0 / 20%),
+      inset 0 1px 0 rgb(255 255 255 / 2%);
+  }
+
+  .project-card:is(:hover, :focus-within) {
+    box-shadow:
+      0 0 30px color-mix(in srgb, var(--color-accent) 22%, transparent),
+      0 16px 36px rgb(0 0 0 / 40%),
+      0 4px 10px rgb(0 0 0 / 25%),
+      inset 0 1px 0 rgb(255 255 255 / 3%);
+  }
+</style>
