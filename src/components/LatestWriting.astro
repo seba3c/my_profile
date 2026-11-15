@@ -10,6 +10,13 @@ const es = (await getPostsByLocale('es')).slice(0,3);
 ---
 <section class="latest-writing" aria-labelledby="writing-title"><h2 id="writing-title" class="section-heading">{site.ui.en.writing}</h2><div data-writing-locale="en"><BlogArchiveList posts={en} locale="en" /></div><div data-writing-locale="es" hidden><BlogArchiveList posts={es} locale="es" /></div></section>
 <script>
-function initWriting() { let locale = navigator.language.startsWith('es') ? 'es' : 'en'; try { locale = localStorage.getItem('blog-locale') || locale; } catch { /* Use browser locale. */ } document.querySelectorAll<HTMLElement>('[data-writing-locale]').forEach(el => el.hidden = el.dataset.writingLocale !== locale); }
+function initWriting() {
+  let locale = 'en';
+  try {
+    const stored = localStorage.getItem('blog-locale');
+    if (stored === 'en' || stored === 'es') locale = stored;
+  } catch { /* Use English by default. */ }
+  document.querySelectorAll<HTMLElement>('[data-writing-locale]').forEach(el => el.hidden = el.dataset.writingLocale !== locale);
+}
 initWriting(); document.addEventListener('astro:page-load', initWriting);
 </script>

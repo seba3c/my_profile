@@ -42,7 +42,8 @@ const defaultTheme = `${baseTheme}-dark`;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
     <title>{title}</title>
@@ -83,15 +84,14 @@ const defaultTheme = `${baseTheme}-dark`;
 
     <!-- BLOG NAV LOCALE SCRIPT
          The "Blog" nav link's target locale is picked client-side (this is a
-         fully static site, so there's no Accept-Language header to read on
-         the server): a stored preference wins, otherwise the browser's own
-         language decides. This only ever rewrites the nav link's href — a
+         fully static site): a stored preference wins, otherwise English
+         is the default. This only ever rewrites the nav link's href — a
          directly-loaded blog URL is never redirected. -->
     <script is:inline>
       function resolveBlogLocale() {
         const stored = (() => { try { return localStorage.getItem('blog-locale'); } catch { return null; } })();
         if (stored === 'en' || stored === 'es') return stored;
-        return navigator.language.toLowerCase().startsWith('es') ? 'es' : 'en';
+        return 'en';
       }
 
       function rewriteBlogNavLinks() {
