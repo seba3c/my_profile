@@ -414,3 +414,11 @@ command-palette [data-empty] {padding:24px}
 .desktop-links a[aria-current] {color:var(--color-accent)}
 
 .archive-path {font:12px var(--font-heading);color:var(--color-subtext);margin-bottom:32px;overflow-wrap:anywhere}.archive-path a {color:var(--color-accent)}
+
+/* Shared blog controls follow the terminal section rhythm. */
+.blog-toolbar {display:flex;align-items:center;justify-content:space-between;gap:24px}
+.blog-toolbar .blog-archive-title {flex:1;margin-bottom:0}
+@media(max-width:639px) {
+ .blog-toolbar {flex-direction:column;align-items:stretch;gap:8px}
+ .blog-toolbar nav {align-self:flex-start}
+}

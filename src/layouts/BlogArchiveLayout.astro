@@ -3,7 +3,7 @@ import ArchiveLayout from './ArchiveLayout.astro';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import BlogMiniHeader from '../components/BlogMiniHeader.astro';
 import { resolveNavHref } from '../lib/nav';
-import type { BlogLocale } from '../lib/blog-i18n';
+import { blogStrings, type BlogLocale } from '../lib/blog-i18n';
 
 interface Props {
   locale: BlogLocale;
@@ -22,12 +22,11 @@ const alternates = [
 ];
 ---
 
-<ArchiveLayout title={title} description={description} lang={locale} alternates={alternates}>
-  <Fragment slot="top-right">
-    <LanguageSwitcher locale={locale} enHref={resolveNavHref('/blog')} esHref={resolveNavHref('/es/blog')} />
-  </Fragment>
-
+<ArchiveLayout title={title} description={description} lang={locale} alternates={alternates} showBreadcrumb={false}>
   <BlogMiniHeader />
-
+  <div class="blog-toolbar mb-8">
+    <h1 class="section-heading blog-archive-title">{blogStrings[locale].archiveTitle}</h1>
+    <LanguageSwitcher locale={locale} enHref={resolveNavHref('/blog')} esHref={resolveNavHref('/es/blog')} />
+  </div>
   <slot />
 </ArchiveLayout>

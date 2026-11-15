@@ -7,6 +7,7 @@ interface Props {
   title?: string;
   description?: string;
   lang?: string;
+  showBreadcrumb?: boolean;
   canonicalUrl?: string;
   alternates?: { hreflang: string; href: string }[];
   noindex?: boolean;
@@ -14,16 +15,16 @@ interface Props {
   structuredData?: Record<string, unknown>;
 }
 
-const { title, description, lang, canonicalUrl, alternates, noindex, ogType, structuredData } = Astro.props;
+const { title, description, showBreadcrumb = true, lang, canonicalUrl, alternates, noindex, ogType, structuredData } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description} lang={lang} canonicalUrl={canonicalUrl} alternates={alternates} noindex={noindex} ogType={ogType} structuredData={structuredData}>
   <div class="terminal-main archive-main">
-    <div class="mb-6 flex justify-end">
+    {Astro.slots.has('top-right') && <div class="mb-6 flex justify-end">
       <slot name="top-right" />
-    </div>
+    </div>}
     <main id="main" class="flex flex-1 flex-col">
-      <nav class="archive-path" aria-label="Breadcrumb"><a href={import.meta.env.BASE_URL}>~</a><span aria-hidden="true"> / </span><span>{Astro.url.pathname.replace(/^\/|\/$/g, "")}</span></nav>
+      {showBreadcrumb && <nav class="archive-path" aria-label="Breadcrumb"><a href={import.meta.env.BASE_URL}>~</a><span aria-hidden="true"> / </span><span>{Astro.url.pathname.replace(/^\/|\/$/g, "")}</span></nav>}
       <slot />
 
 

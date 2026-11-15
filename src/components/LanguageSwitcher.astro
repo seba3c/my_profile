@@ -1,5 +1,5 @@
 ---
-import { Icon } from 'astro-icon/components';
+import { blogStrings } from '../lib/blog-i18n';
 
 interface Props {
   locale: 'en' | 'es';
@@ -10,32 +10,32 @@ interface Props {
 }
 
 const { locale, enHref, esHref } = Astro.props;
+const strings = blogStrings[locale];
+const options = [{ code: 'en', href: enHref }, { code: 'es', href: esHref }] as const;
 ---
 
-<div class="flex items-center gap-2" aria-label="Language">
-  <Icon name="ph:translate" class="h-4 w-4 text-accent" />
-  <div class="flex items-center gap-1.5">
-    {
-      locale === 'en' ? (
-        <span class="nav-link nav-link-active" aria-current="true">EN</span>
-      ) : enHref ? (
-        <a href={enHref} class="nav-link" data-lang-switch="en">EN</a>
-      ) : (
-        <span class="nav-link cursor-not-allowed opacity-40" title="Not available in English">EN</span>
-      )
-    }
-    <span class="text-slate-lightest" aria-hidden="true">/</span>
-    {
-      locale === 'es' ? (
-        <span class="nav-link nav-link-active" aria-current="true">ES</span>
-      ) : esHref ? (
-        <a href={esHref} class="nav-link" data-lang-switch="es">ES</a>
-      ) : (
-        <span class="nav-link cursor-not-allowed opacity-40" title="No disponible en español">ES</span>
-      )
-    }
-  </div>
-</div>
+<nav class="language-switcher" aria-label={strings.languageLabel}>
+  <span aria-hidden="true">lang:</span>
+  {options.map(({ code, href }, index) => <>
+    {index > 0 && <span class="language-separator" aria-hidden="true">/</span>}
+    {locale === code ? (
+      <span class="language-option language-active" aria-current="true" lang={code}>{code}</span>
+    ) : href ? (
+      <a class="language-option" href={href} lang={code} hreflang={code} aria-label={strings.switchLanguage[code]} data-lang-switch={code}>{code}</a>
+    ) : (
+      <span class="language-option language-unavailable" aria-disabled="true" title={strings.unavailableLanguage[code]} aria-label={strings.unavailableLanguage[code]}>{code}</span>
+    )}
+  </>)}
+</nav>
+
+<style>
+  .language-switcher { display:flex; align-items:center; flex-shrink:0; font:13px/1.5 var(--font-heading); color:var(--color-subtext); }
+  .language-option { display:inline-flex; align-items:center; justify-content:center; min-width:44px; min-height:44px; }
+  .language-active { color:var(--color-accent); }
+  a.language-option:hover { color:var(--color-accent); text-decoration:underline; }
+  .language-unavailable { color:var(--color-subtext); text-decoration:line-through; cursor:not-allowed; }
+  .language-separator { color:var(--color-subtext); }
+</style>
 
 <script is:inline>
   (function () {
