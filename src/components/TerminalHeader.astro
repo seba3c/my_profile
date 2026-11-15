@@ -14,22 +14,64 @@ const ui = site.ui[es ? 'es' : 'en'];
   <details class="mobile-menu"><summary>{es ? 'Menú' : 'Menu'}</summary><nav aria-label={es ? 'Móvil' : 'Mobile'}>{navLinks.map(link => <a href={resolveNavHref(link.href)} data-blog-nav-link={link.href === '/blog' || undefined}>{es ? link.es : link.label}</a>)}<a href={site.contact.resume} download>{ui.resume}</a></nav></details></div>
 </header>
 <script>
-let shellObserver: IntersectionObserver | undefined;
+let cleanupSectionTracking: (() => void) | undefined;
 function initShell() {
- shellObserver?.disconnect();
+ cleanupSectionTracking?.();
  const menu = document.querySelector<HTMLDetailsElement>('.mobile-menu');
  if (menu && !menu.dataset.wired) { menu.dataset.wired = 'true';
  menu.addEventListener('keydown', e => { if (e.key === 'Escape') { menu.open = false; menu.querySelector('summary')?.focus(); } });
  menu.addEventListener('toggle', () => { if (menu.open) { document.querySelector<HTMLDialogElement>('command-palette dialog')?.close(); document.querySelector<HTMLDialogElement>('digital-twin-chatbot dialog')?.close(); } });
  menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.open = false));
  }
- const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.desktop-links a[data-section-link]'));
- const targets = links.map(a => document.getElementById(new URL(a.href).hash.slice(1))).filter((s): s is HTMLElement => !!s);
- const observer = new IntersectionObserver(entries => { for (const entry of entries) { if (!entry.isIntersecting) continue; links.forEach(a => { if (new URL(a.href).hash === '#' + entry.target.id) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current'); }); } }, { rootMargin: '-10% 0px -65% 0px' });
- shellObserver = observer;
- targets.forEach(t => observer.observe(t));
- document.querySelectorAll<HTMLAnchorElement>('.desktop-links a').forEach(a => { if (new URL(a.href).pathname === location.pathname && !new URL(a.href).hash) a.setAttribute('aria-current','page'); });
- document.addEventListener('astro:before-swap', () => observer.disconnect(), {once:true});
+ const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.desktop-links a'));
+ const sections = links.flatMap(link => {
+   const url = new URL(link.href);
+   const target = url.pathname === location.pathname && url.hash
+     ? document.getElementById(url.hash.slice(1))
+     : null;
+   return target ? [{ link, target }] : [];
+ });
+ links.forEach(link => {
+   const url = new URL(link.href);
+   link.removeAttribute('aria-current');
+   if (url.pathname === location.pathname && !url.hash) link.setAttribute('aria-current', 'page');
+ });
+ if (!sections.length) return;
+
+ const header = document.querySelector<HTMLElement>('.terminal-header');
+ let frame: number | undefined;
+ function updateActiveSection() {
+   frame = undefined;
+   const activationLine = (header?.getBoundingClientRect().bottom ?? 0) + 16;
+   let active: HTMLAnchorElement | undefined;
+   for (const { link, target } of sections) {
+     if (target.getBoundingClientRect().top <= activationLine) active = link;
+   }
+   // The final section may never reach the header when scrolling stops at the page bottom.
+   const last = sections[sections.length - 1];
+   if (last && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2) {
+     const bounds = last.target.getBoundingClientRect();
+     if (bounds.top < window.innerHeight && bounds.bottom > activationLine) active = last.link;
+   }
+   for (const { link } of sections) {
+     if (link === active) link.setAttribute('aria-current', 'location');
+     else link.removeAttribute('aria-current');
+   }
+ }
+ function scheduleUpdate() {
+   if (frame === undefined) frame = requestAnimationFrame(updateActiveSection);
+ }
+ function cleanup() {
+   window.removeEventListener('scroll', scheduleUpdate);
+   window.removeEventListener('resize', scheduleUpdate);
+   document.removeEventListener('astro:before-swap', cleanup);
+   if (frame !== undefined) cancelAnimationFrame(frame);
+ }
+ cleanupSectionTracking = cleanup;
+ window.addEventListener('scroll', scheduleUpdate, { passive: true });
+ window.addEventListener('resize', scheduleUpdate);
+ document.addEventListener('astro:before-swap', cleanup, { once: true });
+ updateActiveSection();
 }
 initShell(); document.addEventListener('astro:page-load', initShell);
 </script>
