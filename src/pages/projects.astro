@@ -53,7 +53,7 @@ const homeHref = `${base}#featured-projects`;
         </thead>
         <tbody>
           {
-            site.projectArchive.map((row) => (
+            [...site.featuredProjects.map(p => ({ date: p.period || '—', project: p.title, description: p.summary, role: p.role, techStack: p.techStack.join(', '), link: p.link })), ...site.projectArchive].filter((p, i, all) => all.findIndex(other => (other.link || other.project) === (p.link || p.project)) === i).map((row) => (
               <tr>
                 <td class="hidden md:table-cell whitespace-nowrap px-4 py-4 font-mono text-slate">{row.date}</td>
                 <td class="px-4 py-4">

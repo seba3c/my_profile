@@ -1,10 +1,6 @@
 export const navLinks = [
-  { href: '#about', label: 'About' },
-  { href: '#tech-stack', label: 'My tech stack' },
-  { href: '#featured-projects', label: 'Featured Projects' },
-  //{ href: '#featured-events', label: 'Events' },
-  { href: '#experiences', label: 'Experiences' },
-  { href: '#certifications', label: 'Certifications' },
-  //{ href: '#academic', label: 'Academic' },
-  { href: '/blog', label: 'Blog' },
+  { href: '#featured-projects', label: 'Projects', es: 'Proyectos' },
+  { href: '#experiences', label: 'Experience', es: 'Experiencia' },
+  { href: '/blog', label: 'Blog', es: 'Blog' },
+  { href: '#contact', label: 'Contact', es: 'Contacto' },
 ] as const;

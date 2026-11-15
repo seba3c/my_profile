@@ -1,0 +1,64 @@
+---
+import { site } from '@data/site';
+import { navLinks } from '@data/nav';
+import { resolveNavHref } from '../lib/nav';
+interface Props { lang?: string }
+const { lang = 'en' } = Astro.props;
+const es = lang === 'es'; const ui = site.ui[es ? 'es' : 'en'];
+const actions = [
+ ...navLinks.map(n => ({ label: es ? n.es : n.label, href: resolveNavHref(n.href), blog: n.href === '/blog', aliases: n.href })),
+ { label: ui.allProjects, href: resolveNavHref('/projects'), aliases: 'archive work' },
+ { label: ui.allCredentials, href: resolveNavHref('/certifications'), aliases: 'certifications certificates' },
+ { label: ui.resume, href: site.contact.resume, aliases: 'cv resume download' },
+ { label: ui.contact, href: `mailto:${site.contact.email}`, aliases: 'email interview' },
+ ...site.featuredProjects.map(p => ({ label: p.title, href: p.link, aliases: p.techStack.join(' ') })),
+];
+---
+<command-palette>
+ <dialog aria-labelledby="command-title"><header><h2 id="command-title">{ui.commands}</h2><button data-close aria-label={ui.close}>Esc</button></header>
+ <input aria-label={ui.search} placeholder={ui.search} type="search" autocomplete="off" />
+ <ul>{actions.map(a => <li data-search={`${a.label} ${a.aliases}`}><a href={a.href} data-blog-nav-link={'blog' in a && a.blog || undefined} download={a.href === site.contact.resume || undefined}>{a.label}<span aria-hidden="true">↗</span></a></li>)}<li data-search="ai twin chatbot chat rag"><button data-twin>{ui.twin}<span aria-hidden="true">↗</span></button></li></ul>
+ <p data-empty hidden role="status">{ui.empty}</p>
+ </dialog>
+</command-palette>
+<script>
+class CommandPalette extends HTMLElement {
+ private cleanup?: () => void;
+ connectedCallback() {
+  const controller = new AbortController(); const { signal } = controller;
+  const dialog = this.querySelector('dialog')!; const input = this.querySelector('input')!;
+  const triggers = document.querySelectorAll<HTMLButtonElement>('[data-command-open]');
+  let previous: HTMLElement | null = null;
+  const close = () => { dialog.close(); previous?.focus(); };
+  const open = () => {
+   if (dialog.open) { close(); return; }
+   previous = document.activeElement as HTMLElement;
+   document.querySelectorAll<HTMLDetailsElement>('.mobile-menu').forEach(d => d.open = false);
+   document.querySelector<HTMLDialogElement>('digital-twin-chatbot dialog')?.close();
+   input.value = ''; this.querySelectorAll<HTMLElement>('li').forEach(li => li.hidden = false);
+   this.querySelector<HTMLElement>('[data-empty]')!.hidden = true;
+   dialog.showModal(); input.focus();
+  };
+  triggers.forEach(t => { t.hidden = false; t.addEventListener('click', open, { signal }); });
+  document.addEventListener('keydown', e => { if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') { e.preventDefault(); open(); } }, { signal });
+  this.querySelector('[data-close]')!.addEventListener('click', close, { signal });
+  dialog.addEventListener('cancel', e => { e.preventDefault(); close(); }, { signal });
+  dialog.addEventListener('click', e => { if (e.target === dialog) close(); }, { signal });
+  const normalize = (s: string) => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+  input.addEventListener('input', () => { let count = 0; this.querySelectorAll<HTMLElement>('li').forEach(li => { li.hidden = !normalize(li.dataset.search || '').includes(normalize(input.value)); if (!li.hidden) count++; }); this.querySelector<HTMLElement>('[data-empty]')!.hidden = count > 0; }, { signal });
+  dialog.addEventListener('keydown', e => {
+   if (!['ArrowDown', 'ArrowUp', 'Enter'].includes(e.key)) return;
+   const items = Array.from(this.querySelectorAll<HTMLElement>('li:not([hidden]) a, li:not([hidden]) button'));
+   if (!items.length) return;
+   const index = items.indexOf(document.activeElement as HTMLElement);
+   if (e.key === 'Enter' && document.activeElement === input) { e.preventDefault(); items[0].click(); }
+   else if (e.key !== 'Enter') { e.preventDefault(); items[(index + (e.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length].focus(); }
+  }, { signal });
+  this.querySelectorAll('a').forEach(a => a.addEventListener('click', close, { signal }));
+  this.querySelector('[data-twin]')!.addEventListener('click', () => { close(); (document.querySelector('digital-twin-chatbot') as HTMLElement & { open?: () => void })?.open?.(); }, { signal });
+  this.cleanup = () => { controller.abort(); if (dialog.open) dialog.close(); };
+ }
+ disconnectedCallback() { this.cleanup?.(); }
+}
+if (!customElements.get('command-palette')) customElements.define('command-palette', CommandPalette);
+</script>

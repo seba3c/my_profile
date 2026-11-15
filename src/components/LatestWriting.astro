@@ -1,0 +1,15 @@
+---
+import { getPostsByLocale } from '../lib/blog';
+import BlogArchiveList from './BlogArchiveList.astro';
+import { site } from '@data/site';
+interface Props { class?: string }
+const componentProps: Props = Astro.props;
+void componentProps;
+const en = (await getPostsByLocale('en')).slice(0,3);
+const es = (await getPostsByLocale('es')).slice(0,3);
+---
+<section class="latest-writing" aria-labelledby="writing-title"><h2 id="writing-title" class="section-heading">{site.ui.en.writing}</h2><div data-writing-locale="en"><BlogArchiveList posts={en} locale="en" /></div><div data-writing-locale="es" hidden><BlogArchiveList posts={es} locale="es" /></div></section>
+<script>
+function initWriting() { let locale = navigator.language.startsWith('es') ? 'es' : 'en'; try { locale = localStorage.getItem('blog-locale') || locale; } catch { /* Use browser locale. */ } document.querySelectorAll<HTMLElement>('[data-writing-locale]').forEach(el => el.hidden = el.dataset.writingLocale !== locale); }
+initWriting(); document.addEventListener('astro:page-load', initWriting);
+</script>

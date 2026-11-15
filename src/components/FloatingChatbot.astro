@@ -69,6 +69,7 @@ const { chatbot } = Astro.props;
 <script>
   class DigitalTwinChatbot extends HTMLElement {
     private cleanup?: () => void;
+    open() { const dialog = this.querySelector("dialog"); if (!dialog?.open) this.querySelector<HTMLButtonElement>("[data-chat-launcher]")?.click(); }
 
     connectedCallback() {
       // Custom elements reconnect after Astro swaps. Each instance owns its listeners.
@@ -144,6 +145,8 @@ const { chatbot } = Astro.props;
           closePanel();
           return;
         }
+        document.querySelector<HTMLDialogElement>('command-palette dialog')?.close();
+        document.querySelectorAll<HTMLDetailsElement>('.mobile-menu').forEach(d => d.open = false);
         showPanel();
         if (!frame.hasAttribute('src')) loadFrame();
       }, { signal });
@@ -212,7 +215,7 @@ const { chatbot } = Astro.props;
     min-height: 3.5rem;
     padding: 0.875rem 1.125rem;
     border: 1px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
-    border-radius: 999px;
+    border-radius: 3px;
     background: var(--color-background);
     color: var(--color-accent);
     font-size: 0.8125rem;
@@ -248,7 +251,7 @@ const { chatbot } = Astro.props;
     padding: 0;
     overflow: hidden;
     border: 1px solid color-mix(in srgb, var(--color-accent) 30%, transparent);
-    border-radius: 1rem;
+    border-radius: 3px;
     background: var(--color-background);
     color: var(--color-maintext);
     box-shadow: 0 16px 64px #0008;
@@ -273,7 +276,7 @@ const { chatbot } = Astro.props;
     justify-content: center;
     width: 2.75rem;
     height: 2.75rem;
-    border-radius: 999px;
+    border-radius: 3px;
     color: var(--color-subtext);
     cursor: pointer;
   }

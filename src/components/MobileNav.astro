@@ -35,7 +35,7 @@ import { resolveNavHref } from '../lib/nav';
         // #about would scroll it out of view. Send "About" to the top of
         // <main> instead — it's the first in-flow element on mobile, so this
         // is effectively "top of page" with no magic-number scroll offset.
-        const isAbout = link.href === '#about';
+        const isAbout = String(link.href) === '#about';
         const isAnchor = link.href.startsWith('#');
         const href = isAbout ? resolveNavHref('#main') : resolveNavHref(link.href);
 

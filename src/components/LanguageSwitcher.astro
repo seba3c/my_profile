@@ -44,7 +44,7 @@ const { locale, enHref, esHref } = Astro.props;
         if (link.dataset.wired) return;
         link.dataset.wired = 'true';
         link.addEventListener('click', () => {
-          localStorage.setItem('blog-locale', link.getAttribute('data-lang-switch'));
+          try { localStorage.setItem('blog-locale', link.getAttribute('data-lang-switch')); } catch { /* Storage unavailable. */ }
         });
       });
     }

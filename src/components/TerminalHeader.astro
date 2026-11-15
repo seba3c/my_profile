@@ -1,0 +1,35 @@
+---
+import { site } from '@data/site';
+import { navLinks } from '@data/nav';
+import { resolveNavHref } from '../lib/nav';
+interface Props { lang?: string }
+const { lang = 'en' } = Astro.props;
+const es = lang === 'es';
+const ui = site.ui[es ? 'es' : 'en'];
+---
+<header class="terminal-header">
+  <a class="terminal-brand" href={resolveNavHref('/')} aria-label={site.hero.nickname}><span>seba3c</span><span class="text-subtext">:~</span><span class="text-accent">$</span></a>
+  <nav class="desktop-links" aria-label={es ? 'Principal' : 'Primary'}>{navLinks.map(link => <a href={resolveNavHref(link.href)} data-section-link={link.href.startsWith('#') || undefined} data-blog-nav-link={link.href === '/blog' || undefined}>{es ? link.es : link.label}</a>)}</nav>
+  <div class="header-actions"><a class="header-cv" href={site.contact.resume} download>CV ↗</a><button data-command-open hidden>{ui.commands} <kbd>⌘ K</kbd></button>
+  <details class="mobile-menu"><summary>{es ? 'Menú' : 'Menu'}</summary><nav aria-label={es ? 'Móvil' : 'Mobile'}>{navLinks.map(link => <a href={resolveNavHref(link.href)} data-blog-nav-link={link.href === '/blog' || undefined}>{es ? link.es : link.label}</a>)}<a href={site.contact.resume} download>{ui.resume}</a></nav></details></div>
+</header>
+<script>
+let shellObserver: IntersectionObserver | undefined;
+function initShell() {
+ shellObserver?.disconnect();
+ const menu = document.querySelector<HTMLDetailsElement>('.mobile-menu');
+ if (menu && !menu.dataset.wired) { menu.dataset.wired = 'true';
+ menu.addEventListener('keydown', e => { if (e.key === 'Escape') { menu.open = false; menu.querySelector('summary')?.focus(); } });
+ menu.addEventListener('toggle', () => { if (menu.open) { document.querySelector<HTMLDialogElement>('command-palette dialog')?.close(); document.querySelector<HTMLDialogElement>('digital-twin-chatbot dialog')?.close(); } });
+ menu?.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.open = false));
+ }
+ const links = Array.from(document.querySelectorAll<HTMLAnchorElement>('.desktop-links a[data-section-link]'));
+ const targets = links.map(a => document.getElementById(new URL(a.href).hash.slice(1))).filter((s): s is HTMLElement => !!s);
+ const observer = new IntersectionObserver(entries => { for (const entry of entries) { if (!entry.isIntersecting) continue; links.forEach(a => { if (new URL(a.href).hash === '#' + entry.target.id) a.setAttribute('aria-current', 'location'); else a.removeAttribute('aria-current'); }); } }, { rootMargin: '-10% 0px -65% 0px' });
+ shellObserver = observer;
+ targets.forEach(t => observer.observe(t));
+ document.querySelectorAll<HTMLAnchorElement>('.desktop-links a').forEach(a => { if (new URL(a.href).pathname === location.pathname && !new URL(a.href).hash) a.setAttribute('aria-current','page'); });
+ document.addEventListener('astro:before-swap', () => observer.disconnect(), {once:true});
+}
+initShell(); document.addEventListener('astro:page-load', initShell);
+</script>

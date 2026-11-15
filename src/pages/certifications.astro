@@ -50,7 +50,7 @@ const homeHref = `${base}#certifications`;
         </thead>
         <tbody>
           {
-            site.certificationArchive.map((row) => (
+            [...site.certifications, ...site.certificationArchive].filter((p, i, all) => all.findIndex(other => other.name === p.name) === i).map((row) => (
               <tr>
                 <td class="hidden md:table-cell whitespace-nowrap px-4 py-4 font-mono text-slate">{row.date}</td>
                 <td class="px-4 py-4">

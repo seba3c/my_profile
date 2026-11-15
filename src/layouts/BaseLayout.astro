@@ -3,6 +3,10 @@ import '../styles/global.css';
 import { site } from '@data/site';
 import { ClientRouter } from 'astro:transitions';
 import { SITE_CONFIG } from '../config.ts';
+import TerminalHeader from '../components/TerminalHeader.astro';
+import CommandPalette from '../components/CommandPalette.astro';
+import FloatingChatbot from '../components/FloatingChatbot.astro';
+import Footer from '../components/Footer.astro';
 import JsonLd from '../components/JsonLd.astro';
 
 interface Props {
@@ -60,13 +64,13 @@ const defaultTheme = `${baseTheme}-dark`;
     <!-- THEME INITIALIZATION SCRIPT -->
     <script is:inline define:vars={{ baseTheme, defaultTheme }}>
       function applyTheme() {
-        const savedTheme = localStorage.getItem('theme');
+        const savedTheme = (() => { try { return localStorage.getItem('theme'); } catch { return null; } })();
 
         if (savedTheme && savedTheme.startsWith(baseTheme)) {
           document.documentElement.setAttribute('data-theme', savedTheme);
         } else {
           document.documentElement.setAttribute('data-theme', defaultTheme);
-          localStorage.setItem('theme', defaultTheme);
+          try { localStorage.setItem('theme', defaultTheme); } catch { /* Storage unavailable. */ }
         }
       }
 
@@ -85,7 +89,7 @@ const defaultTheme = `${baseTheme}-dark`;
          directly-loaded blog URL is never redirected. -->
     <script is:inline>
       function resolveBlogLocale() {
-        const stored = localStorage.getItem('blog-locale');
+        const stored = (() => { try { return localStorage.getItem('blog-locale'); } catch { return null; } })();
         if (stored === 'en' || stored === 'es') return stored;
         return navigator.language.toLowerCase().startsWith('es') ? 'es' : 'en';
       }
@@ -144,6 +148,11 @@ const defaultTheme = `${baseTheme}-dark`;
     </script>
   </head>
   <body class="min-h-screen bg-background text-maintext antialiased selection:bg-accent/30 selection:text-background">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <TerminalHeader lang={lang} />
     <slot />
+    <Footer />
+    <CommandPalette lang={lang} />
+    <FloatingChatbot chatbot={site.chatbot} />
   </body>
 </html>

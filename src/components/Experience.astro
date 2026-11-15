@@ -14,9 +14,9 @@ import { site } from '../../data/site';
               {item.title} · {item.company}
             </h3>
             <p class="body-copy">{item.summary}</p>
-            <ul class="list-disc space-y-1 pl-5 text-sm text-slate">
+            <details><summary>{site.ui.en.more}</summary><ul class="list-disc space-y-1 pl-5 text-sm text-slate">
               {item.highlights.map((point) => <li>{point}</li>)}
-            </ul>
+            </ul></details>
             <ul class="flex flex-wrap gap-3 pt-1">
               {item.tech.map((tech) => <li class="font-mono text-xs text-accent">{tech}</li>)}
             </ul>

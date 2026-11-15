@@ -58,6 +58,10 @@ export interface ChatbotConfig {
 }
 
 export const site = {
+  ui: {
+    en: { commands: 'Commands', search: 'Search pages and actions…', close: 'Close', empty: 'No results. Try projects, CV or contact.', resume: 'Download CV', contact: 'Get in touch', projects: 'Selected projects', experience: 'Experience', writing: 'Latest writing', credentials: 'Credentials', profile: 'About & toolkit', allProjects: 'All projects', allCredentials: 'All credentials', more: 'View all details', twin: 'Open AI twin' },
+    es: { commands: 'Comandos', search: 'Buscar páginas y acciones…', close: 'Cerrar', empty: 'Sin resultados. Prueba proyectos, CV o contacto.', resume: 'Descargar CV', contact: 'Contactar', projects: 'Proyectos destacados', experience: 'Experiencia', writing: 'Últimos artículos', credentials: 'Credenciales', profile: 'Perfil y herramientas', allProjects: 'Todos los proyectos', allCredentials: 'Todas las credenciales', more: 'Ver detalles', twin: 'Abrir AI twin' },
+  },
   chatbot: {
     url: 'https://seba3c-digital-twin.hf.space',
     launcherLabel: 'Chat with my AI twin',
@@ -99,6 +103,18 @@ export const site = {
       },
       "If you have a project, idea or just want to keep in touch, let's talk!",
     ],
+  },
+  techStackExplorer: {
+    title: 'My tech stack',
+    path: '~/toolkit',
+    description: 'Tools and technologies, grouped by area.',
+    searchLabel: 'Filter technologies',
+    searchPlaceholder: 'Python, AWS, AI…',
+    clearLabel: 'Clear search',
+    packageLabel: 'technologies',
+    directoryLabel: 'categories',
+    emptyTitle: 'No technologies found',
+    emptyDescription: 'Try another name or clear the search to see the complete toolkit.',
   },
   techStack: [
     {
