@@ -3,10 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import About from '../components/About.astro';
 import TechStack from '../components/TechStack.astro';
 import FeaturedProjects from '../components/FeaturedProjects.astro';
-import Footer from '../components/Footer.astro';
+import PortfolioHero from '../components/PortfolioHero.astro';
+import LatestWriting from '../components/LatestWriting.astro';
+import ContactSection from '../components/ContactSection.astro';
 import Experience from '../components/Experience.astro';
 import Certifications from '../components/Certifications.astro';
-import FloatingChatbot from '../components/FloatingChatbot.astro';
+
 import { site } from '../../data/site';
 
 const projects = site.featuredProjects;
@@ -32,11 +34,12 @@ const structuredData = {
 ---
 
 <Layout title={site.meta.title} description={site.meta.description} structuredData={structuredData}>
-  <About />
-  <TechStack />
+  <PortfolioHero />
   <FeaturedProjects projects={projects} />
   <Experience />
+  <About />
+  <TechStack />
   <Certifications />
-  <Footer />
-  <FloatingChatbot slot="floating" chatbot={site.chatbot} />
+  <LatestWriting />
+  <ContactSection />
 </Layout>

@@ -1,6 +1,9 @@
 ---
+import TerminalReveal from './TerminalReveal.astro';
 import type { FeaturedProject } from "../../data/site";
 import ProjectCard from "./ProjectCard.astro";
+import { site } from '@data/site';
+import { resolveNavHref } from '../lib/nav';
 import { Icon } from "astro-icon/components";
 
 interface Props {
@@ -8,10 +11,7 @@ interface Props {
 }
 
 const { projects } = Astro.props;
-const base = import.meta.env.BASE_URL.endsWith("/")
-  ? import.meta.env.BASE_URL
-  : `${import.meta.env.BASE_URL}/`;
-const archiveHref = `${base}projects`;
+const archiveHref = resolveNavHref('/projects');
 ---
 
 <section
@@ -19,7 +19,7 @@ const archiveHref = `${base}projects`;
   class="mb-16 scroll-mt-24 lg:mb-24 lg:scroll-mt-8"
   aria-labelledby="projects-heading"
 >
-  <h2 id="projects-heading" class="section-heading">Featured Projects</h2>
+  <TerminalReveal title="Featured Projects" headingId="projects-heading">
   <div class="space-y-8">
     {
       projects.map((project) => (
@@ -27,17 +27,18 @@ const archiveHref = `${base}projects`;
       ))
     }
   </div>
-  <p class="mt-14">
+  <p class="archive-access">
     <a
       href={archiveHref}
-      class="group flex items-center gap-2 text-sm text-accent transition hover:text-slate-light"
+      class="archive-link"
       data-astro-prefetch
     >
-      View Full Project Archive
+      <span>{site.archiveNavigation.projects}</span>
       <Icon
         name="ph:arrow-right"
-        class="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
+        class="h-4 w-4 shrink-0"
       />
     </a>
   </p>
+</TerminalReveal>
 </section>

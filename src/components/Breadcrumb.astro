@@ -1,0 +1,32 @@
+---
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+  accessibleLabel?: string;
+}
+interface Props {
+  items: readonly BreadcrumbItem[];
+  label?: string;
+}
+const { items, label = 'Breadcrumb' } = Astro.props;
+---
+<nav class="breadcrumb" aria-label={label}>
+  <ol>
+    {items.map((item, index) => <li>
+      {index > 0 && <span class="breadcrumb-separator" aria-hidden="true">/</span>}
+      {item.href ? <a href={item.href} aria-label={item.accessibleLabel} data-astro-prefetch>{item.label}</a> : <span class="breadcrumb-current" aria-current={index === items.length - 1 ? 'page' : undefined}>{item.label}</span>}
+    </li>)}
+  </ol>
+</nav>
+<style>
+  .breadcrumb { min-width:0; font:13px/1.7 var(--font-mono); color:var(--color-subtext); }
+  ol { display:flex; flex-wrap:wrap; align-items:baseline; gap:0; margin:0; padding:0; list-style:none; }
+  li { display:flex; align-items:baseline; gap:0; min-width:0; max-width:100%; }
+  li:nth-child(n + 3) { margin-inline-start:1ch; }
+  a { position:relative; display:inline-flex; align-items:center; justify-content:center; min-height:44px; color:var(--color-accent); text-decoration:underline; text-decoration-color:var(--color-navy-lighter); }
+  /* Expand the root hit target without introducing visible path spacing. */
+  li:first-child a::before { content:''; position:absolute; inset-block:0; inset-inline-start:calc(50% - 12px); width:24px; }
+  a:hover { text-decoration-color:currentColor; }
+  .breadcrumb-current { padding:11px 0; overflow-wrap:anywhere; min-width:0; }
+  .breadcrumb-separator { flex-shrink:0; margin-inline-end:1ch; }
+</style>

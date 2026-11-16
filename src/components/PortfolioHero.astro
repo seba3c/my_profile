@@ -1,0 +1,12 @@
+---
+import { site } from '@data/site';
+interface Props { class?: string }
+const componentProps: Props = Astro.props;
+void componentProps;
+---
+<section class="portfolio-hero" aria-labelledby="hero-title">
+ <div class="hero-copy"><div class="hero-identity"><img src={site.hero.avatarSrc} alt={site.hero.avatarAlt} width="56" height="56" loading="lazy" decoding="async" /><span>{site.hero.role}</span></div>
+ <h1 id="hero-title">{site.hero.nickname}<span class="text-accent">.</span></h1>
+ <p class="hero-summary">{site.meta.description}</p><p class="hero-focus">{site.hero.tagline}</p>
+ <div class="hero-actions"><a class="terminal-button" href={`mailto:${site.contact.email}`}>{site.ui.en.contact} ↗</a><a class="terminal-secondary" href={site.contact.resume} download>{site.ui.en.resume} ↓</a></div></div>
+</section>

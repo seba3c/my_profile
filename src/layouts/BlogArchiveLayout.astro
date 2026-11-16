@@ -1,9 +1,11 @@
 ---
+import TerminalReveal from '../components/TerminalReveal.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
 import ArchiveLayout from './ArchiveLayout.astro';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import BlogMiniHeader from '../components/BlogMiniHeader.astro';
 import { resolveNavHref } from '../lib/nav';
-import type { BlogLocale } from '../lib/blog-i18n';
+import { blogStrings, type BlogLocale } from '../lib/blog-i18n';
 
 interface Props {
   locale: BlogLocale;
@@ -12,6 +14,7 @@ interface Props {
 }
 
 const { locale, title, description } = Astro.props;
+const strings = blogStrings[locale];
 
 const enUrl = new URL(resolveNavHref('/blog/'), Astro.site).href;
 const esUrl = new URL(resolveNavHref('/es/blog/'), Astro.site).href;
@@ -22,12 +25,16 @@ const alternates = [
 ];
 ---
 
-<ArchiveLayout title={title} description={description} lang={locale} alternates={alternates}>
-  <Fragment slot="top-right">
+<ArchiveLayout title={title} description={description} lang={locale} alternates={alternates} showBreadcrumb={false}>
+  <div class="blog-toolbar mb-8">
+    <Breadcrumb label={strings.breadcrumbLabel} items={[
+      { label: '~', href: resolveNavHref('#latest-writing'), accessibleLabel: strings.backToWriting },
+      { label: 'blog' },
+    ]} />
     <LanguageSwitcher locale={locale} enHref={resolveNavHref('/blog')} esHref={resolveNavHref('/es/blog')} />
-  </Fragment>
-
+  </div>
   <BlogMiniHeader />
-
+  <TerminalReveal title={strings.archiveTitle} headingId="blog-title" headingTag="h1">
   <slot />
+  </TerminalReveal>
 </ArchiveLayout>

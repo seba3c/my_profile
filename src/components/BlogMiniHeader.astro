@@ -1,29 +1,26 @@
 ---
-import { Image } from 'astro:assets';
 import { site } from '@data/site';
 import { resolveNavHref } from '../lib/nav';
+interface Props { class?: string }
+const { class: className } = Astro.props;
 ---
 
-<a
-  href={resolveNavHref('/')}
-  class="group mb-8 flex items-center gap-3"
-  data-astro-prefetch
->
-  <div class="h-20 w-20 shrink-0 overflow-hidden rounded-full border border-accent">
-    <Image
-      src={site.hero.avatarSrc}
-      alt={site.hero.avatarAlt}
-      class="h-full w-full object-cover"
-      loading="eager"
-      width={160}
-      height={160}
-    />
-  </div>
-  <div class="flex min-w-0 flex-col leading-tight">
-    <span class="text-lg font-semibold text-slate transition group-hover:text-accent">
-      {site.hero.name}
-    </span>
-    <span class="text-sm font-medium text-slate-light">{site.hero.role}</span>
-    <span class="body-copy text-xs">{site.hero.tagline}</span>
-  </div>
+<a href={resolveNavHref('/')} class:list={['blog-mini-hero', className]} data-astro-prefetch>
+  <img src={site.hero.avatarSrc} alt={site.hero.avatarAlt} width="56" height="56" loading="lazy" decoding="async" />
+  <span class="blog-mini-copy">
+    <span class="blog-mini-name">{site.hero.nickname}<span class="text-accent">.</span></span>
+    <span class="blog-mini-role">{site.hero.role}</span>
+    <span class="blog-mini-focus">{site.hero.tagline}</span>
+  </span>
 </a>
+
+<style>
+  .blog-mini-hero { display:flex; align-items:center; gap:16px; margin-bottom:32px; width:fit-content; max-width:100%; }
+  .blog-mini-hero img { width:56px; height:56px; flex-shrink:0; object-fit:cover; border-radius:4px; }
+  .blog-mini-copy { display:flex; flex-direction:column; gap:4px; min-width:0; }
+  .blog-mini-name { font:400 24px/1.25 var(--font-heading); letter-spacing:-.03em; color:var(--color-maintext); }
+  .blog-mini-role { font:13px/1.5 var(--font-heading); color:var(--color-subtext); }
+  .blog-mini-focus { font:12px/1.8 var(--font-heading); color:var(--color-terminal-amber); overflow-wrap:anywhere; }
+  .blog-mini-hero:hover .blog-mini-name { color:var(--color-accent); }
+  @media(max-width:639px) { .blog-mini-hero { align-items:flex-start; } .blog-mini-name { font-size:20px; } }
+</style>

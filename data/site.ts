@@ -8,6 +8,22 @@
  * Replace placeholder images in src/assets/ with your own.
  */
 
+export interface ExperienceLogo {
+  src: string;
+  alt: string;
+}
+
+export interface ExperienceEntry {
+  period: string;
+  title: string;
+  company: string;
+  summary: string;
+  highlights: readonly string[];
+  tech: readonly string[];
+  logo?: ExperienceLogo;
+  clientLogos?: readonly [] | readonly [ExperienceLogo] | readonly [ExperienceLogo, ExperienceLogo];
+}
+
 export interface AcademicEntry {
   period: string;
   title: string;
@@ -58,6 +74,10 @@ export interface ChatbotConfig {
 }
 
 export const site = {
+  ui: {
+    en: { commands: 'Commands', search: 'Search pages and actions…', close: 'Close', empty: 'No results. Try projects, CV or contact.', resume: 'Download CV', contact: 'Get in touch', projects: 'Selected projects', experience: 'Experience', writing: 'Latest writing', credentials: 'Credentials', profile: 'About & toolkit', allProjects: 'All projects', allCredentials: 'All credentials', more: 'View all details', twin: 'Open AI twin' },
+    es: { commands: 'Comandos', search: 'Buscar páginas y acciones…', close: 'Cerrar', empty: 'Sin resultados. Prueba proyectos, CV o contacto.', resume: 'Descargar CV', contact: 'Contactar', projects: 'Proyectos destacados', experience: 'Experiencia', writing: 'Últimos artículos', credentials: 'Credenciales', profile: 'Perfil y herramientas', allProjects: 'Todos los proyectos', allCredentials: 'Todas las credenciales', more: 'Ver detalles', twin: 'Abrir AI twin' },
+  },
   chatbot: {
     url: 'https://seba3c-digital-twin.hf.space',
     launcherLabel: 'Chat with my AI twin',
@@ -73,7 +93,7 @@ export const site = {
   meta: {
     title: 'Sebastian Castañeda | Senior Software Engineer',
     description:
-      'Senior software engineer with 10+ years building production systems in fintech, crypto, and health tech, focused on Python, AWS, and AI-assisted development.',
+      'Senior software engineer with 15+ years building production systems in fintech, crypto, and health tech, focused on Python, AWS, and AI-assisted development.',
   },
   hero: {
     name: 'Carlos Sebastian Castañeda',
@@ -86,19 +106,31 @@ export const site = {
   },
   about: {
     paragraphs: [
-      'Software Engineer with over 10 years of experience building production systems across FinTech, crypto, government, and health-tech domains. Lately I\'ve been leaning into AI-augmented development — using tools like Claude, Claude Code, and GitHub Copilot as part of my daily workflow, and going deeper into AI engineering through hands-on coursework and project work.',
+      'Software Engineer with 15+ years of experience building production systems across fintech, crypto, government, and health tech. I use Codex and Claude Code in my daily development workflow, while deepening my AI engineering skills through hands-on projects and coursework.',
       {
         heading: 'My strengths',
         bullets: [
           'Strong backend foundation in Python (Django, FastAPI), AWS, and Docker — language-agnostic in practice, with additional experience in Java, JavaScript, and other stacks as needed',
           'Hands-on experience delivering customer-facing web applications and REST APIs end to end',
           'Full ownership of features — from system architecture and payment integrations to frontend delivery, security remediation, and cross-functional collaboration with Product, Security, and DevOps teams',
-          'Growing focus on AI engineering — from AI-assisted development to spec-driven workflows',
+          'Growing focus on AI engineering — including retrieval-augmented generation (RAG), AI agents, AI-assisted development, and spec-driven workflows.',
           'Fast learner who adapts quickly to new tech stacks and tooling as project needs evolve'
         ],
       },
       "If you have a project, idea or just want to keep in touch, let's talk!",
     ],
+  },
+  techStackExplorer: {
+    title: 'My tech stack',
+    path: '~/toolkit',
+    description: 'Tools and technologies, grouped by area.',
+    searchLabel: 'Filter technologies',
+    searchPlaceholder: 'Python, AWS, AI…',
+    clearLabel: 'Clear search',
+    packageLabel: 'technologies',
+    directoryLabel: 'categories',
+    emptyTitle: 'No technologies found',
+    emptyDescription: 'Try another name or clear the search to see the complete toolkit.',
   },
   techStack: [
     {
@@ -132,6 +164,7 @@ export const site = {
       period: '2021-2026',
       title: 'Senior Software Engineer',
       company: 'Xapo Bank',
+      logo: { src: '/logos/experiences/xapo-bank.webp', alt: 'Xapo Bank' },
       summary:
         'Senior Backend Engineer in different company areas and teams.',
       highlights: [
@@ -148,6 +181,11 @@ export const site = {
       period: '2018-2021',
       title: 'Senior Software Engineer',
       company: 'AccelOne',
+      logo: { src: '/logos/experiences/accelone.webp', alt: 'AccelOne' },
+      clientLogos: [
+        { src: '/logos/experiences/xapo-bank.webp', alt: 'Xapo Bank (client)' },
+        { src: '/logos/experiences/seattle-childrens.webp', alt: 'Seattle Children’s (client)' },
+      ],
       summary:
         'Senior Software Engineer for Xapo Bank and Seattle Children\'s Hospital, Foundation, and Research',
       highlights: [
@@ -160,6 +198,11 @@ export const site = {
       period: '2016-2018',
       title: 'Software Engineer',
       company: 'DevsAr',
+      logo: { src: '/logos/experiences/devsar.webp', alt: 'DevsAr' },
+      clientLogos: [
+        { src: '/logos/experiences/moni.webp', alt: 'Moni (client)' },
+        { src: '/logos/experiences/matterport.webp', alt: 'Matterport (client)' },
+      ],
       summary:
         'Software Engineer for Moni and Matterport',
       highlights: [
@@ -170,7 +213,7 @@ export const site = {
       ],
       tech: ['Python', 'Django', 'Datadog', 'JavaScript'],
     },
-  ],
+  ] satisfies readonly ExperienceEntry[],
   academic: [
     {
       period: '2017',
@@ -204,7 +247,7 @@ export const site = {
         width: 704,
         height: 665,
       },
-      period: '',
+      period: '2006',
       summary: 'I run this initiative to provide software development and IT consulting services to small local businesses and entrepreneurs.',
       role: 'Owner',
       link: 'https://juanaylola.com/',
@@ -218,13 +261,33 @@ export const site = {
         width: 704,
         height: 603,
       },
-      period: '',
+      period: '2006',
       summary: 'A chatbot that answers questions about my career, skills, and experience. Built with OpenAI models and retrieval-augmented generation (RAG), including reranking and query rephrasing, and deployed on Hugging Face Spaces.',
       role: 'Owner',
       link: 'https://seba3c-digital-twin.hf.space',
       techStack: ['OpenAI', 'RAG', 'Hugging Face Spaces'],
     },
+    {
+      title: 'Pixban',
+      preview: {
+        src: '/projects/pixban.webp',
+        alt: 'Pixban image editor showing two pixel-art cars with pixelation and annotation tools.',
+        width: 704,
+        height: 402,
+      },
+      period: '2026',
+      summary: 'A browser-based image editor for pixelating details, adding text, and highlighting areas with ellipses and lines. Images are processed locally and exported at their original resolution.',
+      role: 'Owner',
+      link: 'https://pixban.app/',
+      techStack: ['React', 'Vite', 'Codex', 'ChatGPT Sites'],
+    },
   ],
+  archiveNavigation: {
+    projects: 'View Full Project Archive',
+    certifications: 'View Full Certification Archive',
+    backToProjects: 'Return to featured projects',
+    backToCertifications: 'Return to certifications',
+  },
   projectArchivePage: {
     title: 'All projects',
     description: 'Project archive: dates, roles, and technologies across representative engagements.',

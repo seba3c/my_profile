@@ -1,0 +1,24 @@
+---
+import TerminalReveal from './TerminalReveal.astro';
+import { getPostsByLocale } from '../lib/blog';
+import BlogArchiveList from './BlogArchiveList.astro';
+import { site } from '@data/site';
+interface Props { class?: string }
+const componentProps: Props = Astro.props;
+void componentProps;
+const en = (await getPostsByLocale('en')).slice(0,3);
+const es = (await getPostsByLocale('es')).slice(0,3);
+---
+<section id="latest-writing" class="latest-writing" aria-labelledby="writing-title"><TerminalReveal title={site.ui.en.writing} headingId="writing-title"><div data-writing-locale="en"><BlogArchiveList posts={en} locale="en" /></div><div data-writing-locale="es" hidden><BlogArchiveList posts={es} locale="es" /></div></TerminalReveal>
+</section>
+<script>
+function initWriting() {
+  let locale = 'en';
+  try {
+    const stored = localStorage.getItem('blog-locale');
+    if (stored === 'en' || stored === 'es') locale = stored;
+  } catch { /* Use English by default. */ }
+  document.querySelectorAll<HTMLElement>('[data-writing-locale]').forEach(el => el.hidden = el.dataset.writingLocale !== locale);
+}
+initWriting(); document.addEventListener('astro:page-load', initWriting);
+</script>

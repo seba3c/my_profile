@@ -12,7 +12,6 @@ const title = `${strings.archiveTitle} | ${site.hero.name}`;
 ---
 
 <BlogArchiveLayout locale={locale} title={title} description={strings.archiveIntro}>
-  <h1 class="mb-8 text-4xl font-bold tracking-tight text-white sm:text-4xl">{strings.archiveTitle}</h1>
   <p class="mb-10 max-w-prose body-copy">{strings.archiveIntro}</p>
   <BlogArchiveList posts={posts} locale={locale} />
 </BlogArchiveLayout>

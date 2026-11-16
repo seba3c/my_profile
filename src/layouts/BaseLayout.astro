@@ -3,6 +3,10 @@ import '../styles/global.css';
 import { site } from '@data/site';
 import { ClientRouter } from 'astro:transitions';
 import { SITE_CONFIG } from '../config.ts';
+import TerminalHeader from '../components/TerminalHeader.astro';
+import CommandPalette from '../components/CommandPalette.astro';
+import FloatingChatbot from '../components/FloatingChatbot.astro';
+import Footer from '../components/Footer.astro';
 import JsonLd from '../components/JsonLd.astro';
 
 interface Props {
@@ -38,7 +42,8 @@ const defaultTheme = `${baseTheme}-dark`;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/x-icon" sizes="16x16 32x32 48x48" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
 
     <title>{title}</title>
@@ -60,13 +65,13 @@ const defaultTheme = `${baseTheme}-dark`;
     <!-- THEME INITIALIZATION SCRIPT -->
     <script is:inline define:vars={{ baseTheme, defaultTheme }}>
       function applyTheme() {
-        const savedTheme = localStorage.getItem('theme');
+        const savedTheme = (() => { try { return localStorage.getItem('theme'); } catch { return null; } })();
 
         if (savedTheme && savedTheme.startsWith(baseTheme)) {
           document.documentElement.setAttribute('data-theme', savedTheme);
         } else {
           document.documentElement.setAttribute('data-theme', defaultTheme);
-          localStorage.setItem('theme', defaultTheme);
+          try { localStorage.setItem('theme', defaultTheme); } catch { /* Storage unavailable. */ }
         }
       }
 
@@ -79,15 +84,14 @@ const defaultTheme = `${baseTheme}-dark`;
 
     <!-- BLOG NAV LOCALE SCRIPT
          The "Blog" nav link's target locale is picked client-side (this is a
-         fully static site, so there's no Accept-Language header to read on
-         the server): a stored preference wins, otherwise the browser's own
-         language decides. This only ever rewrites the nav link's href — a
+         fully static site): a stored preference wins, otherwise English
+         is the default. This only ever rewrites the nav link's href — a
          directly-loaded blog URL is never redirected. -->
     <script is:inline>
       function resolveBlogLocale() {
-        const stored = localStorage.getItem('blog-locale');
+        const stored = (() => { try { return localStorage.getItem('blog-locale'); } catch { return null; } })();
         if (stored === 'en' || stored === 'es') return stored;
-        return navigator.language.toLowerCase().startsWith('es') ? 'es' : 'en';
+        return 'en';
       }
 
       function rewriteBlogNavLinks() {
@@ -144,6 +148,11 @@ const defaultTheme = `${baseTheme}-dark`;
     </script>
   </head>
   <body class="min-h-screen bg-background text-maintext antialiased selection:bg-accent/30 selection:text-background">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <TerminalHeader />
     <slot />
+    <Footer />
+    <CommandPalette />
+    <FloatingChatbot chatbot={site.chatbot} />
   </body>
 </html>

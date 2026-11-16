@@ -1,4 +1,6 @@
 ---
+import TerminalReveal from './TerminalReveal.astro';
+import { resolveNavHref } from '../lib/nav';
 import { site } from '../../data/site';
 import { Icon } from 'astro-icon/components';
 ---
@@ -8,7 +10,7 @@ import { Icon } from 'astro-icon/components';
   class="mb-16 scroll-mt-24 lg:mb-24 lg:scroll-mt-8"
   aria-labelledby="certifications-heading"
 >
-  <h2 id="certifications-heading" class="section-heading">Certifications</h2>
+  <TerminalReveal title="Certifications" headingId="certifications-heading">
 
   {site.certifications.length < 1 ? (
     <p class="body-copy text-slate-light">{site.certificationsEmptyText}</p>
@@ -45,15 +47,18 @@ import { Icon } from 'astro-icon/components';
       ))}
 
       {site.certificationArchive.length > 0 && (
-        <div class="pt-4">
+        <div class="archive-access">
           <a
-            href="/certifications"
-            class="text-sm text-accent transition hover:text-slate-light"
+            href={resolveNavHref('/certifications')}
+            class="archive-link"
+            data-astro-prefetch
           >
-            View Full Certification Archive →
+            <span>{site.archiveNavigation.certifications}</span>
+            <Icon name="ph:arrow-right" class="h-4 w-4 shrink-0" />
           </a>
         </div>
       )}
     </div>
   )}
+</TerminalReveal>
 </section>

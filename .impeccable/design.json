@@ -1,0 +1,328 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-15T17:55:11Z",
+  "title": "Design System: Sebastian Casta\u00f1eda Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Terminal Green",
+        "tonalRamp": [
+          "oklch(15% 0.12 145)",
+          "oklch(25% 0.12 145)",
+          "oklch(35% 0.12 145)",
+          "oklch(45% 0.12 145)",
+          "oklch(55% 0.12 145)",
+          "oklch(70% 0.12 145)",
+          "oklch(85% 0.12 145)",
+          "oklch(95% 0.12 145)"
+        ]
+      },
+      "primary-hover": {
+        "role": "primary",
+        "displayName": "Bright Terminal Green",
+        "tonalRamp": [
+          "oklch(15% 0.12 145)",
+          "oklch(25% 0.12 145)",
+          "oklch(35% 0.12 145)",
+          "oklch(45% 0.12 145)",
+          "oklch(55% 0.12 145)",
+          "oklch(70% 0.12 145)",
+          "oklch(85% 0.12 145)",
+          "oklch(95% 0.12 145)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Terminal Ink",
+        "tonalRamp": [
+          "oklch(15% 0.015 150)",
+          "oklch(25% 0.015 150)",
+          "oklch(35% 0.015 150)",
+          "oklch(45% 0.015 150)",
+          "oklch(55% 0.015 150)",
+          "oklch(70% 0.015 150)",
+          "oklch(85% 0.015 150)",
+          "oklch(95% 0.015 150)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Raised Ink",
+        "tonalRamp": [
+          "oklch(15% 0.02 150)",
+          "oklch(25% 0.02 150)",
+          "oklch(35% 0.02 150)",
+          "oklch(45% 0.02 150)",
+          "oklch(55% 0.02 150)",
+          "oklch(70% 0.02 150)",
+          "oklch(85% 0.02 150)",
+          "oklch(95% 0.02 150)"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Pale Terminal Text",
+        "tonalRamp": [
+          "oklch(15% 0.012 150)",
+          "oklch(25% 0.012 150)",
+          "oklch(35% 0.012 150)",
+          "oklch(45% 0.012 150)",
+          "oklch(55% 0.012 150)",
+          "oklch(70% 0.012 150)",
+          "oklch(85% 0.012 150)",
+          "oklch(95% 0.012 150)"
+        ]
+      },
+      "muted": {
+        "role": "neutral",
+        "displayName": "Muted Sage Text",
+        "tonalRamp": [
+          "oklch(15% 0.02 150)",
+          "oklch(25% 0.02 150)",
+          "oklch(35% 0.02 150)",
+          "oklch(45% 0.02 150)",
+          "oklch(55% 0.02 150)",
+          "oklch(70% 0.02 150)",
+          "oklch(85% 0.02 150)",
+          "oklch(95% 0.02 150)"
+        ]
+      },
+      "soft-text": {
+        "role": "neutral",
+        "displayName": "Soft Terminal Text",
+        "tonalRamp": [
+          "oklch(15% 0.015 150)",
+          "oklch(25% 0.015 150)",
+          "oklch(35% 0.015 150)",
+          "oklch(45% 0.015 150)",
+          "oklch(55% 0.015 150)",
+          "oklch(70% 0.015 150)",
+          "oklch(85% 0.015 150)",
+          "oklch(95% 0.015 150)"
+        ]
+      },
+      "rule": {
+        "role": "neutral",
+        "displayName": "Fine Rule",
+        "tonalRamp": [
+          "oklch(15% 0.025 150)",
+          "oklch(25% 0.025 150)",
+          "oklch(35% 0.025 150)",
+          "oklch(45% 0.025 150)",
+          "oklch(55% 0.025 150)",
+          "oklch(70% 0.025 150)",
+          "oklch(85% 0.025 150)",
+          "oklch(95% 0.025 150)"
+        ]
+      },
+      "control-border": {
+        "role": "neutral",
+        "displayName": "Control Border",
+        "tonalRamp": [
+          "oklch(15% 0.025 145)",
+          "oklch(25% 0.025 145)",
+          "oklch(35% 0.025 145)",
+          "oklch(45% 0.025 145)",
+          "oklch(55% 0.025 145)",
+          "oklch(70% 0.025 145)",
+          "oklch(85% 0.025 145)",
+          "oklch(95% 0.025 145)"
+        ]
+      },
+      "strong-border": {
+        "role": "neutral",
+        "displayName": "Strong Border",
+        "tonalRamp": [
+          "oklch(15% 0.03 135)",
+          "oklch(25% 0.03 135)",
+          "oklch(35% 0.03 135)",
+          "oklch(45% 0.03 135)",
+          "oklch(55% 0.03 135)",
+          "oklch(70% 0.03 135)",
+          "oklch(85% 0.03 135)",
+          "oklch(95% 0.03 135)"
+        ]
+      },
+      "selection-surface": {
+        "role": "neutral",
+        "displayName": "Selected Forest",
+        "tonalRamp": [
+          "oklch(15% 0.035 140)",
+          "oklch(25% 0.035 140)",
+          "oklch(35% 0.035 140)",
+          "oklch(45% 0.035 140)",
+          "oklch(55% 0.035 140)",
+          "oklch(70% 0.035 140)",
+          "oklch(85% 0.035 140)",
+          "oklch(95% 0.035 140)"
+        ]
+      },
+      "terminal-amber": {
+        "role": "secondary",
+        "displayName": "Terminal Amber",
+        "tonalRamp": [
+          "oklch(15% 0.1 80)",
+          "oklch(25% 0.1 80)",
+          "oklch(35% 0.1 80)",
+          "oklch(45% 0.1 80)",
+          "oklch(55% 0.1 80)",
+          "oklch(70% 0.1 80)",
+          "oklch(85% 0.1 80)",
+          "oklch(95% 0.1 80)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Terminal identity",
+        "purpose": "Identity headline."
+      },
+      "headline": {
+        "displayName": "Section path",
+        "purpose": "Section headings."
+      },
+      "body": {
+        "displayName": "Summary",
+        "purpose": "Short introductory reading."
+      },
+      "reading": {
+        "displayName": "Article reading",
+        "purpose": "Long bilingual blog copy."
+      },
+      "label": {
+        "displayName": "Terminal labels",
+        "purpose": "Navigation and action labels."
+      }
+    },
+    "shadows": [
+      {
+        "name": "command-overlay",
+        "value": "0 24px 80px #0008",
+        "purpose": "Native command modal separation."
+      }
+    ],
+    "motion": [
+      {
+        "name": "command-expand-duration",
+        "value": "200ms",
+        "purpose": "Brief command dialog opening; disabled under reduced motion."
+      },
+      {
+        "name": "command-expand-easing",
+        "value": "cubic-bezier(.16,1,.3,1)",
+        "purpose": "Dialog expansion."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "small",
+        "value": "640px"
+      },
+      {
+        "name": "desktop",
+        "value": "1024px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary action",
+      "kind": "button",
+      "description": "Direct contact action.",
+      "html": "<a class=\"ds-primary\" href=\"mailto:hello@example.com\">Contact \u2197</a>",
+      "css": ".ds-primary{display:inline-block;font-family:var(--font-heading, monospace);font-size:13px;background:var(--color-accent,#b4ed88);color:#0c110f;padding:14px 18px;border-radius:3px;text-decoration:none}.ds-primary:hover{background:#d2ffb0;color:#0c110f}.ds-primary:focus-visible{outline:2px solid var(--color-accent,#b4ed88);outline-offset:5px}",
+      "refersTo": "button-primary"
+    },
+    {
+      "name": "Secondary action",
+      "kind": "button",
+      "description": "Download or supporting action.",
+      "html": "<button class=\"ds-secondary\">Download CV \u2193</button>",
+      "css": ".ds-secondary{font-family:var(--font-heading, monospace);font-size:13px;background:transparent;color:var(--color-maintext,#e8eee9);border:0;border-bottom:1px solid #53634f;padding:12px 0;cursor:pointer}.ds-secondary:hover{color:var(--color-accent,#b4ed88)}.ds-secondary:focus-visible{outline:2px solid var(--color-accent,#b4ed88);outline-offset:5px}",
+      "refersTo": "button-secondary"
+    },
+    {
+      "name": "Command trigger",
+      "kind": "button",
+      "description": "Visible entry to global commands.",
+      "html": "<button class=\"ds-command\">Commands <kbd>\u2318 K</kbd></button>",
+      "css": ".ds-command{font-family:var(--font-heading, monospace);font-size:13px;border:1px solid #344435;border-radius:3px;background:transparent;color:var(--color-accent,#b4ed88);padding:9px 12px;cursor:pointer}.ds-command kbd{margin-left:12px;font-size:11px;color:var(--color-subtext,#a6b5ac)}.ds-command:hover{color:#d2ffb0}.ds-command:focus-visible{outline:2px solid var(--color-accent,#b4ed88);outline-offset:5px}",
+      "refersTo": "command-trigger"
+    },
+    {
+      "name": "Command search",
+      "kind": "input",
+      "description": "Search field in the command dialog.",
+      "html": "<label class=\"ds-search-label\" for=\"ds-search\">Search commands</label><input id=\"ds-search\" class=\"ds-search\" type=\"search\" placeholder=\"Search commands\"/>",
+      "css": ".ds-search-label{display:block;font-family:var(--font-heading, monospace);font-size:13px;color:var(--color-subtext,#a6b5ac);padding:12px 20px}.ds-search{width:calc(100% - 40px);font-family:var(--font-body,sans-serif);font-size:16px;background:transparent;color:var(--color-maintext,#e8eee9);padding:20px;border:0;border-bottom:1px solid #344435}.ds-search:hover{border-color:#53634f}.ds-search:focus-visible{outline:2px solid var(--color-accent,#b4ed88);outline-offset:5px}",
+      "refersTo": "command-input"
+    },
+    {
+      "name": "Terminal navigation",
+      "kind": "nav",
+      "description": "Normal links alongside the terminal brand.",
+      "html": "<nav class=\"ds-nav\" aria-label=\"Example navigation\"><a href=\"#work\">Work</a><a href=\"#writing\">Writing</a><a href=\"#contact\">Contact</a></nav>",
+      "css": ".ds-nav{display:flex;flex-wrap:wrap;gap:24px;font-family:var(--font-heading, monospace);font-size:13px;}.ds-nav a{color:var(--color-maintext,#e8eee9);text-decoration:none}.ds-nav a:hover{color:var(--color-accent,#b4ed88)}.ds-nav a:focus-visible{outline:2px solid var(--color-accent,#b4ed88);outline-offset:5px}"
+    },
+    {
+      "name": "Technology link",
+      "kind": "chip",
+      "description": "Compact outlined linked tag.",
+      "html": "<a class=\"ds-tag\" href=\"#python\">Python</a>",
+      "css": ".ds-tag{display:inline-flex;font-family:var(--font-heading, monospace);font-size:13px;color:var(--color-accent,#b4ed88);border:1px solid #b4ed884d;border-radius:3px;padding:4px 12px;text-decoration:none;transition:background-color .2s}.ds-tag:hover{background:#b4ed8833}.ds-tag:focus-visible{outline:2px solid var(--color-accent,#b4ed88);outline-offset:5px}"
+    },
+    {
+      "name": "Integrated project preview",
+      "kind": "card",
+      "description": "240px natural-ratio preview to the left of grouped project text from 768px. Row maximum 64rem, column gap 24px. Below 768px: title, preview, description, metadata and action, with 16px gaps. Hero remains screenshot-free.",
+      "html": "<a class=\"ds-thumbnail\" href=\"#project\" aria-label=\"View project\"><span>Project preview</span></a>",
+      "css": ".ds-thumbnail{display:block;width:240px;max-width:100%;overflow:hidden;border:1px solid #2b3a30;border-radius:4px;background:#0c110f;color:#a6b5ac;font:13px monospace}.ds-thumbnail img{display:block;width:100%;height:auto}.ds-thumbnail:focus-visible{outline:2px solid #b4ed88;outline-offset:4px}",
+      "refersTo": "project-frame"
+    },
+    {
+      "name": "Package explorer",
+      "kind": "container",
+      "description": "Native expandable tech categories, progressively enhanced with grep-style name/category filtering, live counts, empty/reset states and keyboard navigation. All content visible without JavaScript.",
+      "html": "<div class=\"ds-toolkit\"><div class=\"ds-toolkit-path\">~/toolkit</div><details open><summary>Languages &amp; Frameworks</summary><ul><li>Python</li><li>TypeScript</li></ul></details></div>",
+      "css": ".ds-toolkit{background:#121b16;color:#e8eee9;border:1px solid #2b3a30;border-radius:4px;font:14px monospace}.ds-toolkit-path{color:#b4ed88;padding:18px 24px;border-bottom:1px solid #2b3a30}.ds-toolkit details{padding:0 24px}.ds-toolkit summary{cursor:pointer;padding:22px 0}.ds-toolkit li{min-height:42px;color:#d4ded7}.ds-toolkit summary:focus-visible{outline:2px solid #b4ed88;outline-offset:4px}",
+      "refersTo": "package-explorer"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Working Engineer's Terminal",
+    "overview": "A modern terminal gives this portfolio its code-first character: ink surfaces, green actions, fine rules and monospace headings. Normal navigation and readable prose make the work easy to inspect without requiring visitors to understand terminal commands.\n\nProject text and professional identity lead; small real project screenshots provide secondary visual evidence. The profile hero contains no project screenshot. Preserve the owner's identity and a small portrait; use actual work rather than invented product imagery. Amber emphasizes the supporting hero focus line alongside green actions.\n\nThis document extracts the implemented source, including the terminal overrides in `src/styles/global.css`. Browser visual QA was unavailable because automatic approval review reached its usage limit. These are source-derived decisions, not a claim of rendered visual validation.",
+    "keyCharacteristics": [
+      "Code-first identity with readable Inter body copy.",
+      "Real project imagery and restrained portrait treatment.",
+      "Ink surfaces, green actions and fine dividing rules.",
+      "Visible final content before progressive enhancement.",
+      "Searchable global commands alongside ordinary navigation."
+    ],
+    "rules": [
+      {
+        "name": "The Action Green Rule",
+        "body": "Reserve filled green surfaces for actionable emphasis; keep project imagery secondary to titles, descriptions and actions.",
+        "section": "colors"
+      },
+      {
+        "name": "The Visible Content Rule",
+        "body": "Final page content is visible before JavaScript runs; never make essential content depend on a reveal animation.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** use real project screenshots and preserve accurate professional identity and project authorship.",
+      "**Do** keep headings monospace and long reading copy in Inter.",
+      "**Do** retain ordinary navigation, contact, CV and bilingual blog access alongside commands.",
+      "**Do** show final content before enhancement and honor reduced motion immediately.",
+      "**Do** keep narrow archive entries readable with their field values visible."
+    ],
+    "donts": [
+      "**Don't** substitute generated project mockups for real evidence.",
+      "**Don't** turn the terminal metaphor into a prerequisite for navigation.",
+      "**Don't** use decorative reveal effects that hide content before JavaScript.",
+      "**Don't** claim browser visual validation from source inspection alone."
+    ]
+  }
+}
