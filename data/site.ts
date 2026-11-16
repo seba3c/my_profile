@@ -240,6 +240,20 @@ export const site = {
       link: 'https://seba3c-digital-twin.hf.space',
       techStack: ['OpenAI', 'RAG', 'Hugging Face Spaces'],
     },
+    {
+      title: 'Pixban',
+      preview: {
+        src: '/projects/pixban.webp',
+        alt: 'Pixban image editor showing two pixel-art cars with pixelation and annotation tools.',
+        width: 704,
+        height: 402,
+      },
+      period: '2026',
+      summary: 'A browser-based image editor for pixelating details, adding text, and highlighting areas with ellipses and lines. Images are processed locally and exported at their original resolution.',
+      role: 'Owner',
+      link: 'https://pixban.app/',
+      techStack: ['React', 'Vite', 'Codex', 'ChatGPT Sites'],
+    },
   ],
   archiveNavigation: {
     projects: 'View Full Project Archive',
