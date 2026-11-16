@@ -1,4 +1,5 @@
 ---
+import TerminalReveal from '../components/TerminalReveal.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import ArchiveLayout from './ArchiveLayout.astro';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
@@ -33,6 +34,7 @@ const alternates = [
     <LanguageSwitcher locale={locale} enHref={resolveNavHref('/blog')} esHref={resolveNavHref('/es/blog')} />
   </div>
   <BlogMiniHeader />
-  <h1 class="section-heading">{strings.archiveTitle}</h1>
+  <TerminalReveal title={strings.archiveTitle} headingId="blog-title" headingTag="h1">
   <slot />
+  </TerminalReveal>
 </ArchiveLayout>

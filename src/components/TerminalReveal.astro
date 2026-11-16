@@ -1,0 +1,25 @@
+---
+interface Props {
+  title: string;
+  headingId: string;
+  headingTag?: 'h1' | 'h2';
+  variant?: 'section' | 'contact';
+}
+const { title, headingId, headingTag: Heading = 'h2', variant = 'section' } = Astro.props;
+---
+
+<terminal-reveal data-title={title}>
+  <Heading id={headingId} class:list={['section-heading', 'terminal-heading', { 'terminal-heading--contact': variant === 'contact' }]}>
+    <span class="sr-only">{title}</span>
+    <span class="terminal-prefix" aria-hidden="true">~/</span>
+    <span class="terminal-title" aria-hidden="true">
+      <span class="terminal-title-size">{title}_</span>
+      <span class="terminal-title-visual"><span data-terminal-text>{title}</span><span class="terminal-cursor">_</span></span>
+    </span>
+  </Heading>
+  <div data-terminal-body><slot /></div>
+</terminal-reveal>
+
+<script>
+  import '../scripts/terminal-reveal';
+</script>

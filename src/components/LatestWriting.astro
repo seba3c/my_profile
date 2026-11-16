@@ -1,4 +1,5 @@
 ---
+import TerminalReveal from './TerminalReveal.astro';
 import { getPostsByLocale } from '../lib/blog';
 import BlogArchiveList from './BlogArchiveList.astro';
 import { site } from '@data/site';
@@ -8,7 +9,8 @@ void componentProps;
 const en = (await getPostsByLocale('en')).slice(0,3);
 const es = (await getPostsByLocale('es')).slice(0,3);
 ---
-<section id="latest-writing" class="latest-writing" aria-labelledby="writing-title"><h2 id="writing-title" class="section-heading">{site.ui.en.writing}</h2><div data-writing-locale="en"><BlogArchiveList posts={en} locale="en" /></div><div data-writing-locale="es" hidden><BlogArchiveList posts={es} locale="es" /></div></section>
+<section id="latest-writing" class="latest-writing" aria-labelledby="writing-title"><TerminalReveal title={site.ui.en.writing} headingId="writing-title"><div data-writing-locale="en"><BlogArchiveList posts={en} locale="en" /></div><div data-writing-locale="es" hidden><BlogArchiveList posts={es} locale="es" /></div></TerminalReveal>
+</section>
 <script>
 function initWriting() {
   let locale = 'en';

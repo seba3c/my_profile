@@ -169,7 +169,7 @@ From 1200px, monospace horizontal links show Projects, Experience, About, Tech S
 ### Global Command Palette
 A focused searchable native modal complements normal navigation. Open by visible button or Command/Ctrl+K; focus moves into search. Arrow keys navigate filtered results, Enter activates, Escape closes and focus returns to the opener. Results include navigation, archives, CV, contact, real projects and the AI twin. Opening it closes competing overlays.
 
-The dialog expands briefly (200ms, `cubic-bezier(.16,1,.3,1)`); reduced motion removes that animation and disables smooth scrolling. Essential text is never typed in or withheld while animation runs.
+The dialog expands briefly (200ms, `cubic-bezier(.16,1,.3,1)`); reduced motion removes that animation and disables smooth scrolling. Section titles use the owner-requested terminal sequence described below; complete content remains the server-rendered default.
 
 ## Do's and Don'ts
 
@@ -198,3 +198,11 @@ The only local motion is a 220ms reveal on directory opening and a rotating care
 ### Language boundaries
 
 Global desktop/mobile navigation and Commands always use English, including accessible names, and declare lang=en within Spanish pages. Only the blog listing, articles and their local controls follow the blog locale. First visits default to English regardless of browser language; an explicit saved blog preference is respected. Direct EN/ES URLs retain their content language.
+
+### Terminal section entrances
+
+Homepage section headings, including Let’s talk, and the Blog archive heading use a shared terminal reveal. The hero and individual article titles remain static. On first visibility per page entry, show the green `~/` prompt and blinking underscore for 1200ms (two 600ms cycles), type at 35ms per character (700ms maximum), then blink the cursor for one final 600ms cycle before fading the content in over 600ms. The final underscore stays static and green. Preserve the full title footprint and content dimensions during the sequence.
+
+The full accessible heading remains available throughout. Content is visible without JavaScript; reduced motion shows the final state immediately. Focusing content completes its entrance, and completed sections do not replay within the current page entry.
+
+Content fades through an opacity transition with the same visible target in the revealing and completed states. Scrolling does not interrupt an active fade. Completion follows the body's opacity transitionend, with a 750ms fallback if the event is omitted.

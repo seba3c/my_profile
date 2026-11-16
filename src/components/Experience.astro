@@ -1,9 +1,10 @@
 ---
+import TerminalReveal from './TerminalReveal.astro';
 import { site } from '../../data/site';
 ---
 
 <section id="experiences"   class="mb-16 scroll-mt-24 lg:mb-24 lg:scroll-mt-8" aria-labelledby="experience-heading">
-  <h2 id="experience-heading" class="section-heading">Experiences</h2>
+  <TerminalReveal title="Experiences" headingId="experience-heading">
   <div class="space-y-4">
     {
       site.experiences.map((item) => (
@@ -25,4 +26,5 @@ import { site } from '../../data/site';
       ))
     }
   </div>
+</TerminalReveal>
 </section>

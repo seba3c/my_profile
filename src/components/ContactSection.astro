@@ -1,7 +1,8 @@
 ---
+import TerminalReveal from './TerminalReveal.astro';
 import { site } from '@data/site';
 interface Props { class?: string }
 const componentProps: Props = Astro.props;
 void componentProps;
 ---
-<section id="contact" class="contact-section" aria-labelledby="contact-title"><h2 id="contact-title">Let’s talk<span class="text-accent">_</span></h2><a class="contact-email" href={`mailto:${site.contact.email}`}>{site.contact.email} ↗</a><div class="hero-actions"><a href={site.contact.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a><a href={site.contact.github} target="_blank" rel="noreferrer">GitHub ↗</a><a href={site.contact.resume} download>{site.ui.en.resume} ↓</a></div></section>
+<section id="contact" class="contact-section" aria-labelledby="contact-title"><TerminalReveal title="Let’s talk" headingId="contact-title" variant="contact"><a class="contact-email" href={`mailto:${site.contact.email}`}>{site.contact.email} ↗</a><div class="hero-actions"><a href={site.contact.linkedin} target="_blank" rel="noreferrer">LinkedIn ↗</a><a href={site.contact.github} target="_blank" rel="noreferrer">GitHub ↗</a><a href={site.contact.resume} download>{site.ui.en.resume} ↓</a></div></TerminalReveal></section>

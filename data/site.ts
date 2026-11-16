@@ -77,7 +77,7 @@ export const site = {
   meta: {
     title: 'Sebastian Castañeda | Senior Software Engineer',
     description:
-      'Senior software engineer with 10+ years building production systems in fintech, crypto, and health tech, focused on Python, AWS, and AI-assisted development.',
+      'Senior software engineer with 15+ years building production systems in fintech, crypto, and health tech, focused on Python, AWS, and AI-assisted development.',
   },
   hero: {
     name: 'Carlos Sebastian Castañeda',
@@ -90,14 +90,14 @@ export const site = {
   },
   about: {
     paragraphs: [
-      'Software Engineer with over 10 years of experience building production systems across FinTech, crypto, government, and health-tech domains. Lately I\'ve been leaning into AI-augmented development — using tools like Claude, Claude Code, and GitHub Copilot as part of my daily workflow, and going deeper into AI engineering through hands-on coursework and project work.',
+      'Software Engineer with 15+ years of experience building production systems across fintech, crypto, government, and health tech. I use Codex and Claude Code in my daily development workflow, while deepening my AI engineering skills through hands-on projects and coursework.',
       {
         heading: 'My strengths',
         bullets: [
           'Strong backend foundation in Python (Django, FastAPI), AWS, and Docker — language-agnostic in practice, with additional experience in Java, JavaScript, and other stacks as needed',
           'Hands-on experience delivering customer-facing web applications and REST APIs end to end',
           'Full ownership of features — from system architecture and payment integrations to frontend delivery, security remediation, and cross-functional collaboration with Product, Security, and DevOps teams',
-          'Growing focus on AI engineering — from AI-assisted development to spec-driven workflows',
+          'Growing focus on AI engineering — including retrieval-augmented generation (RAG), AI agents, AI-assisted development, and spec-driven workflows.',
           'Fast learner who adapts quickly to new tech stacks and tooling as project needs evolve'
         ],
       },
