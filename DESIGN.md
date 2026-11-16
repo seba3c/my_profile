@@ -133,7 +133,7 @@ The palette is dark, muted and green-tinted, with a clear pale-green action acce
 
 The shell centers a shared content area (1280px maximum) with desktop side padding (32px). The top navigation is compact, horizontal and sticky, with an ink surface and stacking level (40). Home opens with a single left-aligned identity column (56rem maximum), without a project screenshot. Project rows are left-aligned at a maximum of 64rem. From 768px, a 240px image column sits to the left of the grouped text with a 24px gap. Sections use generous separation (80px) and thin rules rather than repeated floating cards.
 
-Below the desktop threshold (1024px), navigation moves to a native disclosure menu and the hero remains one column. Below the small threshold (640px), page gutters become narrower (20px), archive table entries become block rows. Below 768px, each project stacks title, image, description, then metadata and action with 16px gaps. Preserve visible field values in this mobile archive treatment. Dialog width remains constrained to the viewport with side clearance (32px total), a bounded height (75dvh) and internal scrolling.
+Below the navigation threshold (1200px), navigation moves to a native disclosure menu and the hero remains one column. Below the small threshold (640px), page gutters become narrower (20px), archive table entries become block rows. Below 768px, each project stacks title, image, description, then metadata and action with 16px gaps. Preserve visible field values in this mobile archive treatment. Dialog width remains constrained to the viewport with side clearance (32px total), a bounded height (75dvh) and internal scrolling.
 
 ## Elevation & Depth
 
@@ -164,7 +164,7 @@ Project frames use Raised Ink and a Control Border; screenshots show their compl
 The command search field is full width, transparent and divided from its results by a fine border. Its search label is accessible independently of the placeholder. Use the shared focus treatment. Empty results appear as a status message.
 
 ### Navigation
-Monospace horizontal links remain available on desktop. Native mobile disclosure provides touch access to the same destinations and CV. The command trigger is progressively revealed after initialization; ordinary navigation remains usable without it. Active location is communicated with `aria-current`.
+From 1200px, monospace horizontal links show Projects, Experience, About, Tech Stack, Certifications, Blog and Contact. The same destinations appear in global commands. Section links clear the sticky header, and active location is synchronized across desktop and mobile menus. Short viewports allow internal scrolling of the mobile menu. Native mobile disclosure provides touch access to the same destinations and CV. The command trigger is progressively revealed after initialization; ordinary navigation remains usable without it. Active location is communicated with `aria-current`.
 
 ### Global Command Palette
 A focused searchable native modal complements normal navigation. Open by visible button or Command/Ctrl+K; focus moves into search. Arrow keys navigate filtered results, Enter activates, Escape closes and focus returns to the opener. Results include navigation, archives, CV, contact, real projects and the AI twin. Opening it closes competing overlays.
@@ -194,3 +194,7 @@ The dialog expands briefly (200ms, `cubic-bezier(.16,1,.3,1)`); reduced motion r
 A progressively revealed grep-style search matches technology or category names without case or accent sensitivity. Matching categories open during search, and clearing restores the previous expansion states. Counts and an empty state communicate results. Arrow keys navigate category summaries; native Enter/Space expands them; Escape clears search. List content uses a three-column desktop, two-column tablet and one-column narrow-phone layout.
 
 The only local motion is a 220ms reveal on directory opening and a rotating caret, disabled for reduced motion. Source checks and independent static review passed; rendered responsive and runtime browser verification remains pending because browser access was blocked.
+
+### Language boundaries
+
+Global desktop/mobile navigation and Commands always use English, including accessible names, and declare lang=en within Spanish pages. Only the blog listing, articles and their local controls follow the blog locale. First visits default to English regardless of browser language; an explicit saved blog preference is respected. Direct EN/ES URLs retain their content language.

@@ -149,10 +149,10 @@ const defaultTheme = `${baseTheme}-dark`;
   </head>
   <body class="min-h-screen bg-background text-maintext antialiased selection:bg-accent/30 selection:text-background">
     <a class="skip-link" href="#main">Skip to content</a>
-    <TerminalHeader lang={lang} />
+    <TerminalHeader />
     <slot />
     <Footer />
-    <CommandPalette lang={lang} />
+    <CommandPalette />
     <FloatingChatbot chatbot={site.chatbot} />
   </body>
 </html>

@@ -359,6 +359,8 @@ h1,h2,h3,h4,.terminal-header {font-family:var(--font-heading);text-wrap:balance}
 .terminal-header {max-width:1280px;margin:auto;min-height:88px;padding:20px 32px;display:flex;gap:32px;align-items:center;border-bottom:1px solid #2b3a30;font-size:13px}
 .terminal-brand {font-size:20px;display:flex;gap:4px;margin-right:auto}
 .desktop-links,.header-actions {display:flex;gap:24px;align-items:center}
+.desktop-links a,.header-actions {white-space:nowrap}
+.terminal-main section[id] {scroll-margin-top:104px}
 .header-actions button {border:1px solid #344435;padding:9px 12px;border-radius:3px;cursor:pointer;color:var(--color-accent)}
 kbd {font-size:11px;margin-left:12px;color:var(--color-subtext)}
 .mobile-menu {display:none}
@@ -395,8 +397,11 @@ command-palette li a,command-palette li button {display:flex;justify-content:spa
 command-palette li a:hover,command-palette li button:hover,command-palette li :focus {background:#263525;color:var(--color-accent)}
 command-palette [data-empty] {padding:24px}
 @keyframes command-expand {from {clip-path:inset(0 0 85% 50%);transform:translateY(-10px)}to {clip-path:inset(0);transform:none}}
+@media(max-width:1199px) {
+ .terminal-main section[id] {scroll-margin-top:92px}
+ .desktop-links {display:none}.terminal-header {padding:16px 24px;gap:16px;min-height:76px}.header-actions {gap:16px}.mobile-menu {display:block}.mobile-menu nav {position:absolute;z-index:40;left:16px;right:16px;top:76px;max-height:calc(100dvh - 92px);overflow-y:auto;background:#121b16;border:1px solid #344435;padding:16px;display:grid;gap:0}.mobile-menu nav a {padding:12px}
+}
 @media(max-width:1023px) {
- .desktop-links {display:none}.terminal-header {padding:16px 24px;gap:16px;min-height:76px}.header-actions {gap:16px}.mobile-menu {display:block}.mobile-menu nav {position:absolute;z-index:40;left:16px;right:16px;top:76px;background:#121b16;border:1px solid #344435;padding:16px;display:grid;gap:0}.mobile-menu nav a {padding:12px}
  .terminal-main .portfolio-hero {padding:48px 0 32px}
 }
 @media(max-width:639px) {
@@ -411,7 +416,7 @@ command-palette [data-empty] {padding:24px}
 .hero-focus {color:var(--color-terminal-amber)}
 .terminal-header {position:sticky;top:0;z-index:40;background:var(--color-background)}
 .text-white-soft {color:var(--color-maintext)}
-.desktop-links a[aria-current] {color:var(--color-accent)}
+.desktop-links a[aria-current],.mobile-menu nav a[aria-current] {color:var(--color-accent)}
 
 
 

@@ -2,11 +2,12 @@
 import { site } from '@data/site';
 import { navLinks } from '@data/nav';
 import { resolveNavHref } from '../lib/nav';
-interface Props { lang?: string }
-const { lang = 'en' } = Astro.props;
-const es = lang === 'es'; const ui = site.ui[es ? 'es' : 'en'];
+interface Props { [key: string]: never }
+const componentProps: Props = Astro.props;
+void componentProps;
+const ui = site.ui.en;
 const actions = [
- ...navLinks.map(n => ({ label: es ? n.es : n.label, href: resolveNavHref(n.href), blog: n.href === '/blog', aliases: n.href })),
+ ...navLinks.map(n => ({ label: n.label, href: resolveNavHref(n.href), blog: n.href === '/blog', aliases: n.href })),
  { label: ui.allProjects, href: resolveNavHref('/projects'), aliases: 'archive work' },
  { label: ui.allCredentials, href: resolveNavHref('/certifications'), aliases: 'certifications certificates' },
  { label: ui.resume, href: site.contact.resume, aliases: 'cv resume download' },
@@ -14,7 +15,7 @@ const actions = [
  ...site.featuredProjects.map(p => ({ label: p.title, href: p.link, aliases: p.techStack.join(' ') })),
 ];
 ---
-<command-palette>
+<command-palette lang="en">
  <dialog aria-labelledby="command-title"><header><h2 id="command-title">{ui.commands}</h2><button data-close aria-label={ui.close}>Esc</button></header>
  <input aria-label={ui.search} placeholder={ui.search} type="search" autocomplete="off" />
  <ul>{actions.map(a => <li data-search={`${a.label} ${a.aliases}`}><a href={a.href} data-blog-nav-link={'blog' in a && a.blog || undefined} download={a.href === site.contact.resume || undefined}>{a.label}<span aria-hidden="true">↗</span></a></li>)}<li data-search="ai twin chatbot chat rag"><button data-twin>{ui.twin}<span aria-hidden="true">↗</span></button></li></ul>
