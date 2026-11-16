@@ -1,16 +1,42 @@
 ---
 import TerminalReveal from './TerminalReveal.astro';
 import { site } from '../../data/site';
+import type { ExperienceEntry } from '../../data/site';
+
+interface Props {
+  experiences?: readonly ExperienceEntry[];
+}
+
+const { experiences = site.experiences }: Props = Astro.props;
 ---
 
 <section id="experiences"   class="mb-16 scroll-mt-24 lg:mb-24 lg:scroll-mt-8" aria-labelledby="experience-heading">
   <TerminalReveal title="Experiences" headingId="experience-heading">
   <div class="space-y-4">
     {
-      site.experiences.map((item) => (
-        <article class="scroll-stat panel-card group grid gap-4 md:grid-cols-[9rem_1fr] md:gap-6">
-          <p class="pt-1 font-mono text-xs uppercase tracking-wider text-slate">{item.period}</p>
-          <div class="space-y-3">
+      experiences.map((item) => (
+        <article class:list={[
+          'scroll-stat panel-card group grid items-start gap-4 md:gap-6',
+          item.logo ? 'grid-cols-[72px_minmax(0,1fr)]' : 'md:grid-cols-[9rem_minmax(0,1fr)]',
+        ]}>
+          {item.logo ? (
+            <div class="w-16 space-y-2">
+              <img src={item.logo.src} alt={item.logo.alt} width="64" height="64" class="experience-logo h-16 w-16 object-contain" loading="lazy" decoding="async" />
+              {item.clientLogos && item.clientLogos.length > 0 && (
+                <ul class="flex gap-2">
+                  {item.clientLogos.map((logo) => (
+                    <li>
+                      <img src={logo.src} alt={logo.alt} width="28" height="28" class="experience-logo h-7 w-7 object-contain" loading="lazy" decoding="async" />
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ) : (
+            <p class="pt-1 font-mono text-xs uppercase tracking-wider text-slate">{item.period}</p>
+          )}
+          <div class="min-w-0 space-y-3 [overflow-wrap:anywhere]">
+            {item.logo && <p class="pt-1 font-mono text-xs uppercase tracking-wider text-slate">{item.period}</p>}
             <h3 class="text-base font-semibold text-slate uppercase">
               {item.title} · {item.company}
             </h3>
@@ -28,3 +54,14 @@ import { site } from '../../data/site';
   </div>
 </TerminalReveal>
 </section>
+
+<style>
+  .experience-logo {
+    border-width: 1px;
+    border-style: solid;
+    border-top-color: color-mix(in srgb, var(--color-maintext) 40%, var(--color-background));
+    border-right-color: color-mix(in srgb, var(--color-maintext) 30%, var(--color-background));
+    border-bottom-color: color-mix(in srgb, var(--color-maintext) 20%, var(--color-background));
+    border-left-color: color-mix(in srgb, var(--color-maintext) 10%, var(--color-background));
+  }
+</style>

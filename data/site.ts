@@ -8,6 +8,22 @@
  * Replace placeholder images in src/assets/ with your own.
  */
 
+export interface ExperienceLogo {
+  src: string;
+  alt: string;
+}
+
+export interface ExperienceEntry {
+  period: string;
+  title: string;
+  company: string;
+  summary: string;
+  highlights: readonly string[];
+  tech: readonly string[];
+  logo?: ExperienceLogo;
+  clientLogos?: readonly [] | readonly [ExperienceLogo] | readonly [ExperienceLogo, ExperienceLogo];
+}
+
 export interface AcademicEntry {
   period: string;
   title: string;
@@ -148,6 +164,7 @@ export const site = {
       period: '2021-2026',
       title: 'Senior Software Engineer',
       company: 'Xapo Bank',
+      logo: { src: '/logos/experiences/xapo-bank.webp', alt: 'Xapo Bank' },
       summary:
         'Senior Backend Engineer in different company areas and teams.',
       highlights: [
@@ -164,6 +181,11 @@ export const site = {
       period: '2018-2021',
       title: 'Senior Software Engineer',
       company: 'AccelOne',
+      logo: { src: '/logos/experiences/accelone.webp', alt: 'AccelOne' },
+      clientLogos: [
+        { src: '/logos/experiences/xapo-bank.webp', alt: 'Xapo Bank (client)' },
+        { src: '/logos/experiences/seattle-childrens.webp', alt: 'Seattle Children’s (client)' },
+      ],
       summary:
         'Senior Software Engineer for Xapo Bank and Seattle Children\'s Hospital, Foundation, and Research',
       highlights: [
@@ -176,6 +198,11 @@ export const site = {
       period: '2016-2018',
       title: 'Software Engineer',
       company: 'DevsAr',
+      logo: { src: '/logos/experiences/devsar.webp', alt: 'DevsAr' },
+      clientLogos: [
+        { src: '/logos/experiences/moni.webp', alt: 'Moni (client)' },
+        { src: '/logos/experiences/matterport.webp', alt: 'Matterport (client)' },
+      ],
       summary:
         'Software Engineer for Moni and Matterport',
       highlights: [
@@ -186,7 +213,7 @@ export const site = {
       ],
       tech: ['Python', 'Django', 'Datadog', 'JavaScript'],
     },
-  ],
+  ] satisfies readonly ExperienceEntry[],
   academic: [
     {
       period: '2017',
