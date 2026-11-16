@@ -8,7 +8,7 @@ void componentProps;
 const en = (await getPostsByLocale('en')).slice(0,3);
 const es = (await getPostsByLocale('es')).slice(0,3);
 ---
-<section class="latest-writing" aria-labelledby="writing-title"><h2 id="writing-title" class="section-heading">{site.ui.en.writing}</h2><div data-writing-locale="en"><BlogArchiveList posts={en} locale="en" /></div><div data-writing-locale="es" hidden><BlogArchiveList posts={es} locale="es" /></div></section>
+<section id="latest-writing" class="latest-writing" aria-labelledby="writing-title"><h2 id="writing-title" class="section-heading">{site.ui.en.writing}</h2><div data-writing-locale="en"><BlogArchiveList posts={en} locale="en" /></div><div data-writing-locale="es" hidden><BlogArchiveList posts={es} locale="es" /></div></section>
 <script>
 function initWriting() {
   let locale = 'en';

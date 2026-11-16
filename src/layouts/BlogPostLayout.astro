@@ -1,4 +1,5 @@
 ---
+import Breadcrumb from '../components/Breadcrumb.astro';
 import ArchiveLayout from './ArchiveLayout.astro';
 import LanguageSwitcher from '../components/LanguageSwitcher.astro';
 import BlogMiniHeader from '../components/BlogMiniHeader.astro';
@@ -62,22 +63,19 @@ const alternates = [
   structuredData={structuredData}
   showBreadcrumb={false}
 >
-  <BlogMiniHeader />
   <div class="blog-toolbar mb-8">
-    <a
-      href={resolveNavHref(`${basePath}/`)}
-      class="group flex items-center gap-2 text-sm text-accent transition hover:text-slate-light"
-      data-astro-prefetch
-    >
-      <Icon name="ph:arrow-left" class="h-4 w-4 transition-transform group-hover:-translate-x-1" />
-      {strings.backToBlog}
-    </a>
+    <Breadcrumb label={strings.breadcrumbLabel} items={[
+      { label: '~', href: resolveNavHref('#latest-writing'), accessibleLabel: strings.backToWriting },
+      { label: 'blog', href: resolveNavHref(`${basePath}/`), accessibleLabel: strings.backToBlog },
+      { label: post.slug },
+    ]} />
     <LanguageSwitcher
       locale={locale}
       enHref={hasEn ? resolveNavHref(`/blog/${post.slug}/`) : undefined}
       esHref={hasEs ? resolveNavHref(`/es/blog/${post.slug}/`) : undefined}
     />
   </div>
+  <BlogMiniHeader />
 
   <article>
     <header class="mb-10 border-b border-slate-lightest/10 pb-6">

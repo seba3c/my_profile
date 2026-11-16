@@ -413,7 +413,7 @@ command-palette [data-empty] {padding:24px}
 .text-white-soft {color:var(--color-maintext)}
 .desktop-links a[aria-current] {color:var(--color-accent)}
 
-.archive-path {font:12px var(--font-heading);color:var(--color-subtext);margin-bottom:32px;overflow-wrap:anywhere}.archive-path a {color:var(--color-accent)}
+
 
 /* Shared blog controls follow the terminal section rhythm. */
 .blog-toolbar {display:flex;align-items:center;justify-content:space-between;gap:24px}
@@ -422,3 +422,10 @@ command-palette [data-empty] {padding:24px}
  .blog-toolbar {flex-direction:column;align-items:stretch;gap:8px}
  .blog-toolbar nav {align-self:flex-start}
 }
+
+/* Archive access shares the terminal navigation vocabulary. */
+.archive-access { margin-top:32px; }
+.archive-link { display:inline-flex; align-items:center; gap:12px; max-width:100%; min-height:44px; padding:10px 0; border-bottom:1px solid var(--color-navy-lighter); color:var(--color-accent); font:13px/1.7 var(--font-mono); }
+.archive-link:hover { border-bottom-color:var(--color-accent); }
+.archive-link > span { min-width:0; overflow-wrap:anywhere; }
+.blog-toolbar > nav:first-child { flex:1; min-width:0; }

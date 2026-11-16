@@ -241,6 +241,12 @@ export const site = {
       techStack: ['OpenAI', 'RAG', 'Hugging Face Spaces'],
     },
   ],
+  archiveNavigation: {
+    projects: 'View Full Project Archive',
+    certifications: 'View Full Certification Archive',
+    backToProjects: 'Return to featured projects',
+    backToCertifications: 'Return to certifications',
+  },
   projectArchivePage: {
     title: 'All projects',
     description: 'Project archive: dates, roles, and technologies across representative engagements.',
