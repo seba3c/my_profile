@@ -45,7 +45,9 @@ function initShell() {
    const activationLine = (header?.getBoundingClientRect().bottom ?? 0) + 16;
    let active: HTMLAnchorElement | undefined;
    for (const { link, target } of sections) {
-     if (target.getBoundingClientRect().top <= activationLine) active = link;
+     const scrollMarginTop = parseFloat(getComputedStyle(target).scrollMarginTop) || 0;
+     // Match the anchor's CSS offset, allowing for fractional scroll rounding.
+     if (target.getBoundingClientRect().top <= Math.max(activationLine, scrollMarginTop) + 1) active = link;
    }
    // The final section may never reach the header when scrolling stops at the page bottom.
    const last = sections[sections.length - 1];
